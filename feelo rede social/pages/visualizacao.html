@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelo — Visualização de Dados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --accent:      #9b8afb;
+      --accent-dark: #7c6fe0;
+      --bg:          #0d0d14;
+      --surface:     #15151f;
+      --surface-2:   #1e1e2e;
+      --text:        #e8e8f0;
+      --text-muted:  #8888aa;
+      --border:      rgba(255,255,255,0.07);
+      --radius:      16px;
+      --font-display:'DM Serif Display', serif;
+      --font-body:   'DM Sans', sans-serif;
+      --c1: #9b8afb;
+      --c2: #f472b6;
+      --c3: #34d399;
+      --c4: #fb923c;
+      --c5: #60a5fa;
+      --c6: #a78bfa;
+      --c7: #fbbf24;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── NAVBAR ── */
+    .feelo-navbar {
+      background: rgba(13,13,20,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+      position: sticky; top: 0; z-index: 1030;
+    }
+    .feelo-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .feelo-logo .logo-text { font-family:var(--font-display); font-size:1.6rem; color:var(--accent); letter-spacing:-0.5px; }
+    .feelo-navbar .nav-link {
+      color: var(--text-muted); font-weight:500; font-size:0.92rem;
+      padding:0.4rem 0.8rem; border-radius:8px;
+      display:flex; align-items:center; gap:5px;
+      transition: color .2s, background .2s; text-decoration:none;
+    }
+    .feelo-navbar .nav-link:hover,
+    .feelo-navbar .nav-link.active { color:var(--accent); background:rgba(155,138,251,0.1); }
+    .navbar-toggler { border-color:var(--border); }
+    .navbar-toggler-icon { filter:invert(1); }
+
+    /* ── HERO ── */
+    .viz-hero {
+      padding: 64px 0 52px;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(244,114,182,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 20% 50%, rgba(155,138,251,0.14) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .viz-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(155,138,251,0.08)'/%3E%3C/svg%3E") repeat;
+      pointer-events: none;
+    }
+    .viz-hero .badge-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(155,138,251,0.12); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.3); border-radius: 50px;
+      padding: 5px 16px; font-size: 0.8rem; font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+    .viz-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--text);
+      line-height: 1.12;
+      margin-bottom: 0.9rem;
+    }
+    .viz-hero h1 em { color: var(--accent); font-style: italic; }
+    .viz-hero p { color: var(--text-muted); font-size: 1rem; max-width: 520px; margin: 0 auto 1.8rem; }
+
+    /* ── FILTROS ── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      margin-bottom: 0;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.82rem; font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--font-body);
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active {
+      background: rgba(155,138,251,0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── SEÇÃO SEPARADORA ── */
+    .section-label {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 1.5rem; margin-top: 0.5rem;
+    }
+    .section-label h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── STATUS ── */
+    .stats-strip { padding: 2.5rem 0 1rem; }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      transition: border-color .25s, transform .2s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), #f472b6);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .stat-card:hover { border-color: rgba(155,138,251,0.35); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(155,138,251,0.1); }
+    .stat-card:hover::before { opacity: 1; }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+    .stat-icon { font-size: 1.4rem; margin-bottom: 8px; display: block; }
+
+    /* ── GRID DE GRÁFICOS ── */
+    .charts-section { padding: 1.5rem 0 5rem; }
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      height: 100%;
+      transition: border-color .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .chart-card:hover { border-color: rgba(155,138,251,0.28); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .chart-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .chart-title i { color: var(--accent); font-size: 1rem; }
+    .chart-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.4rem; }
+    .chart-wrapper { position: relative; }
+
+    /* ── RANKING ── */
+    .rank-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(155,138,251,0.12); color: var(--accent);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+    }
+    .rank-bar-bg {
+      background: rgba(255,255,255,0.06); border-radius: 4px; height: 5px;
+      overflow: hidden;
+    }
+    .rank-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+    /* ── DESTAQUE ── */
+    .highlight-row {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 0.7rem;
+      transition: border-color .2s, transform .2s;
+      cursor: default;
+    }
+    .highlight-row:hover { border-color: rgba(155,138,251,0.35); transform: translateX(4px); }
+    .hl-rank { font-family: var(--font-display); font-size: 1.7rem; color: var(--accent); min-width: 34px; text-align: center; line-height: 1; }
+    .hl-info { flex: 1; min-width: 0; }
+    .hl-autor { font-weight: 600; font-size: 0.88rem; }
+    .hl-desc { font-size: 0.76rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hl-stat { text-align: right; min-width: 70px; }
+    .hl-stat .big { font-family: var(--font-display); font-size: 1.3rem; color: var(--c2); }
+    .hl-stat .small { font-size: 0.7rem; color: var(--text-muted); display: block; }
+    .feel-chip {
+      background: rgba(155,138,251,0.1); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.2);
+      border-radius: 50px; padding: 2px 9px; font-size: 0.7rem; font-weight: 600;
+      white-space: nowrap; margin-left: 4px;
+    }
+
+    /* ── CARD DE FEEL FILTRADO ── */
+    #filtered-feels { display: none; }
+    .feel-mini-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .feel-mini-card:hover { border-color: rgba(155,138,251,0.35); transform: translateY(-2px); }
+    .feel-mini-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+    .feel-mini-avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    }
+    .feel-mini-autor { font-size: 0.85rem; font-weight: 600; }
+    .feel-mini-handle { font-size: 0.72rem; color: var(--text-muted); }
+    .feel-mini-text { font-family: var(--font-display); font-size: 0.9rem; font-style: italic; color: var(--text-muted); line-height: 1.5; }
+    .feel-mini-stats { display: flex; gap: 12px; margin-top: 0.6rem; }
+    .feel-mini-stat { font-size: 0.76rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+
+    /* ── RADAR ── */
+    .chart-wrapper-sq { position: relative; max-width: 340px; margin: 0 auto; }
+
+    /* ── FOOTER ── */
+    .feelo-footer { background: var(--surface); border-top: 1px solid var(--border); padding: 2.5rem 0 1.5rem; }
+    .footer-bottom { border-top: 1px solid var(--border); margin-top: 1.5rem; padding-top: 1rem; color: var(--text-muted); font-size: 0.8rem; }
+    .footer-logo .logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--accent); }
+    .footer-tagline { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+    .footer-links h6 { font-weight: 700; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .footer-links a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.88rem; margin-bottom: 6px; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── ANIMAÇÕES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.55s cubic-bezier(.4,0,.2,1) forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+    .delay-4 { animation-delay: 0.32s; }
+    .delay-5 { animation-delay: 0.40s; }
+
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ESTADO VAZIO ── */
+    .empty-state {
+      text-align: center; padding: 3rem 1rem; color: var(--text-muted);
+    }
+    .empty-state i { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 575px) {
+      .stat-number { font-size: 1.75rem; }
+      .highlight-row { flex-wrap: wrap; }
+      .viz-hero { padding: 44px 0 36px; }
+    }
+
+    /* ── CUSTOMIZAÇÃO ── */
+    .info-tip {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: rgba(155,138,251,0.15); color: var(--accent);
+      font-size: 0.65rem; cursor: help; margin-left: 4px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="feelo-navbar">
+    <div class="container d-flex align-items-center justify-content-between gap-3 flex-wrap">
+      <a href="/pages/index.html" class="feelo-logo">
+        <svg width="36" height="36" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="#9b8afb"/>
+          <text x="40" y="48" font-family="serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#fff">f</text>
+        </svg>
+        <span class="logo-text">feelo</span>
+      </a>
+      <div class="d-none d-md-flex align-items-center gap-1">
+        <a href="/pages/index.html" class="nav-link"><i class="bi bi-house-fill"></i> Início</a>
+        <a href="/pages/index.html#todos" class="nav-link"><i class="bi bi-grid-fill"></i> Todos os Feels</a>
+        <a href="/pages/index.html#destaques" class="nav-link"><i class="bi bi-star-fill"></i> Destaques</a>
+        <a href="/pages/visualizacao.html" class="nav-link active"><i class="bi bi-bar-chart-fill"></i> Visualização</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="viz-hero">
+    <div class="container">
+      <div class="badge-pill"><i class="bi bi-bar-chart-line-fill"></i> Análise Interativa</div>
+      <h1>Sentimentos em <em>números</em></h1>
+      <p>Explore como as emoções circulam no Feelo. Filtre por sentimento e veja curtidas, engajamento e muito mais em tempo real.</p>
+
+      <!-- FILTROS -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="todos" onclick="aplicarFiltro(this)">
+          <i class="bi bi-grid-3x3-gap-fill"></i> Todos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATUS -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="row g-3" id="stats-row"></div>
+    </div>
+  </section>
+
+  <!-- FEELS FILTRADOS -->
+  <section id="filtered-feels" style="padding:0 0 2rem;">
+    <div class="container">
+      <div class="section-label">
+        <h2><i class="bi bi-funnel-fill" style="color:var(--accent);font-size:1.1rem;"></i> Feels do Filtro</h2>
+      </div>
+      <div class="row g-3" id="filtered-cards"></div>
+    </div>
+  </section>
+
+  <!-- CHARTS -->
+  <section class="charts-section">
+    <div class="container">
+
+      <!-- SEPARADOR ROW 1 -->
+      <div class="section-label fade-up">
+        <h2>Distribuição & Popularidade</h2>
+      </div>
+
+      <!-- ROW 1: Doughnut + Área Polar -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-md-6 fade-up delay-1">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-circle-half"></i> Sentimentos — Doughnut</div>
+            <div class="chart-subtitle">Distribuição percentual de cada emoção nos feels</div>
+            <div class="chart-wrapper-sq">
+              <canvas id="chartDoughnut"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 fade-up delay-2">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-record-circle"></i> Curtidas — Área Polar</div>
+            <div class="chart-subtitle">Comparação radial da popularidade de cada feel</div>
+            <div class="chart-wrapper-sq">
+              <canvas id="chartPolar"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEPARADOR ROW 2 -->
+      <div class="section-label fade-up">
+        <h2>Engajamento & Comparações</h2>
+      </div>
+
+      <!-- ROW 2: Barras horizontais curtidas + Barras empilhadas -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-lg-7 fade-up delay-1">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-heart-fill"></i> Curtidas por Autor</div>
+            <div class="chart-subtitle">Total de curtidas em cada feel, do mais ao menos popular</div>
+            <div class="chart-wrapper">
+              <canvas id="chartCurtidas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5 fade-up delay-2">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-bar-chart-steps"></i> Engajamento Empilhado</div>
+            <div class="chart-subtitle">Curtidas + comentários por feel</div>
+            <div class="chart-wrapper">
+              <canvas id="chartEngajamento"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEPARADOR ROW 3 -->
+      <div class="section-label fade-up">
+        <h2>Perfil de Cada Feel</h2>
+      </div>
+
+      <!-- ROW 3: Radar + Linha -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-md-5 fade-up delay-1">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-hexagon-fill"></i> Radar de Métricas</div>
+            <div class="chart-subtitle">Curtidas, comentários e engaj. normalizados por feel</div>
+            <div class="chart-wrapper-sq">
+              <canvas id="chartRadar"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-7 fade-up delay-2">
+          <div class="chart-card">
+            <div class="chart-title"><i class="bi bi-graph-up-arrow"></i> Taxa de Comentários
+              <span class="info-tip" title="Proporção comentários ÷ curtidas × 100">?</span>
+            </div>
+            <div class="chart-subtitle">Quanto mais alto, mais discussão o feel gera em relação às curtidas</div>
+            <div class="chart-wrapper">
+              <canvas id="chartTaxa"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEPARADOR ROW 4 -->
+      <div class="section-label fade-up">
+        <h2>Rankings & Destaques</h2>
+      </div>
+
+      <!-- ROW 4: Ranking + Destaques -->
+      <div class="row g-4">
+        <div class="col-12 col-lg-6 fade-up delay-1">
+          <div class="chart-card d-flex flex-column">
+            <div class="chart-title"><i class="bi bi-trophy-fill"></i> Ranking de Curtidas</div>
+            <div class="chart-subtitle">Feels ordenados por popularidade com barra proporcional</div>
+            <div id="ranking-list" style="flex:1; margin-top:0.25rem;"></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 fade-up delay-2">
+          <div class="chart-card d-flex flex-column">
+            <div class="chart-title"><i class="bi bi-fire"></i> Feels em Destaque</div>
+            <div class="chart-subtitle">Posts marcados como destaque no feed</div>
+            <div id="destaque-list" style="flex:1; margin-top:0.5rem;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="feelo-footer">
+    <div class="container">
+      <div class="row g-3 align-items-center justify-content-between">
+        <div class="col-auto">
+          <div class="footer-logo"><span class="logo-text">feelo</span></div>
+          <p class="footer-tagline">Share what you feel.</p>
+        </div>
+        <div class="col-auto footer-links">
+          <a href="/pages/index.html">Início</a>
+          <a href="/pages/index.html#todos">Todos os Feels</a>
+          <a href="/pages/visualizacao.html">Visualização</a>
+        </div>
+        <div class="col-auto footer-links">
+        </div>
+      </div>
+      <div class="footer-bottom text-center">©2026 Feelo Corp. — Visualização de Dados com Chart.js</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/api.js"></script>
+  <script>
+
+  //  CONFIG GLOBAL CHART.JS
+  Chart.defaults.color = '#8888aa';
+  Chart.defaults.font.family = "'DM Sans', sans-serif";
+  Chart.defaults.font.size = 12;
+
+  const PALETTE = ['#9b8afb','#f472b6','#34d399','#fb923c','#60a5fa','#a78bfa','#fbbf24'];
+
+  function hexToRgba(hex, a) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${a})`;
+  }
+
+  function gerarAvatarLocal(iniciais, cor) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+      <circle cx="40" cy="40" r="40" fill="${cor}"/>
+      <text x="40" y="46" font-family="Arial,sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#fff">${iniciais}</text>
+    </svg>`;
+    return 'data:image/svg+xml;base64,' + btoa(svg);
+  }
+
+  function formatNum(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }
+
+  //  ESTADO DO FILTRO + INSTÂNCIAS DE GRÁFICOS
+  let dados = [];
+  let filtroAtivo = 'todos';
+  let dadosFiltrados = [];
+
+  const chartInstances = {};
+
+  function destroyChart(id) {
+    if (chartInstances[id]) {
+      chartInstances[id].destroy();
+      delete chartInstances[id];
+    }
+  }
+
+  //  FILTROS
+  function criarFiltros() {
+    const bar = document.getElementById('filter-bar');
+    const sentimentos = [...new Set(dados.map(p => p.sentimento))];
+    sentimentos.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.dataset.filter = s;
+      btn.textContent = s;
+      btn.onclick = function() { aplicarFiltro(this); };
+      bar.appendChild(btn);
+    });  
+  }
+
+  function aplicarFiltro(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filtroAtivo = btn.dataset.filter;
+    dadosFiltrados = filtroAtivo === 'todos' ? dados : dados.filter(p => p.sentimento === filtroAtivo);
+
+    renderStats();
+    renderDoughnut();
+    renderPolar();
+    renderCurtidas();
+    renderEngajamento();
+    renderRadar();
+    renderTaxa();
+    renderRanking();
+    renderDestaques();
+    renderFilteredCards();
+  }
+
+  function renderFilteredCards() {
+    const section = document.getElementById('filtered-feels');
+    const container = document.getElementById('filtered-cards');
+
+    if (filtroAtivo === 'todos') {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = 'block';
+    container.innerHTML = '';
+
+    if (dadosFiltrados.length === 0) {
+      container.innerHTML = `<div class="col-12"><div class="empty-state"><i class="bi bi-emoji-frown"></i><p>Nenhum feel com esse sentimento.</p></div></div>`;
+      return;
+    }
+
+    dadosFiltrados.forEach(p => {
+      const avatarSrc = gerarAvatarLocal(p.avatarIniciais, p.avatarCor);
+      container.innerHTML += `
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="feel-mini-card">
+            <div class="feel-mini-header">
+              <img src="${avatarSrc}" alt="${p.autor}" class="feel-mini-avatar">
+              <div>
+                <div class="feel-mini-autor">${p.autor}</div>
+                <div class="feel-mini-handle">${p.handle} · ${p.tempo}</div>
+              </div>
+            </div>
+            <p class="feel-mini-text">"${p.texto}"</p>
+            <div class="feel-mini-stats">
+              <span class="feel-mini-stat"><i class="bi bi-heart-fill" style="color:#f472b6;"></i> ${formatNum(p.curtidas)}</span>
+              <span class="feel-mini-stat"><i class="bi bi-chat-dots" style="color:#9b8afb;"></i> ${p.comentarios}</span>
+              ${p.destaque ? '<span class="feel-mini-stat"><i class="bi bi-star-fill" style="color:#fbbf24;"></i> Destaque</span>' : ''}
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+
+  //  STATUS
+  function renderStats() {
+    const d = dadosFiltrados;
+    const totalCurtidas     = d.reduce((s,p) => s + p.curtidas, 0);
+    const totalComentarios  = d.reduce((s,p) => s + p.comentarios, 0);
+    const totalFeels        = d.length;
+    const sentimentosUnicos = [...new Set(d.map(p => p.sentimento))].length;
+    const mediaEngajamento  = totalFeels > 0 ? Math.round((totalCurtidas + totalComentarios) / totalFeels) : 0;
+    const destacados        = d.filter(p => p.destaque).length;
+
+    const stats = [
+      { n: totalFeels,                                   label: 'Feels',          icon: 'bi-file-earmark-text-fill', color: '#9b8afb' },
+      { n: totalCurtidas.toLocaleString('pt-BR'),        label: 'Curtidas',       icon: 'bi-heart-fill',             color: '#f472b6' },
+      { n: totalComentarios.toLocaleString('pt-BR'),     label: 'Comentários',    icon: 'bi-chat-dots-fill',         color: '#34d399' },
+      { n: sentimentosUnicos,                            label: 'Sentimentos',    icon: 'bi-emoji-smile-fill',       color: '#fb923c' },
+      { n: mediaEngajamento.toLocaleString('pt-BR'),     label: 'Engaj. Médio',   icon: 'bi-graph-up-arrow',         color: '#60a5fa' },
+      { n: destacados,                                   label: 'Em Destaque',    icon: 'bi-star-fill',              color: '#fbbf24' },
+    ];
+
+    const row = document.getElementById('stats-row');
+    row.innerHTML = '';
+    stats.forEach((s, i) => {
+      const col = document.createElement('div');
+      col.className = 'col-6 col-sm-4 col-lg-2 fade-up';
+      col.style.animationDelay = (i * 0.07) + 's';
+      col.innerHTML = `
+        <div class="stat-card">
+          <i class="bi ${s.icon} stat-icon" style="color:${s.color};"></i>
+          <div class="stat-number">${s.n}</div>
+          <div class="stat-label">${s.label}</div>
+        </div>`;
+      row.appendChild(col);
+    });
+  }
+
+  //  DOUGHNUT — SENTIMENTOS
+  function renderDoughnut() {
+    destroyChart('chartDoughnut');
+    const d = dadosFiltrados;
+    const sentCount = {};
+    d.forEach(p => { sentCount[p.sentimento] = (sentCount[p.sentimento] || 0) + 1; });
+    const labels = Object.keys(sentCount);
+    const values = Object.values(sentCount);
+
+    if (labels.length === 0) {
+      document.getElementById('chartDoughnut').getContext('2d').clearRect(0,0,400,400);
+      return;
+    }
+
+    chartInstances['chartDoughnut'] = new Chart(document.getElementById('chartDoughnut'), {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: PALETTE.slice(0, labels.length),
+          borderColor: '#0d0d14',
+          borderWidth: 3,
+          hoverOffset: 10,
+        }]
+      },
+      options: {
+        responsive: true,
+        cutout: '65%',
+        animation: { animateRotate: true, duration: 800 },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { padding: 14, color: '#8888aa', font: { size: 11 }, boxWidth: 12, usePointStyle: true }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}: ${ctx.raw} feel${ctx.raw > 1 ? 's' : ''} (${Math.round(ctx.raw / d.length * 100)}%)`
+            }
+          }
+        }
+      }
+    });
+  }
+
+  //  ÁREA POLAR — CURTIDAS
+  function renderPolar() {
+    destroyChart('chartPolar');
+    const d = dadosFiltrados;
+    if (d.length === 0) return;
+
+    chartInstances['chartPolar'] = new Chart(document.getElementById('chartPolar'), {
+      type: 'polarArea',
+      data: {
+        labels: d.map(p => p.autor),
+        datasets: [{
+          data: d.map(p => p.curtidas),
+          backgroundColor: PALETTE.slice(0, d.length).map(c => hexToRgba(c, 0.65)),
+          borderColor: PALETTE.slice(0, d.length),
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 800 },
+        scales: {
+          r: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#8888aa', backdropColor: 'transparent', font: { size: 10 } },
+            pointLabels: { color: '#e8e8f0' }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { padding: 12, color: '#8888aa', font: { size: 10 }, boxWidth: 10, usePointStyle: true }
+          },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.label}: ${ctx.raw.toLocaleString('pt-BR')} curtidas`
+            }
+          }
+        }
+      }
+    });
+  }
+
+  //  BARRAS HORIZONTAIS — CURTIDAS
+  function renderCurtidas() {
+    destroyChart('chartCurtidas');
+    const sorted = [...dadosFiltrados].sort((a,b) => b.curtidas - a.curtidas);
+    if (sorted.length === 0) return;
+
+    chartInstances['chartCurtidas'] = new Chart(document.getElementById('chartCurtidas'), {
+      type: 'bar',
+      data: {
+        labels: sorted.map(p => p.autor),
+        datasets: [{
+          label: 'Curtidas',
+          data: sorted.map(p => p.curtidas),
+          backgroundColor: sorted.map((_, i) => hexToRgba(PALETTE[i % PALETTE.length], 0.75)),
+          borderColor:     sorted.map((_, i) => PALETTE[i % PALETTE.length]),
+          borderWidth: 2,
+          borderRadius: 8,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        indexAxis: 'y',
+        animation: { duration: 700 },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.raw.toLocaleString('pt-BR')} curtidas`
+            }
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#8888aa' } },
+          y: { grid: { display: false }, ticks: { color: '#e8e8f0', font: { weight: '500' } } }
+        }
+      }
+    });
+  }
+
+  //  BARRAS EMPILHADAS — ENGAJAMENTO
+  function renderEngajamento() {
+    destroyChart('chartEngajamento');
+    const d = dadosFiltrados;
+    if (d.length === 0) return;
+
+    chartInstances['chartEngajamento'] = new Chart(document.getElementById('chartEngajamento'), {
+      type: 'bar',
+      data: {
+        labels: d.map(p => p.autor),
+        datasets: [
+          {
+            label: 'Curtidas',
+            data: d.map(p => p.curtidas),
+            backgroundColor: hexToRgba('#9b8afb', 0.7),
+            borderColor: '#9b8afb', borderWidth: 1.5,
+            borderRadius: { topLeft: 6, topRight: 6 }, borderSkipped: false,
+          },
+          {
+            label: 'Comentários',
+            data: d.map(p => p.comentarios),
+            backgroundColor: hexToRgba('#f472b6', 0.7),
+            borderColor: '#f472b6', borderWidth: 1.5,
+            borderRadius: 0, borderSkipped: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 700 },
+        plugins: {
+          legend: { labels: { color: '#8888aa', font: { size: 11 }, usePointStyle: true, boxWidth: 10, padding: 16 } },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { color: '#e8e8f0' } },
+          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#8888aa' } }
+        }
+      }
+    });
+  }
+
+  //  RADAR — MÉTRICAS NORMALIZADAS
+  function renderRadar() {
+    destroyChart('chartRadar');
+    const d = dadosFiltrados;
+    if (d.length === 0) return;
+
+    const maxCurtidas  = Math.max(...d.map(p => p.curtidas), 1);
+    const maxComments  = Math.max(...d.map(p => p.comentarios), 1);
+    const maxEngaj     = Math.max(...d.map(p => p.curtidas + p.comentarios), 1);
+
+    const datasets = d.map((p, i) => ({
+      label: p.autor,
+      data: [
+        Math.round(p.curtidas / maxCurtidas * 100),
+        Math.round(p.comentarios / maxComments * 100),
+        Math.round((p.curtidas + p.comentarios) / maxEngaj * 100),
+        p.destaque ? 100 : 20,
+        p.curtidas > 0 ? Math.round(p.comentarios / p.curtidas * 1000) : 0 // taxa × 10
+      ],
+      borderColor: PALETTE[i % PALETTE.length],
+      backgroundColor: hexToRgba(PALETTE[i % PALETTE.length], 0.08),
+      borderWidth: 2,
+      pointBackgroundColor: PALETTE[i % PALETTE.length],
+      pointRadius: 4,
+    }));
+
+    chartInstances['chartRadar'] = new Chart(document.getElementById('chartRadar'), {
+      type: 'radar',
+      data: {
+        labels: ['Curtidas', 'Comentários', 'Engajamento', 'Destaque', 'Taxa Coment.'],
+        datasets
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 700 },
+        scales: {
+          r: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            angleLines: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#8888aa', backdropColor: 'transparent', font: { size: 9 }, stepSize: 25 },
+            pointLabels: { color: '#e8e8f0', font: { size: 11 } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: '#8888aa', font: { size: 10 }, usePointStyle: true, boxWidth: 8, padding: 10 }
+          }
+        }
+      }
+    });
+  }
+
+  //  LINHA — TAXA DE COMENTÁRIOS
+  function renderTaxa() {
+    destroyChart('chartTaxa');
+    const d = dadosFiltrados;
+    if (d.length === 0) return;
+
+    const taxa = d.map(p => p.curtidas > 0 ? +(p.comentarios / p.curtidas * 100).toFixed(1) : 0);
+
+    chartInstances['chartTaxa'] = new Chart(document.getElementById('chartTaxa'), {
+      type: 'line',
+      data: {
+        labels: d.map(p => p.autor),
+        datasets: [{
+          label: 'Taxa (%)',
+          data: taxa,
+          borderColor: '#34d399',
+          backgroundColor: hexToRgba('#34d399', 0.1),
+          borderWidth: 2.5,
+          pointBackgroundColor: '#34d399',
+          pointBorderColor: '#0d0d14',
+          pointRadius: 6,
+          pointHoverRadius: 9,
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 700 },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.raw}% de comentários por curtida`
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#e8e8f0' } },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: { color: '#8888aa', callback: v => v + '%' }
+          }
+        }
+      }
+    });
+  }
+
+  //  RANKING
+  function renderRanking() {
+    const sorted = [...dadosFiltrados].sort((a,b) => b.curtidas - a.curtidas);
+    const max = sorted[0]?.curtidas || 1;
+    const container = document.getElementById('ranking-list');
+    container.innerHTML = '';
+
+    if (sorted.length === 0) {
+      container.innerHTML = `<div class="empty-state"><i class="bi bi-emoji-frown"></i><p>Sem dados para este filtro.</p></div>`;
+      return;
+    }
+
+    sorted.forEach((p, i) => {
+      const pct   = Math.round(p.curtidas / max * 100);
+      const color = PALETTE[i % PALETTE.length];
+      container.innerHTML += `
+        <div style="margin-bottom:0.9rem;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <span class="rank-num">${i+1}</span>
+            <span style="font-size:0.85rem;font-weight:600;flex:1;">${p.autor}</span>
+            <span class="feel-chip">${p.sentimento}</span>
+            <span style="font-size:0.82rem;color:${color};font-weight:600;min-width:42px;text-align:right;">${p.curtidas.toLocaleString('pt-BR')}</span>
+          </div>
+          <div class="rank-bar-bg">
+            <div class="rank-bar-fill" style="width:0%;background:${color};" data-w="${pct}"></div>
+          </div>
+        </div>`;
+    });
+
+    // Animação das barras
+    setTimeout(() => {
+      container.querySelectorAll('.rank-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+    }, 100);
+  }
+
+  //  DESTAQUES
+  function renderDestaques() {
+    const destaques = dadosFiltrados.filter(p => p.destaque);
+    const container = document.getElementById('destaque-list');
+    container.innerHTML = '';
+
+    if (destaques.length === 0) {
+      container.innerHTML = `<div class="empty-state"><i class="bi bi-star"></i><p>Nenhum feel em destaque neste filtro.</p></div>`;
+      return;
+    }
+
+    destaques.forEach((p, i) => {
+      container.innerHTML += `
+        <div class="highlight-row">
+          <div class="hl-rank">${['🥇','🥈','🥉'][i] || (i+1)}</div>
+          <div class="hl-info">
+            <div class="hl-autor">${p.autor}<span class="feel-chip">${p.sentimento}</span></div>
+            <div class="hl-desc">${p.descricao}</div>
+          </div>
+          <div class="hl-stat">
+            <span class="big">${formatNum(p.curtidas)}</span>
+            <span class="small">curtidas</span>
+          </div>
+        </div>`;
+    });
+  }
+
+  //  INICIAR
+  document.addEventListener('DOMContentLoaded', async function () {
+    try {
+      dados = await Api.getFeels();
+      dadosFiltrados = dados;
+    } catch (erro) {
+      console.error('[Visualização] Erro ao carregar feels:', erro);
+      document.querySelector('.charts-section .container').innerHTML =
+        `<div class="empty-state"><i class="bi bi-wifi-off"></i>
+         <p>Não foi possível carregar os dados. Verifique se o JSON Server está rodando em http://localhost:3000.</p></div>`;
+      return;
+    }
+
+    criarFiltros();
+    renderStats();
+    renderDoughnut();
+    renderPolar();
+    renderCurtidas();
+    renderEngajamento();
+    renderRadar();
+    renderTaxa();
+    renderRanking();
+    renderDestaques();
+  });
+  </script>
+</body>
+</html>

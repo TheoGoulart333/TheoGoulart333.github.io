@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelo — Share What You Feel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+
+    /* ── VARIÁVEIS ──────────────────────────────────── */
+
+    :root {
+      --accent:      #9b8afb;
+      --accent-dark: #7c6fe0;
+      --bg:          #0d0d14;
+      --surface:     #15151f;
+      --surface-2:   #1e1e2e;
+      --text:        #e8e8f0;
+      --text-muted:  #8888aa;
+      --border:      rgba(255,255,255,0.07);
+      --radius:      16px;
+      --font-display:'DM Serif Display', serif;
+      --font-body:   'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── NAVBAR ─────────────────────────────────────── */
+
+    .feelo-navbar {
+      background: rgba(13,13,20,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+      position: sticky; top: 0; z-index: 1030;
+    }
+    .feelo-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .feelo-logo .logo-text { font-family:var(--font-display); font-size:1.6rem; color:var(--accent); letter-spacing:-0.5px; }
+    .feelo-navbar .nav-link {
+      color: var(--text-muted); font-weight:500; font-size:0.92rem;
+      padding:0.4rem 0.8rem; border-radius:8px;
+      display:flex; align-items:center; gap:5px;
+      transition: color .2s, background .2s; text-decoration:none;
+    }
+    .feelo-navbar .nav-link:hover, .feelo-navbar .nav-link.active {
+      color:var(--accent); background:rgba(155,138,251,0.1);
+    }
+    .feelo-navbar .nav-link .badge { background:var(--accent); font-size:0.62rem; }
+    .navbar-toggler { border-color:var(--border); }
+    .navbar-toggler-icon { filter:invert(1); }
+    .btn-feel {
+      background:var(--accent); color:#fff; font-weight:600;
+      border-radius:50px; padding:0.45rem 1.2rem; border:none;
+      font-size:0.88rem; transition:background .2s, transform .15s; cursor:pointer;
+      display:inline-flex; align-items:center;
+    }
+    .btn-feel:hover { background:var(--accent-dark); color:#fff; transform:translateY(-1px); }
+
+    /* ── SEÇÃO HEADER ───────────────────────────────── */
+
+    .section-header h2 {
+      font-family:var(--font-display); font-size:clamp(1.5rem,3.5vw,2.2rem); color:var(--text);
+    }
+    .section-header p { color:var(--text-muted); font-size:0.95rem; margin:0; }
+    .section-divider {
+      border: none; border-top: 1px solid var(--border); margin: 0 0 2rem;
+    }
+
+    /* ── SEÇÃO 1 — CARROSSEL ────────────────────────── */
+
+    .destaque-section { padding: 56px 0 0; }
+    .carousel-slide-wrapper {
+      width: 100%;
+      height: 480px;
+      background-size: cover;
+      background-position: center;
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 767px) { .carousel-slide-wrapper { height: 340px; } }
+    .carousel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,20,0.92) 0%, rgba(13,13,20,0.45) 55%, transparent 100%);
+    }
+    .carousel-caption-custom {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem;
+      z-index: 2;
+    }
+    .feeling-tag-carousel {
+      background: rgba(155,138,251,0.18); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.4); border-radius: 50px;
+      padding: 4px 14px; font-size: 0.8rem; font-weight: 600;
+      display: inline-block; margin-bottom: 0.6rem;
+    }
+    .carousel-titulo {
+      font-family: var(--font-display); font-size: clamp(1rem,2.5vw,1.35rem);
+      color: #fff; margin-bottom: 0.4rem; font-style: italic;
+    }
+    .carousel-texto {
+      color: rgba(232,232,240,0.8); font-size: 0.88rem;
+      line-height: 1.6; margin-bottom: 0.8rem;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .carousel-author { display: flex; align-items: center; gap: 10px; margin-bottom: 0.8rem; }
+    .carousel-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--accent); }
+    #carrosselDestaques .carousel-control-prev,
+    #carrosselDestaques .carousel-control-next {
+      width: 48px; height: 48px; background: rgba(155,138,251,0.2);
+      border: 1px solid rgba(155,138,251,0.3); border-radius: 50%;
+      top: 50%; transform: translateY(-50%); opacity: 1;
+      transition: background .2s;
+    }
+    #carrosselDestaques .carousel-control-prev { left: 1rem; }
+    #carrosselDestaques .carousel-control-next { right: 1rem; }
+    #carrosselDestaques .carousel-control-prev:hover,
+    #carrosselDestaques .carousel-control-next:hover { background: rgba(155,138,251,0.45); }
+    #carrosselDestaques .carousel-indicators [data-bs-target] {
+      width: 8px; height: 8px; border-radius: 50%; background: rgba(155,138,251,0.4);
+      border: none; margin: 0 4px;
+    }
+    #carrosselDestaques .carousel-indicators .active { background: var(--accent); }
+
+    /* ── SEÇÃO 2 — CARDS ────────────────────────────── */
+
+    .cards-section { padding: 52px 0; }
+    .post-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.3rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: border-color .25s, transform .2s;
+    }
+    .post-card:hover { border-color: rgba(155,138,251,0.4); transform: translateY(-3px); }
+    .card-img {
+      border-radius: 10px; width: 100%; object-fit: cover; height: 180px; display: block;
+    }
+    .card-author { display: flex; align-items: center; gap: 10px; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .author-name { font-weight: 600; font-size: 0.88rem; color: var(--text); display: block; }
+    .author-handle { font-size: 0.76rem; color: var(--text-muted); }
+    .feeling-tag {
+      margin-left: auto; background: rgba(155,138,251,0.12); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.25); border-radius: 50px;
+      padding: 3px 11px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;
+    }
+    .card-text { color: var(--text); font-size: 0.9rem; line-height: 1.55; flex: 1; margin: 0; }
+    .card-actions {
+      display: flex; gap: 0.9rem; padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .action-btn {
+      background: none; border: none; color: var(--text-muted); font-size: 0.82rem;
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      padding: 3px 7px; border-radius: 8px; transition: color .2s, background .2s;
+    }
+    .action-btn:hover { color: var(--accent); background: rgba(155,138,251,0.1); }
+    .action-btn.liked { color: #e066aa; }
+    .action-btn i { font-size: 0.95rem; }
+
+    /* ── SEÇÃO 3 — ALUNO ────────────────────────────── */
+
+    .aluno-section {
+      padding: 52px 0 72px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .aluno-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+    }
+    .aluno-sobre { color: var(--text-muted); font-size: 0.93rem; line-height: 1.7; }
+    .aluno-nome { font-family: var(--font-display); font-size: 1.3rem; color: var(--text); margin-bottom: 4px; }
+    .aluno-detalhe { font-size: 0.85rem; color: var(--text-muted); margin: 3px 0; }
+    .aluno-detalhe strong { color: var(--text); }
+    .social-links { display: flex; gap: 10px; margin-top: 1rem; }
+    .social-links a {
+      width: 38px; height: 38px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 1rem; text-decoration: none;
+      transition: color .2s, border-color .2s;
+    }
+    .social-links a:hover { color: var(--accent); border-color: var(--accent); }
+    .aluno-divider {
+      width: 1px; background: var(--border); align-self: stretch; margin: 0 1.5rem;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+
+    .feelo-footer {
+      background: var(--bg); border-top: 1px solid var(--border); padding: 40px 0 28px;
+    }
+    .footer-logo .logo-text { font-family: var(--font-display); font-size: 1.7rem; color: var(--accent); }
+    .footer-tagline { color: var(--text-muted); font-size: 0.88rem; margin-top: 2px; }
+    .footer-links a {
+      color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+      display: block; margin-bottom: 5px; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-links h6 {
+      color: var(--text); font-weight: 600; font-size: 0.78rem;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border); margin-top: 2rem;
+      padding-top: 1.1rem; color: var(--text-muted); font-size: 0.8rem;
+    }
+
+    /* ── MODAL ──────────────────────────────────────── */
+
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px); z-index: 2000;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem; width: 100%; max-width: 500px; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer;
+    }
+    .modal-title { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 1.1rem; }
+    .modal-user { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; font-weight: 500; }
+    .feeling-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem; }
+    .feel-option {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 50px; padding: 5px 13px; font-size: 0.82rem; cursor: pointer;
+      transition: border-color .2s, background .2s; user-select: none;
+    }
+    .feel-option:hover, .feel-option.selected {
+      border-color: var(--accent); background: rgba(155,138,251,0.15); color: var(--accent);
+    }
+    .modal-textarea {
+      width: 100%; background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text); padding: 0.75rem; font-size: 0.92rem;
+      resize: none; min-height: 96px; outline: none; margin-bottom: 1rem;
+      transition: border-color .2s; font-family: var(--font-body);
+    }
+    .modal-textarea:focus { border-color: var(--accent); }
+    .modal-submit {
+      width: 100%; background: var(--accent); color: #fff; border: none;
+      font-weight: 600; font-size: 0.98rem; padding: 0.65rem;
+      border-radius: 10px; cursor: pointer; transition: background .2s;
+    }
+    .modal-submit:hover:not(:disabled) { background: var(--accent-dark); }
+    .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    ::placeholder { color: var(--text-muted); opacity: 1; }
+
+    /* ── COMPOSE BOX ─────────────────────────── */
+
+    .compose-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem;
+      margin-bottom: 1.5rem; display: flex; gap: 12px; align-items: flex-start;
+    }
+    .compose-input {
+      width: 100%; background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text); padding: 0.65rem 1rem;
+      font-size: 0.92rem; outline: none; cursor: pointer; transition: border-color .2s;
+    }
+    .compose-input:focus { border-color: var(--accent); }
+    .compose-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .btn-ca {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.8rem; padding: 4px 11px;
+      border-radius: 8px; cursor: pointer; transition: color .2s, border-color .2s;
+    }
+    .btn-ca:hover { color: var(--accent); border-color: var(--accent); }
+    .btn-cs {
+      margin-left: auto; background: var(--accent); border: none; color: #fff;
+      font-weight: 600; font-size: 0.82rem; padding: 4px 16px;
+      border-radius: 8px; cursor: pointer; transition: background .2s;
+    }
+    .btn-cs:hover { background: var(--accent-dark); }
+
+    /* ── Seção de Feed ───────────────────────────────── */
+
+    .feed-section { padding: 0 0 52px; }
+    .feed-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .feed-tab {
+      padding: 0.55rem 1.1rem; color: var(--text-muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .feed-tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+    .widget-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.2rem; margin-bottom: 1.4rem;
+    }
+    .widget-box h5 { font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.9rem; color: var(--text); }
+    .trend-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0.45rem 0; border-bottom: 1px solid var(--border);
+    }
+    .trend-item:last-child { border-bottom: none; }
+    .trend-emoji { font-size: 1.2rem; }
+    .trend-name { font-weight: 600; font-size: 0.85rem; color: var(--text); margin: 0; }
+    .trend-count { font-size: 0.75rem; color: var(--text-muted); margin: 0; }
+    .suggest-item { display: flex; align-items: center; gap: 10px; padding: 0.45rem 0; }
+    .suggest-name { font-weight: 600; font-size: 0.85rem; color: var(--text); margin: 0; }
+    .suggest-handle { font-size: 0.75rem; color: var(--text-muted); margin: 0; }
+    .btn-follow {
+      margin-left: auto; border: 1px solid var(--accent); color: var(--accent);
+      background: transparent; font-size: 0.78rem; font-weight: 600;
+      padding: 3px 11px; border-radius: 50px; cursor: pointer;
+      transition: background .2s, color .2s; white-space: nowrap;
+    }
+    .btn-follow:hover { background: var(--accent); color: #fff; }
+    .search-box { position: relative; margin-bottom: 1.4rem; }
+    .search-box input {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 50px; color: var(--text); padding: 0.5rem 1rem 0.5rem 2.6rem;
+      width: 100%; font-size: 0.88rem; outline: none; transition: border-color .2s;
+    }
+    .search-box input:focus { border-color: var(--accent); }
+    .search-box i { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+    @keyframes slideIn {
+      from { opacity:0; transform:translateY(-14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .new-post { animation: slideIn .35s ease; }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ───────────────────────────────────────────── -->
+
+  <header>
+    <nav class="feelo-navbar navbar navbar-expand-lg">
+      <div class="container">
+        <a class="feelo-logo navbar-brand" href="/pages/index.html">
+          <svg width="36" height="36" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="40" fill="#9b8afb"/>
+            <text x="40" y="48" font-family="serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#fff">f</text>
+          </svg>
+          <span class="logo-text">feelo</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+          aria-controls="navbarMain" aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <!-- Menu renderizado condicionalmente pelo ui.js -->
+          <ul class="navbar-nav mx-auto gap-1" id="nav-menu"></ul>
+
+          <button class="btn-feel ms-lg-3 mt-2 mt-lg-0" id="btn-novo-feel">
+            <i class="bi bi-plus-lg me-1"></i> Novo Feel
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       SEÇÃO 1 — ITENS EM DESTAQUE (Carrossel Bootstrap)
+  ═══════════════════════════════════════════════════════ -->
+
+  <section class="destaque-section" id="destaques">
+    <div class="container">
+      <div class="section-header mb-3">
+        <h2><i class="bi bi-star-fill me-2" style="color:var(--accent);font-size:1.2rem;"></i>Feels em Destaque</h2>
+        <p>Os feels mais tocantes selecionados para você</p>
+      </div>
+      <hr class="section-divider">
+
+      <div id="carrosselDestaques" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators" id="carousel-indicators"></div>
+        <div class="carousel-inner" id="carousel-inner"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrosselDestaques" data-bs-slide="prev">
+          <i class="bi bi-chevron-left" style="font-size:1.2rem;color:#fff;"></i>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrosselDestaques" data-bs-slide="next">
+          <i class="bi bi-chevron-right" style="font-size:1.2rem;color:#fff;"></i>
+          <span class="visually-hidden">Próximo</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SEÇÃO 2 — TODOS OS ITENS (Cards dinâmicos via JS)
+  ═══════════════════════════════════════════════════════ -->
+
+  <section class="cards-section" id="todos" style="background:var(--surface); border-top:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header mb-3">
+        <h2><i class="bi bi-grid-fill me-2" style="color:var(--accent);font-size:1.2rem;"></i>Todos os Feels</h2>
+        <p>Explore todas as emoções compartilhadas na plataforma</p>
+      </div>
+      <hr class="section-divider">
+      <div class="row g-4" id="cards-container"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FEED + SIDEBAR
+  ═══════════════════════════════════════════════════════ -->
+
+  <section class="feed-section pt-5" id="feed" style="border-top:1px solid var(--border);">
+    <div class="container">
+      <div class="section-header mb-3">
+        <h2><i class="bi bi-rss-fill me-2" style="color:var(--accent);font-size:1.2rem;"></i>Feed ao Vivo</h2>
+        <p>Publicações em tempo real da comunidade</p>
+      </div>
+      <hr class="section-divider">
+      <div class="row g-4">
+        <!-- Feed -->
+        <div class="col-12 col-lg-8">
+          <div class="feed-tabs">
+            <a href="#" class="feed-tab active">Para Você</a>
+            <a href="#" class="feed-tab">Seguindo</a>
+          </div>
+          <div class="compose-box">        
+            <img id="compose-avatar" src="" alt="perfil" class="avatar">
+            <div style="flex:1">
+              <input type="text" class="compose-input" id="compose-input" placeholder="Como você está se sentindo agora?" readonly>
+              <div class="compose-actions">
+                <button class="btn-ca" id="btn-abrir-modal-emocao">😊 Emoção</button>
+                <button class="btn-ca" id="btn-abrir-modal-foto">📷 Foto</button>
+                <button class="btn-cs" id="btn-abrir-modal-cs">Feelo</button>
+              </div>
+            </div>
+          </div>
+          <div id="posts-container"></div>
+        </div>
+
+        <!-- Sidebar -->
+
+        <div class="col-12 col-lg-4">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Buscar feelings...">
+          </div>
+          <div class="widget-box">
+            <h5>Trending Feelings</h5>
+            <div class="trend-item"><span class="trend-emoji">😔</span><div><p class="trend-name">#melancolia</p><p class="trend-count">1.2k feels</p></div></div>
+            <div class="trend-item"><span class="trend-emoji">🌸</span><div><p class="trend-name">#gratidão</p><p class="trend-count">984 feels</p></div></div>
+            <div class="trend-item"><span class="trend-emoji">😤</span><div><p class="trend-name">#frustração</p><p class="trend-count">741 feels</p></div></div>
+            <div class="trend-item"><span class="trend-emoji">🥰</span><div><p class="trend-name">#amor</p><p class="trend-count">603 feels</p></div></div>
+          </div>
+          <div class="widget-box">
+            <h5>Sugestões para seguir</h5>
+            <div class="suggest-item">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiNjMDYwODAiLz4KPHRleHQgeD0iNDAiIHk9IjQ2IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPkFJPC90ZXh0Pgo8L3N2Zz4=" alt="" class="avatar">
+              <div><p class="suggest-name">anaisbr</p><p class="suggest-handle">@anaisbr</p></div>
+              <button class="btn-follow">Seguir</button>
+            </div>
+            <div class="suggest-item">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiMzYTdhNTAiLz4KPHRleHQgeD0iNDAiIHk9IjQ2IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPlJTPC90ZXh0Pgo8L3N2Zz4=" alt="" class="avatar">
+              <div><p class="suggest-name">rafasousa</p><p class="suggest-handle">@rafasousa</p></div>
+              <button class="btn-follow">Seguir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SEÇÃO 3 — INFORMAÇÕES DO ALUNO
+  ═══════════════════════════════════════════════════════ -->
+
+  <section class="aluno-section" id="sobre">
+    <div class="container">
+      <div class="section-header mb-3">
+        <h2><i class="bi bi-person-badge-fill me-2" style="color:var(--accent);font-size:1.2rem;"></i>Informações do Aluno</h2>
+        <p>Responsável pela criação deste projeto</p>
+      </div>
+      <hr class="section-divider">
+
+      <div class="row g-4 align-items-start">
+        <div class="col-12 col-md-7">
+          <div class="aluno-card h-100">
+            <h5 style="font-family:var(--font-display);font-size:1.1rem;color:var(--accent);margin-bottom:1rem;">
+              <i class="bi bi-info-circle-fill me-2"></i>Sobre o Projeto
+            </h5>
+            <p class="aluno-sobre">
+              O <strong style="color:var(--accent);">Feelo</strong> é uma rede social emocional onde as pessoas podem compartilhar 
+              sentimentos, experiências e momentos do cotidiano. O projeto foi desenvolvido como trabalho 
+              prático da disciplina <strong>Desenvolvimento de Interfaces Web</strong> do curso de Engenharia 
+              de Software da PUC Minas.
+            </p>
+            <p class="aluno-sobre mt-2">
+              A plataforma apresenta uma estrutura de posts chamados <em>"feels"</em>, onde cada publicação 
+              carrega um sentimento associado, fotos vinculadas e informações de interação. O site é totalmente 
+              responsivo e todo o conteúdo é gerado dinamicamente via JavaScript a partir de uma API REST (JSON Server).
+            </p>
+            <div class="mt-3 d-flex flex-wrap gap-2">
+              <span style="background:rgba(155,138,251,0.12);color:var(--accent);border:1px solid rgba(155,138,251,0.3);border-radius:50px;padding:4px 14px;font-size:0.78rem;font-weight:600;">HTML5</span>
+              <span style="background:rgba(155,138,251,0.12);color:var(--accent);border:1px solid rgba(155,138,251,0.3);border-radius:50px;padding:4px 14px;font-size:0.78rem;font-weight:600;">CSS3</span>
+              <span style="background:rgba(155,138,251,0.12);color:var(--accent);border:1px solid rgba(155,138,251,0.3);border-radius:50px;padding:4px 14px;font-size:0.78rem;font-weight:600;">JavaScript</span>
+              <span style="background:rgba(155,138,251,0.12);color:var(--accent);border:1px solid rgba(155,138,251,0.3);border-radius:50px;padding:4px 14px;font-size:0.78rem;font-weight:600;">Bootstrap 5</span>
+              <span style="background:rgba(155,138,251,0.12);color:var(--accent);border:1px solid rgba(155,138,251,0.3);border-radius:50px;padding:4px 14px;font-size:0.78rem;font-weight:600;">JSON Server</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-5">
+          <div class="aluno-card h-100">
+            <h5 style="font-family:var(--font-display);font-size:1.1rem;color:var(--accent);margin-bottom:1.2rem;">
+              <i class="bi bi-person-circle me-2"></i>Autoria
+            </h5>
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiMzZDJkNmUiLz4KPGNpcmNsZSBjeD0iNDAiIGN5PSIzMiIgcj0iMTQiIGZpbGw9IiM5YjhhZmIiLz4KPGVsbGlwc2UgY3g9IjQwIiBjeT0iNzAiIHJ4PSIyMiIgcnk9IjE2IiBmaWxsPSIjOWI4YWZiIi8+Cjwvc3ZnPg==" alt="Theo Goulart" 
+                style="width:64px;height:64px;border-radius:50%;border:3px solid var(--accent);">
+              <div>
+                <p class="aluno-nome">Theo Goulart</p>
+                <p class="aluno-detalhe" style="color:var(--text-muted);">@theosoad</p>
+              </div>
+            </div>
+            <p class="aluno-detalhe"><strong>Curso:</strong> Engenharia de Software</p>
+            <p class="aluno-detalhe"><strong>Turma:</strong> Noite — 2026/1</p>
+            <p class="aluno-detalhe"><strong>Instituição:</strong> PUC Minas</p>
+            <p class="aluno-detalhe"><strong>Disciplina:</strong> Des. de Interfaces Web (DIW)</p>
+            <p class="aluno-detalhe"><strong>Matrícula:</strong> 907916</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1rem;margin-bottom:0.4rem;">Redes Sociais:</p>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+
+  <footer class="feelo-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="footer-logo"><span class="logo-text">feelo</span></div>
+          <p class="footer-tagline">Share what you feel.</p>
+          <p class="mt-3" style="color:var(--text-muted);font-size:0.83rem;">Um espaço seguro para expressar emoções e se conectar com quem entende o que você sente.</p>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Produto</h6>
+          <a href="/pages/index.html">Início</a>
+          <a href="#destaques">Destaques</a>
+          <a href="#todos">Todos os Feels</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Empresa</h6>
+          <a href="#">Sobre nós</a><a href="#">Blog</a><a href="#">Carreiras</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Suporte</h6>
+          <a href="#">Central de Ajuda</a><a href="#">Privacidade</a><a href="#">Termos de Uso</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Projeto</h6>
+          <a href="#">PUC Minas</a><a href="#">DIW — Eng. Software</a>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span>©2026 Feelo Corp. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── MODAL ─────────────────────────────────────────── -->
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="btn-fechar-modal" aria-label="Fechar modal">✕</button>
+      <h2 class="modal-title">Como você está se sentindo?</h2>
+      <div class="modal-user" id="modal-user-info">
+      </div>
+      <div class="feeling-picker">
+        <span class="feel-option" data-feeling="😊 Feliz">😊 Feliz</span>
+        <span class="feel-option" data-feeling="😔 Triste">😔 Triste</span>
+        <span class="feel-option" data-feeling="😤 Frustrado">😤 Frustrado</span>
+        <span class="feel-option" data-feeling="🌸 Grato">🌸 Grato</span>
+        <span class="feel-option" data-feeling="🌅 Em paz">🌅 Em paz</span>
+        <span class="feel-option" data-feeling="🥰 Apaixonado">🥰 Apaixonado</span>
+      </div>
+      <textarea class="modal-textarea" id="post-text" placeholder="Compartilhe o que sente..."></textarea>
+      <button class="modal-submit" id="btn-publicar">Publicar Feel</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════ -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>

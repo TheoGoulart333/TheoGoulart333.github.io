@@ -1,0 +1,231 @@
+/* ==========================================
+   1. ESTILOS GERAIS (BASE)
+   ========================================== */
+body {
+    background-color: #f5f5f5;
+}
+
+main {
+    width: 100%;
+    padding-top: 9.47vh;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+/* ==========================================
+   2. COMPONENTES REUTILIZÁVEIS
+   ========================================== */
+/* Filtros, Contadores e Barras de Info */
+.filtros {
+    display: flex;
+    gap: 1rem;
+    margin: 2% 1%;
+    flex-wrap: wrap;
+}
+
+.filtros input,
+.filtros select {
+    padding: 1rem;
+    border-radius: 20px;
+    font-family: var(--font-principal);
+    font-size: 1rem;
+    flex: 1;
+    min-width: 220px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#contador-favoritos {
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--cor-texto-escuro);
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: var(--cor-terciaria);
+    border-radius: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.info-beneficios {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alterarPerfil {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ==========================================
+   3. SEÇÃO: INTRODUÇÃO
+   ========================================== */
+.intro {
+    background-color: #f2f0ec;
+    border-radius: 40px;
+    padding: 1%;
+    margin-top: 1%;
+    font-family: var(--font-principal);
+    color: var(--cor-texto-escuro);
+}
+
+.intro>h1 {
+    font-weight: 700;
+    font-size: 3.5rem;
+}
+
+.intro p {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+/* ==========================================
+   4. SEÇÃO: CARDS DE BENEFÍCIOS
+   ========================================== */
+.beneficios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1%;
+    gap: 1%;
+}
+
+.card-beneficio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    font-family: var(--font-principal);
+    padding: 1%;
+    margin: 1%;
+    border-radius: 40px;
+    width: 30%;
+    gap: 1rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card-beneficio>button {
+    margin: 0% 10% 0 10%;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orgao {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    white-space: nowrap;
+    padding: 1% 2% 1% 2%;
+    border-radius: 40px;
+}
+
+.descricao {
+    color: var(--cor-texto-escuro);
+    text-align: start;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoria {
+    text-align: center;
+    white-space: nowrap;
+    padding: 2% 4% 2% 4%;
+    color: var(--cor-texto-escuro);
+    background-color: var(--cor-terciaria-hover);
+    border-radius: 40px;
+}
+
+.valor {
+    text-align: center;
+    font-weight: 600;
+}
+
+.favoritar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.favoritar>button {
+    border-radius: 40px;
+    margin: 0 !important;
+    width: 40%;
+}
+
+/* ==========================================
+   5. RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================== */
+
+/* Tablets (até 1024px) */
+@media (max-width: 1024px) {
+    .card-beneficio {
+        width: 45%;
+        padding: 3%;
+    }
+
+    .intro>h1 {
+        font-weight: 700;
+        font-size: 2.0rem;
+    }
+
+    .intro>p {
+        font-weight: 400;
+        font-size: 1.25rem;
+    }
+
+    .alterarPerfil {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .alterarPerfil>p {
+        margin: 0;
+    }
+}
+
+/* Celulares (até 768px) */
+@media (max-width: 768px) {
+    .intro>h1 {
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    .intro>p {
+        font-weight: 400;
+        font-size: 1.5rem;
+    }
+
+    .card-beneficio {
+        width: 100%;
+        padding: 5%;
+    }
+
+    .info-beneficios {
+        justify-content: center;
+        margin: 0.5rem 0 3rem 0;
+    }
+
+    .info-beneficios button {
+        font-size: 1.2rem;
+    }
+
+    #contador-favoritos {
+        font-size: 1.2rem !important;
+    }
+
+    .filtros {
+        margin-top: 3rem !important;
+    }
+}

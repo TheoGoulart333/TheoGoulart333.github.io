@@ -1,0 +1,43 @@
+
+main {
+    font-family: var(--font-principal);
+    background-color: #E8E8E8;
+}
+
+#titulo {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/img-detalhes-beneficio/imagem-fundo.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh; 
+}
+
+#titulo-site {
+    font-family: montserrat;
+    letter-spacing: 0.5rem;
+    font-weight: 500;
+    padding-top: 7rem;
+    color: #ffffff;
+}
+
+#titulo-descricao-desktop {
+    margin-top: 1.2rem;
+}
+
+#descricao-beneficio-desktop {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#div-valor-beneficio {
+    border-top: 1px solid;
+}
+
+#valor-beneficio-desktop {
+    margin-top: 0.35rem;
+}
+
+#botao-postos-atendimentos:hover {
+    background-color: #0D43A1;
+    transform: scale(1.05);
+}
+

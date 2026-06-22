@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postos de Benefícios | PRISM</title>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sidebar-bg:    #1a2533;
+      --sidebar-hover: #243040;
+      --sidebar-active:#28a745;
+      --green:         #28a745;
+      --green-dark:    #1e7e34;
+      --green-light:   #e8f5ed;
+      --white:         #ffffff;
+      --gray-50:       #f8fafc;
+      --gray-100:      #f1f5f9;
+      --gray-200:      #e2e8f0;
+      --gray-400:      #94a3b8;
+      --gray-600:      #64748b;
+      --gray-800:      #1e293b;
+      --blue:          #1a3c8f;
+      --red:           #dc3545;
+      --yellow:        #f59e0b;
+      --purple:        #7c3aed;
+      --shadow-sm:     0 1px 6px rgba(0,0,0,0.08);
+      --shadow-md:     0 4px 20px rgba(0,0,0,0.12);
+      --radius:        12px;
+      --radius-sm:     8px;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Barra Lateral ────────────────────── */
+    .sidebar {
+      width: 220px;
+      min-height: 100vh;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 200;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-logo .dot {
+      width: 10px; height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+    .sidebar-nav { flex: 1; padding: 16px 12px; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: rgba(255,255,255,0.65);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-decoration: none;
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: var(--sidebar-hover); color: var(--white); }
+    .nav-item.active {
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(40,167,69,0.4);
+    }
+    .nav-item .icon { font-size: 1.1rem; flex-shrink: 0; }
+    .sidebar-bottom {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── Conteúdo do Main ───────────────────────────────────────── */
+    .main {
+      margin-left: 220px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Barra do topo ─────────────────────────────────────────────── */
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .back-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      transition: all 0.18s;
+    }
+    .back-btn:hover { background: var(--gray-100); color: var(--gray-800); }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .notif-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--gray-600);
+    }
+    .notif-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: var(--green);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 800;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+    .user-avatar {
+      width: 34px; height: 34px;
+      background: var(--gray-200);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* ── Conteúdo da página ───────────────────────────────────────── */
+    .content {
+      padding: 28px;
+      flex: 1;
+    }
+
+    .page-header {
+      margin-bottom: 24px;
+    }
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .page-title .title-icon {
+      background: var(--green-light);
+      color: var(--green-dark);
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .page-subtitle {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      margin-left: 48px;
+    }
+
+    /* ── Estatísticas ────────────────────────────────────────── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      transition: all 0.18s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+    .stat-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .stat-icon.green  { background: var(--green-light);       color: var(--green-dark); }
+    .stat-icon.blue   { background: #e8eeff;                  color: var(--blue); }
+    .stat-icon.yellow { background: #fef3c7;                  color: #92400e; }
+    .stat-icon.purple { background: #ede9fe;                  color: var(--purple); }
+    .stat-value { font-size: 1.6rem; font-weight: 800; line-height: 1; color: var(--gray-800); }
+    .stat-label { font-size: 0.78rem; font-weight: 600; color: var(--gray-600); margin-top: 2px; }
+
+    /* ── Layout: Mapa + Painel ────────────────────────────────── */
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ── Cartão do Mapa ───────────────────────────────────────────── */
+    .map-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .map-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .map-card-title {
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray-800);
+    }
+    .map-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      color: var(--gray-600);
+    }
+    .filter-btn:hover { border-color: var(--green); color: var(--green); }
+    .filter-btn.active {
+      background: var(--green);
+      color: var(--white);
+      border-color: var(--green);
+    }
+    .filter-btn.cras.active  { background: #1a3c8f; border-color: #1a3c8f; }
+    .filter-btn.creas.active { background: #7c3aed; border-color: #7c3aed; }
+    .filter-btn.bolsa.active { background: #f59e0b; border-color: #f59e0b; }
+    .filter-btn.prev.active  { background: #0891b2; border-color: #0891b2; }
+
+    #mapa-beneficios {
+      height: 500px;
+      width: 100%;
+    }
+
+    .map-footer {
+      padding: 10px 20px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.78rem;
+      color: var(--gray-600);
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ── Painel Lateral ─────────────────────────────────────────── */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Buscar */
+    .search-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+    .search-title {
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      color: var(--gray-800);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .search-input-wrap {
+      position: relative;
+    }
+    .search-input-wrap input {
+      width: 100%;
+      padding: 9px 12px 9px 34px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gray-800);
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .search-input-wrap input:focus { border-color: var(--green); }
+    .search-input-wrap .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      font-size: 0.9rem;
+    }
+
+    /* Listagem */
+    .list-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .list-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--gray-200);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--gray-800);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .count-badge {
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .postos-list {
+      max-height: 360px;
+      overflow-y: auto;
+    }
+    .postos-list::-webkit-scrollbar { width: 4px; }
+    .postos-list::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+
+    .posto-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-100);
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .posto-item:hover { background: var(--gray-50); }
+    .posto-item:last-child { border-bottom: none; }
+    .posto-item.highlighted { background: var(--green-light); }
+
+    .posto-type-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .posto-info { flex: 1; min-width: 0; }
+    .posto-nome {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .posto-bairro {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      margin-top: 1px;
+    }
+    .posto-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    /* ── Popup customizado ───────────────────────────────── */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px !important;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+    .leaflet-popup-content {
+      margin: 0 !important;
+      width: 260px !important;
+    }
+    .popup-header {
+      padding: 12px 14px 10px;
+      color: white;
+      font-family: 'Nunito', sans-serif;
+    }
+    .popup-type {
+      font-size: 0.68rem;
+      font-weight: 800;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+    .popup-nome {
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .popup-body {
+      padding: 10px 14px 12px;
+      font-family: 'Nunito', sans-serif;
+    }
+    .popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #374151;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .popup-row .pi { flex-shrink: 0; margin-top: 1px; }
+    .popup-servicos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .popup-serv-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: #374151;
+    }
+    .popup-actions {
+      padding: 0 14px 12px;
+      display: flex;
+      gap: 6px;
+    }
+    .popup-btn {
+      flex: 1;
+      padding: 7px 0;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .popup-btn-primary {
+      background: #28a745;
+      color: white;
+    }
+    .popup-btn-primary:hover { background: #1e7e34; }
+    .popup-btn-outline {
+      background: #f1f5f9;
+      color: #374151;
+    }
+    .popup-btn-outline:hover { background: #e2e8f0; }
+
+    /* ── Carregamento ────────────────────────────────────── */
+    .map-loading {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .map-wrapper { position: relative; }
+
+    /* ── Toast ──────────────────────────────────────────────── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      background: var(--gray-800);
+      color: white;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      animation: slideIn 0.25s ease;
+    }
+    .toast.success { background: var(--green-dark); }
+    .toast.error   { background: #dc3545; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── Responsividade ─────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .map-layout { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .side-panel { flex-direction: row; flex-wrap: wrap; }
+      .side-panel > * { flex: 1 1 280px; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════ Barra Lateral ═══════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="dot"></div>
+      PRISM
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item"><span class="icon">⊞</span> Dashboard</a>
+      <a href="#" class="nav-item"><span class="icon">≡</span> Ocorrências</a>
+      <a href="#" class="nav-item"><span class="icon">↗</span> Relatórios</a>
+      <a href="#" class="nav-item"><span class="icon">⊕</span> Nova Ocorrência</a>
+      <a href="#" class="nav-item active"><span class="icon">📍</span> Postos Benef.</a>
+      <a href="#" class="nav-item"><span class="icon">☰</span> Detalhes</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item"><span class="icon">⇤</span> Sair</a>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <div class="main">
+
+    <!-- Barra do topo -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="back-btn" onclick="history.back()">← Voltar</button>
+      </div>
+      <div class="topbar-right">
+        <button class="notif-btn">
+          🔔
+          <span class="notif-badge">4</span>
+        </button>
+        <div class="user-chip">
+          <div class="user-avatar">👤</div>
+          <div>
+            <div style="font-size:0.82rem;font-weight:800">Admin</div>
+            <div style="font-size:0.72rem;color:var(--gray-600);font-weight:600">Administrador</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <div class="content">
+
+      <!-- Header da página -->
+      <div class="page-header">
+        <div class="page-title">
+          <div class="title-icon"></div>
+          Postos de Benefícios Governamentais
+        </div>
+        <p class="page-subtitle">Mapa interativo de unidades de assistência social e previdência em Belo Horizonte</p>
+      </div>
+
+      <!-- Estatísticas -->
+      <div class="stats-strip" id="stats-strip">
+        <div class="stat-card">
+          <div class="stat-icon blue">🏢</div>
+          <div>
+            <div class="stat-value" id="stat-cras">—</div>
+            <div class="stat-label">Unidades CRAS</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">🏛️</div>
+          <div>
+            <div class="stat-value" id="stat-creas">—</div>
+            <div class="stat-label">Unidades CREAS</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow">💰</div>
+          <div>
+            <div class="stat-value" id="stat-bolsa">—</div>
+            <div class="stat-label">Postos Bolsa Família</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">🩺</div>
+          <div>
+            <div class="stat-value" id="stat-prev">—</div>
+            <div class="stat-label">Postos Previdência</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa + Painel -->
+      <div class="map-layout">
+
+        <!-- Painel do Mapa -->
+        <div class="map-card">
+          <div class="map-card-header">
+            <div class="map-card-title">Mapa de Belo Horizonte</div>
+            <div class="map-controls">
+              <button class="filter-btn active" data-tipo="todos" onclick="filtrarTipo('todos', this)">Todos</button>
+              <button class="filter-btn cras" data-tipo="CRAS" onclick="filtrarTipo('CRAS', this)">CRAS</button>
+              <button class="filter-btn creas" data-tipo="CREAS" onclick="filtrarTipo('CREAS', this)">CREAS</button>
+              <button class="filter-btn bolsa" data-tipo="Bolsa Família" onclick="filtrarTipo('Bolsa Família', this)">Bolsa Família</button>
+              <button class="filter-btn prev" data-tipo="Previdência" onclick="filtrarTipo('Previdência', this)">Previdência</button>
+            </div>
+          </div>
+          <div class="map-wrapper">
+            <div id="mapa-beneficios"></div>
+            <div class="map-loading" id="map-loading">
+              <div class="spinner"></div>
+              Carregando postos de Belo Horizonte...
+            </div>
+          </div>
+          <div class="map-footer">
+            <span class="legend-item"><span class="legend-dot" style="background:#1a3c8f"></span> CRAS</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#7c3aed"></span> CREAS</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> Bolsa Família</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#0891b2"></span> Previdência</span>
+            <span style="margin-left:auto;color:var(--gray-400)">© OpenStreetMap • Dados: SMAS / SMPS BH 2024</span>
+          </div>
+        </div>
+
+        <!-- Painel Lateral -->
+        <div class="side-panel">
+
+          <!-- Busca -->
+          <div class="search-card">
+            <div class="search-title">Buscar posto</div>
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="search-input" placeholder="Nome, bairro ou região..." oninput="filtrarLista()" />
+            </div>
+          </div>
+
+          <!-- Lista -->
+          <div class="list-card">
+            <div class="list-header">
+              Postos encontrados
+              <span class="count-badge" id="list-count">0</span>
+            </div>
+            <div class="postos-list" id="postos-list">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+
+  <script>
+  /* ════════════════════════════════════════════════════════════
+     POSTOS DE BENEFÍCIOS GOVERNAMENTAIS — BH
+  ════════════════════════════════════════════════════════════ */
+
+  const POSTOS_BH = [
+    // ── CRAS ────────────────────────────────────────────────
+    { id:1, tipo:'CRAS', nome:'CRAS Barreiro', bairro:'Barreiro',
+      endereco:'R. Deputado Bernardino Sena Figueiredo, 30 - Barreiro',
+      telefone:'(31) 3277-4840', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.9977, lng:-44.0163,
+      servicos:['Cadastro Único','CRAS Volante','Benefício de Prestação Continuada','PAIF'] },
+
+    { id:2, tipo:'CRAS', nome:'CRAS Nordeste', bairro:'Venda Nova',
+      endereco:'R. Professor Estevão Pinto, 672 - Venda Nova',
+      telefone:'(31) 3277-6110', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.8333, lng:-43.9499,
+      servicos:['Cadastro Único','PAIF','SCFV','Visita Domiciliar'] },
+
+    { id:3, tipo:'CRAS', nome:'CRAS Leste', bairro:'Taquaril',
+      endereco:'R. Cruzeiro do Sul, 620 - Taquaril',
+      telefone:'(31) 3277-7520', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.9135, lng:-43.8928,
+      servicos:['Cadastro Único','PAIF','Bolsa Família','BPC'] },
+
+    { id:4, tipo:'CRAS', nome:'CRAS Pampulha', bairro:'Pampulha',
+      endereco:'R. Desembargador Saraiva, 1070 - São Luiz',
+      telefone:'(31) 3277-5300', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.8710, lng:-43.9680,
+      servicos:['Cadastro Único','PAIF','SCFV','Acompanhamento Familiar'] },
+
+    { id:5, tipo:'CRAS', nome:'CRAS Noroeste', bairro:'Padre Eustáquio',
+      endereco:'R. Mário Werneck, 1400 - Padre Eustáquio',
+      telefone:'(31) 3277-8900', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.9236, lng:-43.9787,
+      servicos:['Cadastro Único','PAIF','Oficinas','BPC'] },
+
+    { id:6, tipo:'CRAS', nome:'CRAS Centro-Sul', bairro:'Barro Preto',
+      endereco:'R. dos Tupis, 149 - Centro',
+      telefone:'(31) 3277-1450', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.9320, lng:-43.9390,
+      servicos:['Cadastro Único','PAIF','SCFV','Transferência de Renda'] },
+
+    { id:7, tipo:'CRAS', nome:'CRAS Oeste', bairro:'Betânia',
+      endereco:'R. Diamantina, 1700 - Betânia',
+      telefone:'(31) 3277-5600', horario:'Seg a Sex: 08h às 17h',
+      lat:-19.9650, lng:-44.0010,
+      servicos:['Cadastro Único','PAIF','BPC','Bolsa Família'] },
+
+    // ── CREAS ────────────────────────────────────────────────
+    { id:8, tipo:'CREAS', nome:'CREAS Centro-Sul', bairro:'Lourdes',
+      endereco:'R. Sergipe, 975 - Funcionários',
+      telefone:'(31) 3277-1875', horario:'Seg a Sex: 08h às 18h',
+      lat:-19.9385, lng:-43.9330,
+      servicos:['PAEFI','Medidas Socioeducativas','Abrigamento','Violência Doméstica'] },
+
+    { id:9, tipo:'CREAS', nome:'CREAS Leste', bairro:'Caetés',
+      endereco:'R. Padre Humberto Pietrogrande, 40 - Caetés',
+      telefone:'(31) 3277-6640', horario:'Seg a Sex: 08h às 18h',
+      lat:-19.9050, lng:-43.8790,
+      servicos:['PAEFI','Exploração Sexual','Tráfico de Pessoas','MSE'] },
+
+    { id:10, tipo:'CREAS', nome:'CREAS Noroeste', bairro:'Caiçaras',
+      endereco:'R. Caiçaras, 840 - Caiçaras',
+      telefone:'(31) 3277-9010', horario:'Seg a Sex: 08h às 18h',
+      lat:-19.9200, lng:-43.9880,
+      servicos:['PAEFI','Violência Intrafamiliar','Acolhimento','MSE'] },
+
+    { id:11, tipo:'CREAS', nome:'CREAS Venda Nova', bairro:'Venda Nova',
+      endereco:'Av. Vilarinho, 1200 - Venda Nova',
+      telefone:'(31) 3277-6220', horario:'Seg a Sex: 08h às 18h',
+      lat:-19.8290, lng:-43.9600,
+      servicos:['PAEFI','Medidas Protetivas','Apoio a Idosos','MSE'] },
+
+    // ── Bolsa Família / CAIXA ────────────────────────────────
+    { id:12, tipo:'Bolsa Família', nome:'Caixa Econômica – Ag. BH Centro', bairro:'Centro',
+      endereco:'Av. Amazonas, 505 - Centro',
+      telefone:'0800 726 0101', horario:'Seg a Sex: 09h às 15h',
+      lat:-19.9192, lng:-43.9379,
+      servicos:['Bolsa Família','Saque FGTS','Financiamento Habitação','Seguro-Desemprego'] },
+
+    { id:13, tipo:'Bolsa Família', nome:'Lotérica São João Batista', bairro:'São João Batista',
+      endereco:'R. Elce Ribeiro, 258 - São João Batista',
+      telefone:'(31) 3494-1234', horario:'Seg a Sex: 09h às 17h | Sáb: 09h às 12h',
+      lat:-19.8194, lng:-43.9634,
+      servicos:['Bolsa Família','INSS Fácil','Saque','Pagamentos gov.'] },
+
+    { id:14, tipo:'Bolsa Família', nome:'Lotérica Pampulha', bairro:'Pampulha',
+      endereco:'Av. Antônio Carlos, 3450 - Pampulha',
+      telefone:'(31) 3491-5678', horario:'Seg a Sex: 09h às 17h',
+      lat:-19.8650, lng:-43.9730,
+      servicos:['Bolsa Família','Saque','Seguro-Desemprego','Pagamentos'] },
+
+    { id:15, tipo:'Bolsa Família', nome:'Caixa Econômica – Ag. Barreiro', bairro:'Barreiro',
+      endereco:'R. Conde de Bobadela, 120 - Barreiro',
+      telefone:'0800 726 0101', horario:'Seg a Sex: 09h às 15h',
+      lat:-19.9890, lng:-44.0200,
+      servicos:['Bolsa Família','FGTS','Habitação','Microcredito'] },
+
+    // ── Previdência Social / INSS ────────────────────────────
+    { id:16, tipo:'Previdência', nome:'APS INSS – BH Centro', bairro:'Centro',
+      endereco:'R. Curitiba, 832 - Centro',
+      telefone:'135', horario:'Seg a Sex: 07h às 13h',
+      lat:-19.9218, lng:-43.9348,
+      servicos:['Aposentadoria','BPC','Salário-Maternidade','Auxílio-Doença','Pensão por Morte'] },
+
+    { id:17, tipo:'Previdência', nome:'APS INSS – Venda Nova', bairro:'Venda Nova',
+      endereco:'Av. Vilarinho, 2120 - Venda Nova',
+      telefone:'135', horario:'Seg a Sex: 07h às 13h',
+      lat:-19.8240, lng:-43.9660,
+      servicos:['Aposentadoria','BPC','Auxílio-Doença','Revisão de Benefício'] },
+
+    { id:18, tipo:'Previdência', nome:'APS INSS – Barreiro', bairro:'Barreiro',
+      endereco:'Av. Afonso Vaz de Melo, 901 - Barreiro',
+      telefone:'135', horario:'Seg a Sex: 07h às 13h',
+      lat:-19.9870, lng:-44.0230,
+      servicos:['Aposentadoria','BPC','Pensão por Morte','Salário-Maternidade'] },
+
+    { id:19, tipo:'Previdência', nome:'APS INSS – Leste / Ipiranga', bairro:'Ipiranga',
+      endereco:'R. Três Corações, 32 - Ipiranga',
+      telefone:'135', horario:'Seg a Sex: 07h às 13h',
+      lat:-19.9050, lng:-43.9010,
+      servicos:['Aposentadoria','BPC','Auxílio-Acidente','Reabilitação Profissional'] },
+  ];
+
+  /* ── Cores por tipo ─────────────────────────────────────── */
+  const CORES = {
+    'CRAS':          { bg:'#1a3c8f', light:'#e8eeff', text:'#1a3c8f' },
+    'CREAS':         { bg:'#7c3aed', light:'#ede9fe', text:'#7c3aed' },
+    'Bolsa Família': { bg:'#f59e0b', light:'#fef3c7', text:'#92400e' },
+    'Previdência':   { bg:'#0891b2', light:'#e0f2fe', text:'#0c4a6e' },
+  };
+
+  /* ── Estado ─────────────────────────────────────────────── */
+  let mapa, clusterGroup;
+  let marcadores = [];     
+  let filtroAtivo = 'todos';
+  let searchTerm = '';
+
+  /* ── Iniciar mapa ──────────────────────────────────────────── */
+  window.addEventListener('DOMContentLoaded', () => {
+    mapa = L.map('mapa-beneficios', {
+      center: [-19.9191, -43.9387],
+      zoom: 12,
+      zoomControl: true,
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19,
+    }).addTo(mapa);
+
+    clusterGroup = L.markerClusterGroup({
+      iconCreateFunction: cluster => {
+        const n = cluster.getChildCount();
+        return L.divIcon({
+          html: `<div style="background:#28a745;color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;box-shadow:0 2px 8px rgba(40,167,69,0.4)">${n}</div>`,
+          className: '',
+          iconSize: [36, 36],
+        });
+      },
+      maxClusterRadius: 60,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+    });
+    mapa.addLayer(clusterGroup);
+
+    criarMarcadores();
+    atualizarStats();
+    atualizarLista();
+    document.getElementById('map-loading').style.display = 'none';
+    toast('✅ ' + POSTOS_BH.length + ' postos carregados em Belo Horizonte');
+  });
+
+  /* ── Ícone customizado ──────────────────────────────────── */
+  function criarIcone(tipo) {
+    const cor = CORES[tipo]?.bg || '#28a745';
+    const emoji = { 'CRAS':'🏢','CREAS':'🏛️','Bolsa Família':'💰','Previdência':'🩺' }[tipo] || '📍';
+    return L.divIcon({
+      html: `<div style="
+        background:${cor};
+        width:32px;height:32px;
+        border-radius:50% 50% 50% 0;
+        transform:rotate(-45deg);
+        display:flex;align-items:center;justify-content:center;
+        box-shadow:0 3px 12px rgba(0,0,0,0.25);
+        border:2px solid rgba(255,255,255,0.8)
+      "><span style="transform:rotate(45deg);font-size:0.85rem">${emoji}</span></div>`,
+      className: '',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -34],
+    });
+  }
+
+  /* ── Criar todos os marcadores ──────────────────────────── */
+  function criarMarcadores() {
+    marcadores = [];
+    POSTOS_BH.forEach(posto => {
+      const marker = L.marker([posto.lat, posto.lng], { icon: criarIcone(posto.tipo) });
+      const cor = CORES[posto.tipo]?.bg || '#28a745';
+      const servHtml = posto.servicos.map(s =>
+        `<span class="popup-serv-tag">${s}</span>`).join('');
+
+      marker.bindPopup(`
+        <div class="popup-header" style="background:${cor}">
+          <div class="popup-type">${posto.tipo}</div>
+          <div class="popup-nome">${posto.nome}</div>
+        </div>
+        <div class="popup-body">
+          <div class="popup-row"><span class="pi">📍</span><span>${posto.endereco}</span></div>
+          <div class="popup-row"><span class="pi">📞</span><span>${posto.telefone}</span></div>
+          <div class="popup-row"><span class="pi">🕐</span><span>${posto.horario}</span></div>
+          <div class="popup-servicos">${servHtml}</div>
+        </div>
+        <div class="popup-actions">
+          <button class="popup-btn popup-btn-primary" onclick="abrirMaps(${posto.lat},${posto.lng},'${posto.nome.replace(/'/g,"\\'")}')">🗺️ Como chegar</button>
+          <button class="popup-btn popup-btn-outline" onclick="copiarEndereco('${posto.endereco.replace(/'/g,"\\'")}')">📋 Copiar</button>
+        </div>
+      `, { maxWidth: 280, className: '' });
+
+      marker.on('click', () => destacarItemLista(posto.id));
+      marcadores.push({ posto, marker });
+    });
+    renderizarMarcadores();
+  }
+
+  /* ── Renderizar marcadores no cluster ───────────────────── */
+  function renderizarMarcadores() {
+    clusterGroup.clearLayers();
+    const visiveis = marcadores.filter(({ posto }) => {
+      const tipoOk = filtroAtivo === 'todos' || posto.tipo === filtroAtivo;
+      const searchOk = !searchTerm ||
+        posto.nome.toLowerCase().includes(searchTerm) ||
+        posto.bairro.toLowerCase().includes(searchTerm) ||
+        posto.tipo.toLowerCase().includes(searchTerm);
+      return tipoOk && searchOk;
+    });
+    visiveis.forEach(({ marker }) => clusterGroup.addLayer(marker));
+  }
+
+  /* ── Filtro por tipo ────────────────────────────────────── */
+  function filtrarTipo(tipo, btn) {
+    filtroAtivo = tipo;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderizarMarcadores();
+    atualizarLista();
+  }
+
+  /* ── Filtro por busca ───────────────────────────────────── */
+  function filtrarLista() {
+    searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+    renderizarMarcadores();
+    atualizarLista();
+  }
+
+  /* ── Atualizar lista lateral ────────────────────────────── */
+  function atualizarLista() {
+    const lista = document.getElementById('postos-list');
+    const filtered = POSTOS_BH.filter(p => {
+      const tipoOk = filtroAtivo === 'todos' || p.tipo === filtroAtivo;
+      const sOk = !searchTerm ||
+        p.nome.toLowerCase().includes(searchTerm) ||
+        p.bairro.toLowerCase().includes(searchTerm) ||
+        p.tipo.toLowerCase().includes(searchTerm);
+      return tipoOk && sOk;
+    });
+
+    document.getElementById('list-count').textContent = filtered.length;
+    lista.innerHTML = filtered.map(p => {
+      const cor = CORES[p.tipo]?.bg || '#28a745';
+      const tagBg = CORES[p.tipo]?.light || '#f1f5f9';
+      const tagColor = CORES[p.tipo]?.text || '#374151';
+      return `
+        <div class="posto-item" id="item-${p.id}" onclick="focarPosto(${p.id})">
+          <div class="posto-type-dot" style="background:${cor}"></div>
+          <div class="posto-info">
+            <div class="posto-nome">${p.nome}</div>
+            <div class="posto-bairro">📍 ${p.bairro}</div>
+          </div>
+          <span class="posto-tag" style="background:${tagBg};color:${tagColor}">${p.tipo}</span>
+        </div>`;
+    }).join('') || `<div style="padding:24px;text-align:center;color:var(--gray-400);font-size:0.85rem">Nenhum posto encontrado</div>`;
+  }
+
+  /* ── Focar um posto no mapa ─────────────────────────────── */
+  function focarPosto(id) {
+    const entry = marcadores.find(m => m.posto.id === id);
+    if (!entry) return;
+    mapa.setView([entry.posto.lat, entry.posto.lng], 15, { animate: true });
+    entry.marker.openPopup();
+    destacarItemLista(id);
+  }
+
+  function destacarItemLista(id) {
+    document.querySelectorAll('.posto-item').forEach(el => el.classList.remove('highlighted'));
+    const el = document.getElementById('item-' + id);
+    if (el) {
+      el.classList.add('highlighted');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Status ──────────────────────────────────────────────── */
+  function atualizarStats() {
+    const counts = { CRAS: 0, CREAS: 0, 'Bolsa Família': 0, 'Previdência': 0 };
+    POSTOS_BH.forEach(p => { if (counts[p.tipo] !== undefined) counts[p.tipo]++; });
+    document.getElementById('stat-cras').textContent = counts['CRAS'];
+    document.getElementById('stat-creas').textContent = counts['CREAS'];
+    document.getElementById('stat-bolsa').textContent = counts['Bolsa Família'];
+    document.getElementById('stat-prev').textContent = counts['Previdência'];
+  }
+
+  /* ── Ajuda ────────────────────────────────────────────── */
+  function abrirMaps(lat, lng, nome) {
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${encodeURIComponent(nome)}`, '_blank');
+  }
+
+  function copiarEndereco(end) {
+    navigator.clipboard.writeText(end).then(() => toast('📋 Endereço copiado!'));
+  }
+
+  function toast(msg, tipo = 'success') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast ${tipo}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+  </script>
+
+</body>
+</html>

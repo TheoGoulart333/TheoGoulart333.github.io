@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar | Guia-Benefício</title>
+  <link rel="stylesheet" href="login.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Guia-Benefício" onerror="this.style.display='none'" />
+        <span class="logo-text"><span class="logo-green">Guia</span>-<span class="logo-blue">Benefício</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../../beneficios.html">Benefícios</a></li>
+        <li><a href="../../recomendador.html">Recomendador</a></li>
+        <li><a href="../postos/postos.html">Postos de Saúde</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero-login">
+    <div class="hero-content">
+      <div class="hero-badge">Acesso à sua conta</div>
+      <h1>Bem-vindo de volta ao <span class="text-blue">Guia-Benefício</span></h1>
+      <p>Entre para salvar seus endereços, acompanhar postos favoritos e acessar recomendações personalizadas.</p>
+    </div>
+  </section>
+
+  <div class="page-wrapper page-wrapper-login">
+
+    <!-- ===== CARTÃO DE AUTENTICAÇÃO ===== -->
+    <section class="auth-card">
+
+      <!-- Abas: Entrar / Criar Conta -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLogin" onclick="alternarAba('login')">Entrar</button>
+        <button type="button" class="auth-tab" id="tabCadastro" onclick="alternarAba('cadastro')">Criar Conta</button>
+      </div>
+
+      <!-- ===== FORMULÁRIO DE LOGIN ===== -->
+      <form id="formLogin" class="auth-form" novalidate>
+        <div class="section-header section-header-compact">
+          <div class="section-icon">👤</div>
+          <div>
+            <h2>Entrar</h2>
+            <p>Informe seus dados para acessar sua conta</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginEmail">E-mail *</label>
+          <input type="email" id="loginEmail" placeholder="seuemail@exemplo.com" required />
+          <span class="field-error" id="erroLoginEmail"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginSenha">Senha *</label>
+          <div class="input-with-btn">
+            <input type="password" id="loginSenha" placeholder="Sua senha" required />
+            <button type="button" class="btn-secondary-sm" id="btnVerSenhaLogin">Ver</button>
+          </div>
+          <span class="field-error" id="erroLoginSenha"></span>
+        </div>
+
+        <div class="auth-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="manterConectado" />
+            Manter conectado
+          </label>
+          <a href="#" class="link-discreto" id="linkEsqueciSenha">Esqueci minha senha</a>
+        </div>
+
+        <div class="form-actions form-actions-column">
+          <button type="submit" class="btn-primary" id="btnEntrar">
+            <span class="btn-icon"></span> Entrar
+          </button>
+        </div>
+
+        <p class="auth-switch">
+          Não tem uma conta?
+          <button type="button" class="link-botao" onclick="alternarAba('cadastro')">Criar conta</button>
+        </p>
+      </form>
+
+      <!-- ===== FORMULÁRIO DE CADASTRO ===== -->
+      <form id="formCadastro" class="auth-form" novalidate style="display:none">
+        <div class="section-header section-header-compact">
+          <div class="section-icon">📝</div>
+          <div>
+            <h2>Criar Conta</h2>
+            <p>Cadastre-se gratuitamente em poucos segundos</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cadastroNome">Nome completo *</label>
+          <input type="text" id="cadastroNome" placeholder="Ex: Maria Silva" required />
+          <span class="field-error" id="erroCadastroNome"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="cadastroEmail">E-mail *</label>
+          <input type="email" id="cadastroEmail" placeholder="seuemail@exemplo.com" required />
+          <span class="field-error" id="erroCadastroEmail"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="cadastroSenha">Senha *</label>
+          <div class="input-with-btn">
+            <input type="password" id="cadastroSenha" placeholder="Mínimo 6 caracteres" required />
+            <button type="button" class="btn-secondary-sm" id="btnVerSenhaCadastro">Ver</button>
+          </div>
+          <span class="field-error" id="erroCadastroSenha"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="cadastroConfirmarSenha">Confirmar senha *</label>
+          <input type="password" id="cadastroConfirmarSenha" placeholder="Repita a senha" required />
+          <span class="field-error" id="erroCadastroConfirmarSenha"></span>
+        </div>
+
+        <div class="form-actions form-actions-column">
+          <button type="submit" class="btn-primary" id="btnCriarConta">
+            <span class="btn-icon"></span> Criar Conta
+          </button>
+        </div>
+
+        <p class="auth-switch">
+          Já tem uma conta?
+          <button type="button" class="link-botao" onclick="alternarAba('login')">Entrar</button>
+        </p>
+      </form>
+
+    </section>
+
+  </div>
+
+  <!-- Toast de notificações -->
+  <div id="toastContainer"></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="logo-text"><span class="logo-green">Guia</span>-<span class="logo-blue">Benefício</span></span>
+    </div>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+</html>

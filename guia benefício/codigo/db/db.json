@@ -1,0 +1,1443 @@
+{
+  "beneficios": [
+    {
+      "id": "BEN-001",
+      "nome": "Bolsa Família",
+      "categoria": "Alimentação",
+      "descricao": "Auxílio mensal para famílias de baixa renda cadastradas em programas sociais.",
+      "descricaoCompleta": "O Bolsa Família é um programa federal de transferência de renda que busca garantir a subsistência básica de famílias em situação de pobreza e extrema pobreza. Além do repasse financeiro, exige contrapartidas como a manutenção da frequência escolar das crianças e a atualização do cartão de vacinação, promovendo acesso à saúde e educação.",
+      "valorBase": 600,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Governo Federal",
+      "requisitos": [
+        "Inscrição ativa e atualizada no Cadastro Único (CadÚnico)",
+        "Renda familiar per capita mensal de até R$ 218,00"
+      ],
+      "condicoes": [
+        "Frequência escolar mínima de 60% para crianças de 4 a 5 anos",
+        "Frequência escolar mínima de 75% para jovens de 6 a 18 anos",
+        "Acompanhamento pré-natal para gestantes da família",
+        "Acompanhamento do estado nutricional (peso e altura) de crianças menores de 7 anos",
+        "Manter a carteira de vacinação de todos os membros menores de 18 anos atualizada"
+      ],
+      "documentos": [
+        "CPF ou Título de Eleitor do Responsável Familiar",
+        "Documento de identificação com foto de todos os membros da família",
+        "Certidão de nascimento ou casamento dos dependentes",
+        "Comprovante de residência atualizado",
+        "Declaração de matrícula escolar recente das crianças e adolescentes"
+      ]
+    },
+    {
+      "id": "BEN-002",
+      "nome": "Auxílio Moradia",
+      "categoria": "Moradia",
+      "descricao": "Subsídio mensal temporário para famílias em extrema vulnerabilidade habitacional.",
+      "descricaoCompleta": "Destinado a custear moradia temporária para famílias que perderam seus imóveis devido a desastres naturais, desabamentos, desapropriações ou que se encontram em situação de rua. O benefício é concedido mediante acompanhamento técnico contínuo do serviço social do município.",
+      "valorBase": 600,
+      "publicoAlvo": [
+        "BAIXA_RENDA",
+        "SEM_IMOVEL"
+      ],
+      "orgaoResponsavel": "Ministério das Cidades",
+      "requisitos": [
+        "Estar cadastrado no Cadastro Único do município",
+        "Renda familiar total de até 2 salários mínimos",
+        "Não possuir outro imóvel residencial próprio no território nacional",
+        "Estar em situação de desabrigo por sinistro, remoção ou extrema vulnerabilidade de rua"
+      ],
+      "condicoes": [
+        "O subsídio deve ser utilizado exclusivamente para locação de imóvel residencial",
+        "Participar do plano de acompanhamento familiar junto ao CRAS/CREAS",
+        "Comprovar semestralmente a permanência nas condições de vulnerabilidade"
+      ],
+      "documentos": [
+        "Documento de identidade oficial com foto e CPF",
+        "Folha de resumo do Cadastro Único (V7)",
+        "Laudo técnico da Defesa Civil ou órgão equivalente atestando o risco ou sinistro habitacional",
+        "Declaração assinada de que não possui outro imóvel",
+        "Cópia do contrato de locação residencial ou recibo provisório"
+      ]
+    },
+    {
+      "id": "BEN-003",
+      "nome": "Tarifa Social de Energia",
+      "categoria": "Energia",
+      "descricao": "Desconto na conta de luz para famílias de baixa renda e inscritas no CadÚnico.",
+      "descricaoCompleta": "Oferece descontos escalonados na conta de energia elétrica de até 65% para consumidores residenciais de baixa renda. Para famílias indígenas ou quilombolas, o desconto pode chegar a 100% dependendo da faixa de consumo mensal em kWh.",
+      "valorBase": 80,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Aneel / CEMIG",
+      "requisitos": [
+        "Inscrição ativa no CadÚnico com renda familiar per capita menor ou igual a meio salário mínimo",
+        "OU ter na família quem receba o Benefício de Prestação Continuada (BPC)",
+        "OU família inscrita no CadÚnico com renda mensal de até 3 salários mínimos que tenha portador de doença que necessite de aparelhos elétricos contínuos"
+      ],
+      "condicoes": [
+        "O desconto é aplicado progressivamente conforme a faixa de consumo (até 220 kWh/mês)",
+        "O benefício é válido apenas para uma única unidade consumidora por família",
+        "Manter o NIS atualizado a cada dois anos"
+      ],
+      "documentos": [
+        "Documento de identificação com foto e CPF",
+        "Número de Identificação Social (NIS) ou NB (Número do Benefício do BPC)",
+        "Conta de energia elétrica recente na qual será aplicado o benefício",
+        "Relatório e receita médica (para casos de dependência de aparelhos de sobrevivência)"
+      ]
+    },
+    {
+      "id": "BEN-004",
+      "nome": "Auxílio Gás",
+      "categoria": "Gás",
+      "descricao": "Subsídio bimestral para auxiliar na compra do botijão de gás de cozinha de 13kg.",
+      "descricaoCompleta": "Programa que visa diminuir o impacto do preço do gás de cozinha no orçamento de famílias vulneráveis. Pago a cada dois meses, o valor corresponde a 100% da média nacional do preço do botijão de GLP de 13kg, calculado pela ANP.",
+      "valorBase": 110,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Governo Federal",
+      "requisitos": [
+        "Famílias inscritas no CadÚnico com renda per capita menor ou igual a meio salário mínimo",
+        "OU famílias que possuam em sua composição beneficiários do BPC (idoso ou PCD)"
+      ],
+      "condicoes": [
+        "Pagamento liberado a cada dois meses em conta digital social",
+        "Inclusão automática pelo governo baseada em critérios de prioridade (menor renda, maior número de membros)"
+      ],
+      "documentos": [
+        "Cartão do Cidadão ou Cartão do Bolsa Família",
+        "Documento de identidade oficial do responsável familiar",
+        "Número de Identificação Social (NIS) ativo"
+      ]
+    },
+    {
+      "id": "BEN-005",
+      "nome": "Benefício Primeira Infância",
+      "categoria": "Alimentação",
+      "descricao": "Suplemento financeiro para famílias com crianças de zero a seis anos de idade.",
+      "descricaoCompleta": "Integrado ao Bolsa Família, este benefício garante um valor adicional por cada criança na faixa etária da primeira infância. O foco é ampliar a segurança alimentar, nutricional e o desenvolvimento integral nos primeiros anos de vida.",
+      "valorBase": 150,
+      "publicoAlvo": [
+        "BAIXA_RENDA",
+        "CRIANCAS"
+      ],
+      "orgaoResponsavel": "Ministério do Desenvolvimento Social",
+      "requisitos": [
+        "A família deve ser beneficiária elegível do programa Bolsa Família",
+        "Ter na composição familiar crianças com idade entre 0 e 6 anos completos (até 6 anos e 11 meses)"
+      ],
+      "condicoes": [
+        "Acompanhamento obrigatório da carteira de vacinação da criança",
+        "Realização do acompanhamento de peso e crescimento em postos de saúde",
+        "Matrícula e frequência escolar regular para crianças a partir de 4 anos"
+      ],
+      "documentos": [
+        "Certidão de nascimento da criança",
+        "Caderneta de Saúde / Cartão de Vacinação infantil",
+        "Documento de identidade do responsável familiar",
+        "Comprovante de matrícula em creche ou pré-escola (se houver)"
+      ]
+    },
+    {
+      "id": "BEN-006",
+      "nome": "BPC Idoso",
+      "categoria": "Assistência",
+      "descricao": "Salário mínimo mensal para idosos com 65 anos ou mais que não possuem renda.",
+      "descricaoCompleta": "O Benefício de Prestação Continuada (BPC) é uma garantia constitucional que assegura um salário mínimo mensal ao idoso que comprove não possuir meios de prover a própria manutenção nem de tê-la provida por sua família (renda familiar per capita inferior a 1/4 do salário mínimo).",
+      "valorBase": 1412,
+      "publicoAlvo": [
+        "IDOSO",
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "INSS",
+      "requisitos": [
+        "Ter idade igual ou superior a 65 anos (homens e mulheres)",
+        "Renda mensal familiar por pessoa inferior a 1/4 do salário mínimo vigente",
+        "Inscrição atualizada no Cadastro Único antes de solicitar o benefício"
+      ],
+      "condicoes": [
+        "O benefício é individual, intransferível e não gera direito à pensão por morte",
+        "Não é permitido acumular o BPC com nenhum outro benefício previdenciário ou assistencial",
+        "Passível de revisão cadastral periódica pelo INSS a cada dois anos"
+      ],
+      "documentos": [
+        "Documento de identificação oficial com foto e CPF de todos os membros do grupo familiar",
+        "Certidões de nascimento ou casamento de todos da casa",
+        "Comprovantes de rendimentos/renda da família (se houver)",
+        "Formulário de composição do grupo familiar preenchido no CRAS"
+      ]
+    },
+    {
+      "id": "BEN-007",
+      "nome": "BPC Deficiência",
+      "categoria": "Assistência",
+      "descricao": "Salário mínimo mensal para pessoas com deficiência e impedimentos de longo prazo.",
+      "descricaoCompleta": "Garante um salário mínimo por mês à pessoa com deficiência de qualquer idade que apresente impedimentos físicos, mentais, intelectuais ou sensoriais de longo prazo, os quais barrem sua participação plena e efetiva na sociedade em igualdade de condições.",
+      "valorBase": 1412,
+      "publicoAlvo": [
+        "PCD",
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "INSS",
+      "requisitos": [
+        "Comprovação de impedimento de longo prazo (mínimo de 2 anos) de natureza física, mental, intelectual ou sensorial",
+        "Renda familiar mensal per capita inferior a 1/4 do salário mínimo",
+        "Inscrição ativa no Cadastro Único"
+      ],
+      "condicoes": [
+        "Obrigatoriedade de passar por perícia médica e avaliação social realizadas por profissionais do INSS",
+        "Não exercer atividade remunerada regular (salvo na condição de aprendiz por tempo limitado)",
+        "Atualização bienal dos dados cadastrais"
+      ],
+      "documentos": [
+        "Documento de identidade e CPF do requerente e de todo o núcleo familiar",
+        "Laudos médicos, exames, relatórios clínicos e receitas que comprovem a deficiência",
+        "Comprovante de residência",
+        "Extrato do Cadastro Único impresso"
+      ]
+    },
+    {
+      "id": "BEN-008",
+      "nome": "Tarifa Social de Água",
+      "categoria": "Água",
+      "descricao": "Desconto na tarifa de água e esgoto para residências cadastradas no CadÚnico.",
+      "descricaoCompleta": "Concede benefício tarifário diferenciado na conta de água para habitações unifamiliares de baixa renda. Reduz em até 50% o valor da conta para os primeiros blocos de consumo de água potável e coleta de esgoto.",
+      "valorBase": 45,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "COPASA",
+      "requisitos": [
+        "Estar cadastrado no Cadastro Único com dados atualizados nos últimos 24 meses",
+        "Renda familiar per capita de até meio salário mínimo",
+        "O imóvel deve ser classificado como padrão residencial social/vulnerável"
+      ],
+      "condicoes": [
+        "O desconto é aplicado progressivamente para consumos de até 10 ou 15 metros cúbicos mensais",
+        "O benefício cessa caso seja detectada fraude na ligação de água ou inadimplência persistente",
+        "Válido para uma única ligação de água por grupo familiar"
+      ],
+      "documentos": [
+        "Última conta de água emitida pela concessionária (COPASA)",
+        "Folha de resumo do CadÚnico constando o número do NIS",
+        "Carteira de identidade (RG) e CPF do titular da conta ou do responsável cadastrado"
+      ]
+    },
+    {
+      "id": "BEN-009",
+      "nome": "Carteira do Idoso",
+      "categoria": "Transporte",
+      "descricao": "Garante gratuidade ou desconto em passagens de ônibus interestaduais.",
+      "descricaoCompleta": "Documento que viabiliza o acesso ao transporte interestadual gratuito (duas vagas por veículo) ou desconto de 50% no valor das passagens para idosos com renda individual igual ou inferior a dois salários mínimos, conforme o Estatuto do Idoso.",
+      "valorBase": 0,
+      "publicoAlvo": [
+        "IDOSO"
+      ],
+      "orgaoResponsavel": "Secretaria Nacional de Assistência Social",
+      "requisitos": [
+        "Ter idade igual ou superior a 60 anos",
+        "Renda individual igual ou inferior a 2 salários mínimos",
+        "Estar inscrito no Cadastro Único"
+      ],
+      "condicoes": [
+        "A carteira tem validade de 2 anos a partir da data de emissão",
+        "A gratuidade total depende da disponibilidade das 2 vagas reservadas por veículo; caso preenchidas, aplica-se o desconto de 50%",
+        "A reserva deve ser solicitada com antecedência mínima estipulada pelas empresas de transporte"
+      ],
+      "documentos": [
+        "Documento de identidade oficial com foto",
+        "Cadastro de Pessoa Física (CPF)",
+        "Número de Identificação Social (NIS)",
+        "Comprovante de renda (ou declaração de renda emitida pelo CRAS caso não possua carteira assinada)"
+      ]
+    },
+    {
+      "id": "BEN-010",
+      "nome": "ID Jovem",
+      "categoria": "Cultura e transporte",
+      "descricao": "Benefício que dá direito a meia-entrada e transporte interestadual gratuito para jovens.",
+      "descricaoCompleta": "A Identidade Jovem é o documento que assegura aos jovens de 15 a 29 anos de baixa renda o acesso aos benefícios da meia-entrada em eventos artístico-culturais e esportivos, além de reserva de vagas gratuitas ou com desconto no transporte coletivo interestadual.",
+      "valorBase": 0,
+      "publicoAlvo": [
+        "JOVENS",
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Secretaria Nacional da Juventude",
+      "requisitos": [
+        "Ter idade entre 15 e 29 anos (estudante ou não)",
+        "Pertencer a família com renda mensal de até 2 salários mínimos",
+        "Estar inscrito no CadÚnico com o NIS ativo e atualizado nos últimos 24 meses"
+      ],
+      "condicoes": [
+        "Apresentação do cartão gerado digitalmente por aplicativo ou site junto a um documento oficial com foto",
+        "Reserva de 2 vagas 100% gratuitas e 2 vagas com 50% de desconto em comboios e linhas de ônibus interestaduais convencionais"
+      ],
+      "documentos": [
+        "Número de Identificação Social (NIS) do jovem",
+        "Documento de identidade (RG) ou CNH",
+        "CPF"
+      ]
+    },
+    {
+      "id": "BEN-011",
+      "nome": "Auxílio Natalidade",
+      "categoria": "Maternidade",
+      "descricao": "Benefício em dinheiro ou bens de consumo pago devido ao nascimento de um filho.",
+      "descricaoCompleta": "Trata-se de um benefício eventual da assistência social de caráter temporário, oferecido pelo município para reduzir a vulnerabilidade da família decorrente do nascimento de um novo membro. Pode vir em formato de enxoval físico ou pecúnia.",
+      "valorBase": 300,
+      "publicoAlvo": [
+        "GESTANTES",
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Prefeitura Municipal",
+      "requisitos": [
+        "A gestante ou puérpera deve residir no município da solicitação",
+        "Renda familiar per capita compatível com critérios municipais de pobreza (geralmente até meio salário mínimo)",
+        "Inscrição no Cadastro Único"
+      ],
+      "condicoes": [
+        "O benefício deve ser requerido a partir do 8º mês de gestação até no máximo 90 dias após o nascimento da criança",
+        "A liberação está sujeita à avaliação técnica de um assistente social do CRAS"
+      ],
+      "documentos": [
+        "RG e CPF da requerente",
+        "Comprovante de residência atualizado no município",
+        "Cartão de acompanhamento do pré-natal ou Certidão de Nascimento do bebê",
+        "Folha de dados do CadÚnico"
+      ]
+    },
+    {
+      "id": "BEN-012",
+      "nome": "Programa Leite de Todos",
+      "categoria": "Alimentação",
+      "descricao": "Distribuição gratuita de leite para combater as deficiências nutricionais infantis.",
+      "descricaoCompleta": "Programa voltado à segurança alimentar de crianças de 6 meses a 3 anos e gestantes em vulnerabilidade. Consiste no fornecimento diário de leite pasteurizado enriquecido com vitaminas, com o intuito de reduzir indicadores de desnutrição infantil.",
+      "valorBase": 60,
+      "publicoAlvo": [
+        "CRIANCAS",
+        "GESTANTES"
+      ],
+      "orgaoResponsavel": "Secretaria de Assistência Social e Saúde",
+      "requisitos": [
+        "Família com crianças de 6 meses a 3 anos ou gestantes",
+        "Renda familiar total abaixo do limite de pobreza estabelecido localmente",
+        "Cadastro ativo no sistema municipal de assistência à saúde/social"
+      ],
+      "condicoes": [
+        "Retirada diária ou semanal nos pontos autorizados (como postos de saúde ou cozinhas comunitárias)",
+        "Apresentação periódica do cartão de pesagem da criança ou exames de pré-natal da gestante"
+      ],
+      "documentos": [
+        "Certidão de nascimento da criança ou cartão de gestante",
+        "Documento de identificação do responsável",
+        "Cartão do SUS",
+        "Comprovante de endereço e comprovante de inscrição no CadÚnico"
+      ]
+    },
+    {
+      "id": "BEN-013",
+      "nome": "Passe Livre Interestadual PCD",
+      "categoria": "Transporte",
+      "descricao": "Passe livre no transporte interestadual rodoviário, ferroviário e aquaviário para PCD.",
+      "descricaoCompleta": "Programa do Governo Federal que assegura a gratuidade em viagens de ônibus entre estados diferentes para pessoas com deficiência física, mental, intelectual ou sensorial comprovadamente carentes (renda per capita menor ou igual a 1 salário mínimo).",
+      "valorBase": 0,
+      "publicoAlvo": [
+        "PCD",
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Ministério dos Transportes",
+      "requisitos": [
+        "Comprovação de deficiência por laudo médico padrão do programa",
+        "Renda mensal bruta familiar per capita de até 1 salário mínimo",
+        "Inscrição no Cadastro Único"
+      ],
+      "condicoes": [
+        "O passe livre dá direito apenas à passagem de transporte convencional (exclui leito ou semileito)",
+        "A solicitação do bilhete na empresa de transporte deve ocorrer com no mínimo 3 horas de antecedência do horário de partida",
+        "A carteira do benefício deve ser renovada a cada 3 anos"
+      ],
+      "documentos": [
+        "Formulário de requerimento do Passe Livre preenchido e assinado",
+        "Atestado Médico Padrão do programa assinado por médico especialista do SUS",
+        "Cópia de documento de identidade com foto e CPF do requerente e familiares",
+        "Comprovante de residência"
+      ]
+    },
+    {
+      "id": "BEN-014",
+      "nome": "Isenção de Taxa de Concurso",
+      "categoria": "Educação",
+      "descricao": "Isenção total do pagamento de inscrição em concursos públicos federais e municipais.",
+      "descricaoCompleta": "Garante ao cidadão inscrito no CadÚnico e membro de família de baixa renda o direito de se inscrever em seleções e concursos públicos de órgãos governamentais sem arcar com as custas da taxa de inscrição, promovendo igualdade de oportunidades de emprego.",
+      "valorBase": 100,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "Governo Federal",
+      "requisitos": [
+        "Estar formalmente inscrito no Cadastro Único para Programas Sociais do Governo Federal",
+        "Ser membro de família de baixa renda, nos termos do decreto federal regente"
+      ],
+      "condicoes": [
+        "O pedido deve ser feito no ato da inscrição do concurso específico, seguindo os prazos estipulados em edital",
+        "As informações fornecidas são cruzadas com a base do CadÚnico; dados incorretos ou desatualizados anulam o benefício"
+      ],
+      "documentos": [
+        "Indicação do Número de Identificação Social (NIS) no formulário de inscrição do concurso",
+        "Declaração de hipossuficiência financeira assinada pelo candidato (quando exigida pelo edital)",
+        "Documento de identidade oficial informado no cadastro do concurso"
+      ]
+    },
+    {
+      "id": "BEN-015",
+      "nome": "Bolsa Qualificação Profissional",
+      "categoria": "Educação",
+      "descricao": "Bolsa de incentivo financeiro para jovens e adultos matriculados em cursos técnicos.",
+      "descricaoCompleta": "Auxílio concedido a beneficiários de programas sociais que realizam cursos de capacitação técnica promovidos por centros municipais. O valor ajuda nas despesas de transporte e alimentação durante todo o período letivo da formação.",
+      "valorBase": 250,
+      "publicoAlvo": [
+        "JOVENS",
+        "ADULTOS"
+      ],
+      "orgaoResponsavel": "Secretaria de Trabalho e Emprego",
+      "requisitos": [
+        "Idade a partir de 16 anos",
+        "Estar matriculado em curso de qualificação ou técnico validado pela prefeitura/CRAS",
+        "Pertencer a família cadastrada no CadÚnico"
+      ],
+      "condicoes": [
+        "Manter frequência mínima obrigatória de 85% nas aulas do curso",
+        "Aproveitamento pedagógico satisfatório nas avaliações do curso",
+        "O auxílio cessa imediatamente em caso de trancamento ou abandono das aulas"
+      ],
+      "documentos": [
+        "Documento de identidade e CPF do estudante",
+        "Comprovante de matrícula oficial contendo dias e horários das aulas",
+        "Extrato do NIS",
+        "Dados bancários em nome do próprio estudante beneficiário"
+      ]
+    },
+    {
+      "id": "BEN-016",
+      "nome": "Cesta Cidadã emergencial",
+      "categoria": "Alimentação",
+      "descricao": "Fornecimento emergencial temporário de insumos e cestas de alimentos básicos.",
+      "descricaoCompleta": "Benefício eventual voltado a famílias em situação de extrema vulnerabilidade conjuntural imediata (desemprego repentino, calamidades ou extrema necessidade). Fornece kits completos de alimentação por um período de até 3 meses renováveis.",
+      "valorBase": 180,
+      "publicoAlvo": [
+        "BAIXA_RENDA"
+      ],
+      "orgaoResponsavel": "CRAS / Prefeitura",
+      "requisitos": [
+        "Encontrar-se em situação temporária de desabastecimento alimentar ou insegurança nutricional grave",
+        "Residir na área de abrangência do CRAS solicitante",
+        "Passar por triagem e entrevista com assistente social plantonista"
+      ],
+      "condicoes": [
+        "Concessão limitada a uma cesta básica por mês por família",
+        "O benefício é temporário, concedido inicialmente por até 3 meses, necessitando de nova avaliação técnica para prorrogação"
+      ],
+      "documentos": [
+        "Documento de identificação com foto do solicitante",
+        "CPF",
+        "Comprovante de residência recente (ou declaração de residência)",
+        "Comprovante ou carteira de trabalho que comprove situação de desemprego atual (se aplicável)"
+      ]
+    }
+  ],
+  "pontos-atendimento": [
+    {
+      "nome": "CRAS Independência",
+      "endereco": "R. Maria Antonieta Ferreira, 151, Independência, BH",
+      "tipo": "CRAS",
+      "lat": -20.01939346,
+      "lon": -44.03171182,
+      "atendimentos": 520,
+      "telefone": "(31) 98866-1026",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "FVgvscMq4ug"
+    },
+    {
+      "nome": "CRAS Petrópolis",
+      "endereco": "R. Frederico Boy Prussiano, 137, Petrópolis, BH",
+      "tipo": "CRAS",
+      "lat": -20.01253853,
+      "lon": -44.02702332,
+      "atendimentos": 240,
+      "telefone": "(31) 3277-9578",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "x_XgSiZsj_g"
+    },
+    {
+      "nome": "CRAS Vila Cemig",
+      "endereco": "R. Faisão, 1071, Flávio Marques Lisboa, BH",
+      "tipo": "CRAS",
+      "lat": -19.99796072,
+      "lon": -43.99276614,
+      "atendimentos": 410,
+      "telefone": "(31)3277-1355",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "EWacRpZlliU"
+    },
+    {
+      "nome": "CRAS Vila Fátima",
+      "endereco": "R. Dona Benta, 145, Vila Fátima, BH",
+      "tipo": "CRAS",
+      "lat": -19.93422999,
+      "lon": -43.90431762,
+      "atendimentos": 180,
+      "telefone": "(31) 3277-9913",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "tuBYXBWe7eg"
+    },
+    {
+      "nome": "CRAS Vila Marçola",
+      "endereco": "R. Engenheiro Lucas Júlio de Proença, 73, Serra, BH",
+      "tipo": "CRAS",
+      "lat": -19.938577,
+      "lon": -43.91180634,
+      "atendimentos": 390,
+      "telefone": "(31) 3246-5006",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "s3odr1IX3Y0"
+    },
+    {
+      "nome": "CRAS Vila Santa Rita de Cássia",
+      "endereco": "R. São Tomaz de Aquino, 640, Vila Santa Rita de Cássia, BH",
+      "tipo": "CRAS",
+      "lat": -19.95335191,
+      "lon": -43.94150376,
+      "atendimentos": 210,
+      "telefone": "(31) 3277-9415",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "qiCSBGHFedE"
+    },
+    {
+      "nome": "CRAS Alto Vera Cruz",
+      "endereco": "R. Padre Júlio Maria, 1550, Alto Vera Cruz, BH",
+      "tipo": "CRAS",
+      "lat": -19.91479304,
+      "lon": -43.8895762,
+      "atendimentos": 580,
+      "telefone": "(31) 3277-5730",
+      "horario": "Segunda a sexta, das 8h30min às 17h",
+      "id": "a2eVRFJ1i8E"
+    },
+    {
+      "nome": "CRAS Granja de Freitas",
+      "endereco": "R. do Grupo, 12, Granja de Freitas, BH",
+      "tipo": "CRAS",
+      "lat": -19.90667259,
+      "lon": -43.88360023,
+      "atendimentos": 150,
+      "telefone": "(31) 3277-5660",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "vlvNeiCUI40"
+    },
+    {
+      "nome": "CRAS Mariano de Abreu",
+      "endereco": "R. Cinco de Janeiro, S/N, Mariano de Abreu, BH",
+      "tipo": "CRAS",
+      "lat": -19.89577743,
+      "lon": -43.89015555,
+      "atendimentos": 320,
+      "telefone": "(31) 3277-5643",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "jJF8JVRD9ig"
+    },
+    {
+      "nome": "CRAS Taquaril",
+      "endereco": "R. Ludgero Felipe Ferreira, 42, Taquaril, BH",
+      "tipo": "CRAS",
+      "lat": -19.92024007,
+      "lon": -43.87546778,
+      "atendimentos": 490,
+      "telefone": "(31) 3277-9010",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "r0jrJZHioQA"
+    },
+    {
+      "nome": "CRAS União / Arthur de Sá",
+      "endereco": "R. Prof. Geraldo Fontes, 30, União, BH",
+      "tipo": "CRAS",
+      "lat": -19.88070454,
+      "lon": -43.92011046,
+      "atendimentos": 340,
+      "telefone": "(31) 3277-9155",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "qHFjCxtJPPE"
+    },
+    {
+      "nome": "CRAS Conjunto Paulo VI",
+      "endereco": "R. Neblina, 120, Conjunto Paulo VI, BH",
+      "tipo": "CRAS",
+      "lat": -19.83237891,
+      "lon": -43.88728023,
+      "atendimentos": 420,
+      "telefone": "(31) 3277-6840",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "ml6TK1FLrCs"
+    },
+    {
+      "nome": "CRAS Vila Maria",
+      "endereco": "R. Prof. Amílcar Viana Martins, 65, Jardim Vitória, BH",
+      "tipo": "CRAS",
+      "lat": -19.84880866,
+      "lon": -43.88474822,
+      "atendimentos": 230,
+      "telefone": "(31) 3246-8051",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "Jg6xTBChO2E"
+    },
+    {
+      "nome": "CRAS Vila Califórnia",
+      "endereco": "Av. Avaí, 700, Vila Califórnia, BH",
+      "tipo": "CRAS",
+      "lat": -19.9189792,
+      "lon": -44.00787234,
+      "atendimentos": 190,
+      "telefone": "(31) 3246-3045",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "9ruC5JnJwys"
+    },
+    {
+      "nome": "CRAS Vila Coqueiral",
+      "endereco": "R. Rainha das Flores, 102, Jardim Filadélfia, BH",
+      "tipo": "CRAS",
+      "lat": -19.91674996,
+      "lon": -44.02460933,
+      "atendimentos": 280,
+      "telefone": "(31) 3277-7179",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "zzju81sqouI"
+    },
+    {
+      "nome": "CRAS Pedreira Prado Lopes",
+      "endereco": "Av. José Bonifácio, 189, São Cristóvão, BH",
+      "tipo": "CRAS",
+      "lat": -19.90328307,
+      "lon": -43.94738317,
+      "atendimentos": 600,
+      "telefone": "(31) 3277-6032",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "JEr7vjsg4Ns"
+    },
+    {
+      "nome": "CRAS Vila Sumaré",
+      "endereco": "R. Cirilo Gaspar Araújo, 522, Aparecida, BH",
+      "tipo": "CRAS",
+      "lat": -19.89021858,
+      "lon": -43.96452785,
+      "atendimentos": 310,
+      "telefone": "(31) 3246-7551",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "VBeu5kcgfX0"
+    },
+    {
+      "nome": "CRAS Vila Senhor dos Passos",
+      "endereco": "R. Evaristo da Veiga, 239, Vila Senhor dos Passos, BH",
+      "tipo": "CRAS",
+      "lat": -19.90563355,
+      "lon": -43.94874573,
+      "atendimentos": 290,
+      "telefone": "(31) 3277-6119",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "tlzMzzsMOWg"
+    },
+    {
+      "nome": "CRAS Novo Aarão Reis",
+      "endereco": "Av. Risoleta Neves, 347, Novo Aarão Reis, BH",
+      "tipo": "CRAS",
+      "lat": -19.84447936,
+      "lon": -43.91391993,
+      "atendimentos": 340,
+      "telefone": "(31) 98874-0957",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "WqAdmApU68w"
+    },
+    {
+      "nome": "CRAS Jardim Felicidade",
+      "endereco": "R. Cecília Trindade da Silva, 55, Jardim Felicidade, BH",
+      "tipo": "CRAS",
+      "lat": -19.82950253,
+      "lon": -43.92773867,
+      "atendimentos": 480,
+      "telefone": "(31) 3246-9503",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "Ulxs-_UxVAE"
+    },
+    {
+      "nome": "CRAS Providência",
+      "endereco": "R. São Sebastião, 140, Minaslândia, BH",
+      "tipo": "CRAS",
+      "lat": -19.85330938,
+      "lon": -43.9313972,
+      "atendimentos": 220,
+      "telefone": "(31) 98874-0942",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "Ms8xua9apqQ"
+    },
+    {
+      "nome": "CRAS Zilah Spósito",
+      "endereco": "R. Coquilhos, 75, Zilah Spósito, BH",
+      "tipo": "CRAS",
+      "lat": -19.80127079,
+      "lon": -43.9239943,
+      "atendimentos": 450,
+      "telefone": "(31) 3246-9000",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "VqAXPvVkW_4"
+    },
+    {
+      "nome": "CRAS Vila Biquinhas",
+      "endereco": "R. Coronel Joaquim Tibúrcio, 850, Heliópolis, BH",
+      "tipo": "CRAS",
+      "lat": -19.84236008,
+      "lon": -43.94030213,
+      "atendimentos": 190,
+      "telefone": "(31) 3246-8004",
+      "horario": "Segunda e sexta, das 8h às 18h. Terça a quinta, das 8h às 19h",
+      "id": "g0yaRQixXDU"
+    },
+    {
+      "nome": "CRAS Havaí, Ventosa",
+      "endereco": "R. Manila, 432, Havaí, BH",
+      "tipo": "CRAS",
+      "lat": -19.9628515,
+      "lon": -43.96930218,
+      "atendimentos": 510,
+      "telefone": "(31) 3277-9976",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "Td8L0GcdnFs"
+    },
+    {
+      "nome": "CRAS Graça Saboia / Morro das Pedras",
+      "endereco": "Av. Silva Lobo, 2379, Nova Granada, BH",
+      "tipo": "CRAS",
+      "lat": -19.93828451,
+      "lon": -43.96858335,
+      "atendimentos": 530,
+      "telefone": "(31) 3277-7091",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "4bFtYYqCgCA"
+    },
+    {
+      "nome": "CRAS Vila Antena",
+      "endereco": "R. Central, 78, Vila Antena, BH",
+      "tipo": "CRAS",
+      "lat": -19.94877335,
+      "lon": -43.96274686,
+      "atendimentos": 140,
+      "telefone": "(31) 98874-0972",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "3sNE6zltyCI"
+    },
+    {
+      "nome": "CRAS Vista Alegre I",
+      "endereco": "R. Aguanil, 425, Vista Alegre, BH",
+      "tipo": "CRAS",
+      "lat": -19.95370488,
+      "lon": -43.99631739,
+      "atendimentos": 330,
+      "telefone": "(31) 3246-2008",
+      "horario": "Segunda a sexta, das 8h às 18h. Sábado, atendimento 24 horas.",
+      "id": "C_niFsT1Zps"
+    },
+    {
+      "nome": "CRAS Vila Betânia",
+      "endereco": "R. Demiza, 770, Betânia, BH",
+      "tipo": "CRAS",
+      "lat": -19.95530835,
+      "lon": -43.99260521,
+      "atendimentos": 260,
+      "telefone": "(31) 3277-5989",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "N8R_Kk7j4MA"
+    },
+    {
+      "nome": "CRAS Cabana",
+      "endereco": "R. Capim Branco, 231, Vista Alegre, BH",
+      "tipo": "CRAS",
+      "lat": -19.9512212,
+      "lon": -44.0003767,
+      "atendimentos": 570,
+      "telefone": "(31) (31) 98021-1931 ",
+      "horario": "Segunda a sexta, das 8h às 18h. Sábado, atendimento 24 horas.",
+      "id": "O1gxruxL3x8"
+    },
+    {
+      "nome": "CRAS Confisco",
+      "endereco": "R. Cecília Magalhães Gomes, 127, Confisco, BH",
+      "tipo": "CRAS",
+      "lat": -19.86525688,
+      "lon": -44.01899815,
+      "atendimentos": 380,
+      "telefone": "(31) 3277-7146",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "lRAmeRb770c"
+    },
+    {
+      "nome": "CRAS Novo Ouro Preto",
+      "endereco": "R. Geraldina Cândida de Jesus, 92, Novo Ouro Preto, BH",
+      "tipo": "CRAS",
+      "lat": -19.87631558,
+      "lon": -43.98799181,
+      "atendimentos": 170,
+      "telefone": " (31) 98221-0512",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "JrZ396Dak5s"
+    },
+    {
+      "nome": "CRAS Santa Rosa",
+      "endereco": "Av. Major Delfino de Paula, 2553, São Francisco, BH",
+      "tipo": "CRAS",
+      "lat": -19.88100722,
+      "lon": -43.95918489,
+      "atendimentos": 210,
+      "telefone": "(31) 98874-0981",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "4_vFtwE1Wxc"
+    },
+    {
+      "nome": "CRAS Vila São José",
+      "endereco": "R. Joaquim José Ribeiro, 50, Manacás, BH",
+      "tipo": "CRAS",
+      "lat": -19.900013558,
+      "lon": -43.99556637,
+      "atendimentos": 360,
+      "telefone": "(31) 3277-7149",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "_zLD3O1TA8c"
+    },
+    {
+      "nome": "CRAS Dandara",
+      "endereco": "R. José Simplício Moreira, 1144, Trevo, BH",
+      "tipo": "CRAS",
+      "lat": -19.8343974,
+      "lon": -44.01427746,
+      "atendimentos": 490,
+      "telefone": "(31) 98906-6792",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "rhbRVZfXdD0"
+    },
+    {
+      "nome": "CRAS Apolônia",
+      "endereco": "R. Visconde de Itaboraí, 304, Jardim Leblon, BH",
+      "tipo": "CRAS",
+      "lat": -19.82842261,
+      "lon": -43.98729444,
+      "atendimentos": 280,
+      "telefone": "(31) 3277-1816",
+      "horario": "Segunda a sexta, das 8h às 17h",
+      "id": "3toncVvjYGs"
+    },
+    {
+      "nome": "CRAS Lagoa",
+      "endereco": "R. José Sabino Maciel, 120, Lagoa, BH",
+      "tipo": "CRAS",
+      "lat": -19.80933607,
+      "lon": -44.00087714,
+      "atendimentos": 390,
+      "telefone": "(31) 98874-1009",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "I65N7ksO1-M"
+    },
+    {
+      "nome": "CRAS Mantiqueira",
+      "endereco": "R. Luzia Salomão, 300, Mantiqueira, BH",
+      "tipo": "CRAS",
+      "lat": -19.80030171,
+      "lon": -43.98111463,
+      "atendimentos": 410,
+      "telefone": "(31) 98913-6253",
+      "horario": "Segunda a sexta, das 8h às 18h",
+      "id": "TlGa695LX4c"
+    }
+  ],
+  "assistentes-sociais": [
+    {
+      "id": "AS-001",
+      "nome": "Fernanda Oliveira",
+      "telefone": "(31) 98888-7777",
+      "email": "fernanda.oliveira@assistencia.gov.br",
+      "imagem-assistente": "../../assets/images/assistentes/fernanda-oliveira.avif",
+      "cras": "CRAS Centro Sul",
+      "familias-assistidas": [
+        {
+          "id": "FAM-001"
+        },
+        {
+          "id": "FAM-002"
+        }
+      ],
+      "id_usuario": "USU-001"
+    },
+    {
+      "id": "AS-002",
+      "nome": "Rodrigo Souza",
+      "telefone": "(31) 97777-6666",
+      "email": "rodrigo.souza@assistencia.gov.br",
+      "imagem-assistente": "img/assistente2",
+      "cras": "CRAS Barreiro",
+      "familias-assistidas": [
+        {
+          "id": "FAM-003"
+        },
+        {
+          "id": "FAM-004"
+        }
+      ],
+      "id_usuario": "USU-002"
+    },
+    {
+      "id": "AS-003",
+      "nome": "Amanda Costa",
+      "telefone": "(31) 96666-5555",
+      "email": "amanda.costa@assistencia.gov.br",
+      "imagem-assistente": "img/assistente3",
+      "cras": "CRAS Venda Nova",
+      "familias-assistidas": [
+        {
+          "id": "FAM-005"
+        },
+        {
+          "id": "FAM-006"
+        }
+      ],
+      "id_usuario": "USU-003"
+    },
+    {
+      "id": "AS-004",
+      "nome": "Juliana Lima",
+      "telefone": "(31) 95555-4444",
+      "email": "juliana.lima@assistencia.gov.br",
+      "imagem-assistente": "img/assistente4",
+      "cras": "CRAS Eldorado",
+      "familias-assistidas": [
+        {
+          "id": "FAM-007"
+        }
+      ],
+      "id_usuario": "USU-004"
+    }
+  ],
+  "usuários": [
+    {
+      "id": "USU-001",
+      "email": "fernanda.oliveira@assistencia.gov.br",
+      "senha": "Fer883322"
+    },
+    {
+      "id": "USU-002",
+      "email": "rodrigo.souza@assistencia.gov.br",
+      "senha": "Rod112233"
+    },
+    {
+      "id": "USU-003",
+      "email": "amanda.costa@assistencia.gov.br",
+      "senha": "Ama445566"
+    },
+    {
+      "id": "USU-004",
+      "email": "juliana.lima@assistencia.gov.br",
+      "senha": "Jul778899"
+    }
+  ],
+  "familias": [
+    {
+      "idFamilia": "FAM-001",
+      "nomeFamilia": "Família Dos Souzas",
+      "fotoFamilia": "",
+      "endereco": {
+        "rua": "Rua das Flores",
+        "numero": "120",
+        "bairro": "Centro",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "30110-000"
+      },
+      "telefone": "(31) 99999-9999",
+      "rendaFamiliar": 1850.5,
+      "assistenteSocial": {
+        "idAssistente": "AS-001"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-004",
+          "nome": "Auxílio Gás",
+          "valor": 110
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-001",
+          "nome": "Maria Aparecida Souza",
+          "cpf": "123.456.789-00",
+          "categoria": "Responsável",
+          "dataNascimento": "1985-03-12",
+          "imagem-membro": "",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Médio Completo",
+          "ocupacao": "Diarista",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-003",
+              "nome": "Tarifa Social de Energia",
+              "valor": 80
+            }
+          ]
+        },
+        {
+          "idPessoa": "PES-002",
+          "nome": "João Pedro Souza",
+          "cpf": "987.654.321-00",
+          "categoria": "Dependente",
+          "dataNascimento": "2012-08-20",
+          "imagem-membro": "",
+          "parentesco": "Filho",
+          "escolaridade": "Ensino Fundamental",
+          "ocupacao": "Estudante",
+          "beneficiosIndividuais": []
+        },
+        {
+          "idPessoa": "PES-003",
+          "nome": "Ana Clara Souza",
+          "cpf": "456.789.123-55",
+          "categoria": "Dependente",
+          "dataNascimento": "2018-11-02",
+          "imagem-membro": "",
+          "parentesco": "Filha",
+          "escolaridade": "Educação Infantil",
+          "ocupacao": "Estudante",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-005",
+              "nome": "Benefício Primeira Infância",
+              "valor": 150
+            }
+          ]
+        }
+      ],
+      "id": "j7KP2yAMNlI"
+    },
+    {
+      "idFamilia": "FAM-002",
+      "nomeFamilia": "Família Silva",
+      "fotoFamilia": "img/fotoFamilia2",
+      "endereco": {
+        "rua": "Avenida Amazonas",
+        "numero": "2500",
+        "bairro": "Barro Preto",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "30180-001"
+      },
+      "telefone": "(31) 98888-1111",
+      "rendaFamiliar": 700,
+      "assistenteSocial": {
+        "idAssistente": "AS-001"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-002",
+          "nome": "Auxílio Moradia",
+          "valor": 600
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-004",
+          "nome": "Francisca Silva",
+          "cpf": "234.567.890-11",
+          "categoria": "Responsável",
+          "dataNascimento": "1958-05-19",
+          "imagem-membro": "img/membro4",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Fundamental Incompleto",
+          "ocupacao": "Aposentada por Idade",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-006",
+              "nome": "BPC Idoso",
+              "valor": 1412
+            },
+            {
+              "idBeneficio": "BEN-009",
+              "nome": "Carteira do Idoso",
+              "valor": 0
+            }
+          ]
+        }
+      ],
+      "id": "HpV4EQOa9SI"
+    },
+    {
+      "idFamilia": "FAM-003",
+      "nomeFamilia": "Família Santos Rodrigues",
+      "fotoFamilia": "img/fotoFamilia3",
+      "endereco": {
+        "rua": "Rua David Fonseca",
+        "numero": "45",
+        "bairro": "Milionários",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "30620-270"
+      },
+      "telefone": "(31) 97777-2222",
+      "rendaFamiliar": 1200,
+      "assistenteSocial": {
+        "idAssistente": "AS-002"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-008",
+          "nome": "Tarifa Social de Água",
+          "valor": 45
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-005",
+          "nome": "Clarice Santos",
+          "cpf": "345.678.901-22",
+          "categoria": "Responsável",
+          "dataNascimento": "1990-01-25",
+          "imagem-membro": "img/membro5",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Médio Incompleto",
+          "ocupacao": "Desempregada",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-016",
+              "nome": "Cesta Cidadã emergencial",
+              "valor": 180
+            }
+          ]
+        },
+        {
+          "idPessoa": "PES-006",
+          "nome": "Marcos Rodrigues",
+          "cpf": "543.210.987-11",
+          "categoria": "Dependente",
+          "dataNascimento": "2005-06-14",
+          "imagem-membro": "img/membro6",
+          "parentesco": "Filho",
+          "escolaridade": "Ensino Médio Completo",
+          "ocupacao": "Autônomo",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-010",
+              "nome": "ID Jovem",
+              "valor": 0
+            }
+          ]
+        }
+      ],
+      "id": "B_ltMjLkanE"
+    },
+    {
+      "idFamilia": "FAM-004",
+      "nomeFamilia": "Família Oliveira Lima",
+      "fotoFamilia": "img/fotoFamilia4",
+      "endereco": {
+        "rua": "Rua Boaventura",
+        "numero": "890",
+        "bairro": "Indaiá",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "31270-020"
+      },
+      "telefone": "(31) 96666-3333",
+      "rendaFamiliar": 450,
+      "assistenteSocial": {
+        "idAssistente": "AS-002"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-004",
+          "nome": "Auxílio Gás",
+          "valor": 110
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-007",
+          "nome": "Sandra Oliveira",
+          "cpf": "456.789.012-33",
+          "categoria": "Responsável",
+          "dataNascimento": "1995-09-05",
+          "imagem-membro": "img/membro7",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Fundamental Completo",
+          "ocupacao": "Coletora de Recicláveis",
+          "beneficiosIndividuais": []
+        },
+        {
+          "idPessoa": "PES-008",
+          "nome": "Thiago Oliveira",
+          "cpf": "654.321.098-22",
+          "categoria": "Dependente",
+          "dataNascimento": "2022-04-10",
+          "imagem-membro": "img/membro8",
+          "parentesco": "Filho",
+          "escolaridade": "Não alfabetizado",
+          "ocupacao": "Nenhuma",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-005",
+              "nome": "Benefício Primeira Infância",
+              "valor": 150
+            },
+            {
+              "idBeneficio": "BEN-012",
+              "nome": "Programa Leite de Todos",
+              "valor": 60
+            }
+          ]
+        }
+      ],
+      "id": "Uo0Lx8UXnBU"
+    },
+    {
+      "idFamilia": "FAM-005",
+      "nomeFamilia": "Família Pereira Costa",
+      "fotoFamilia": "img/fotoFamilia5",
+      "endereco": {
+        "rua": "Rua Padre Pedro Pinto",
+        "numero": "2110",
+        "bairro": "Venda Nova",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "31510-000"
+      },
+      "telefone": "(31) 95555-7777",
+      "rendaFamiliar": 2100,
+      "assistenteSocial": {
+        "idAssistente": "AS-003"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-009",
+          "nome": "Raimunda Pereira",
+          "cpf": "567.890.123-44",
+          "categoria": "Responsável",
+          "dataNascimento": "1978-11-30",
+          "imagem-membro": "img/membro9",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Médio Completo",
+          "ocupacao": "Cozinheira",
+          "beneficiosIndividuais": []
+        },
+        {
+          "idPessoa": "PES-010",
+          "nome": "Carlos Pereira",
+          "cpf": "765.432.109-33",
+          "categoria": "Dependente",
+          "dataNascimento": "1998-02-12",
+          "imagem-membro": "img/membro10",
+          "parentesco": "Filho",
+          "escolaridade": "Ensino Médio Completo",
+          "ocupacao": "Estudante Técnico",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-015",
+              "nome": "Bolsa Qualificação Profissional",
+              "valor": 250
+            }
+          ]
+        }
+      ],
+      "id": "DMD-Xo_Z_Ug"
+    },
+    {
+      "idFamilia": "FAM-006",
+      "nomeFamilia": "Família Alves Mendes",
+      "fotoFamilia": "img/fotoFamilia6",
+      "endereco": {
+        "rua": "Rua São Roque",
+        "numero": "400",
+        "bairro": "Renascença",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "31130-000"
+      },
+      "telefone": "(31) 94444-8888",
+      "rendaFamiliar": 0,
+      "assistenteSocial": {
+        "idAssistente": "AS-003"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-002",
+          "nome": "Auxílio Moradia",
+          "valor": 600
+        },
+        {
+          "idBeneficio": "BEN-004",
+          "nome": "Auxílio Gás",
+          "valor": 110
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-011",
+          "nome": "Elaine Alves",
+          "cpf": "678.890.123-55",
+          "categoria": "Responsável",
+          "dataNascimento": "2000-07-22",
+          "imagem-membro": "img/membro11",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Médio Incompleto",
+          "ocupacao": "Desempregada",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-011",
+              "nome": "Auxílio Natalidade",
+              "valor": 300
+            }
+          ]
+        }
+      ],
+      "id": "YDzOC0MCmrw"
+    },
+    {
+      "idFamilia": "FAM-007",
+      "nomeFamilia": "Família Lima Macedo",
+      "fotoFamilia": "img/fotoFamilia7",
+      "endereco": {
+        "rua": "Rua Marajó",
+        "numero": "55",
+        "bairro": "Eldorado",
+        "cidade": "Contagem",
+        "estado": "MG",
+        "cep": "32315-010"
+      },
+      "telefone": "(31) 93333-9999",
+      "rendaFamiliar": 1412,
+      "assistenteSocial": {
+        "idAssistente": "AS-004"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-003",
+          "nome": "Tarifa Social de Energia",
+          "valor": 80
+        },
+        {
+          "idBeneficio": "BEN-008",
+          "nome": "Tarifa Social de Água",
+          "valor": 45
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-012",
+          "nome": "Jorge Lima",
+          "cpf": "789.012.345-66",
+          "categoria": "Responsável",
+          "dataNascimento": "1980-04-18",
+          "imagem-membro": "img/membro12",
+          "parentesco": "Responsável Familiar",
+          "escolaridade": "Ensino Fundamental Incompleto",
+          "ocupacao": "Afastado por Invalidez",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-007",
+              "nome": "BPC Deficiência",
+              "valor": 1412
+            },
+            {
+              "idBeneficio": "BEN-013",
+              "nome": "Passe Livre Interestadual PCD",
+              "valor": 0
+            }
+          ]
+        }
+      ],
+      "id": "Z5P_p2JQ61A"
+    },
+    {
+      "idFamilia": "FAM-1781534527920",
+      "nomeFamilia": "Família Monteiro",
+      "fotoFamilia": "",
+      "endereco": {
+        "rua": "Rua Álvaro Ferreira Cardoso",
+        "numero": "291",
+        "bairro": "Cardoso",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "cep": "30626280"
+      },
+      "telefone": "31997046525",
+      "rendaFamiliar": 2000,
+      "assistenteSocial": {
+        "idAssistente": "AS-001"
+      },
+      "beneficiosFamiliares": [
+        {
+          "idBeneficio": "BEN-001",
+          "nome": "Bolsa Família",
+          "valor": 600
+        }
+      ],
+      "membros": [
+        {
+          "idPessoa": "PES-1781534527920-0",
+          "nome": "Yuri Monteiro",
+          "cpf": "13372983602",
+          "categoria": "Responsável",
+          "dataNascimento": "2000-09-07",
+          "imagem-membro": "",
+          "parentesco": "Responsável",
+          "escolaridade": "Ensino Médio",
+          "ocupacao": "Autonomo",
+          "beneficiosIndividuais": [
+            {
+              "idBeneficio": "BEN-010",
+              "nome": "ID Jovem",
+              "valor": 0
+            }
+          ]
+        }
+      ],
+      "id": "h4CMG3T18Kg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

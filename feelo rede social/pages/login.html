@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Feelo</title>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #1e1e1e; padding: 2rem; border-radius: 10px; border: 1px solid #333; width: 100%; max-width: 400px; }
+        .input-group { margin-bottom: 1rem; }
+        input { width: 100%; padding: 0.8rem; margin-top: 0.5rem; border-radius: 5px; border: 1px solid #444; background: #2a2a2a; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 0.8rem; margin-top: 1rem; background: #8e44ad; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>Entrar no Feelo</h2>
+        <form id="form-login">
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label>Senha</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" id="btn-login">Entrar</button>
+        </form>
+    </div>
+
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('form-login');
+        const btnLogin = document.getElementById('btn-login');
+
+        // Se já houver um usuário logado, pula direto para o feed
+        if (Auth.usuarioLogado()) {
+            window.location.href = '/pages/index.html';
+            return;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('password').value;
+
+            btnLogin.disabled = true;
+            btnLogin.textContent = 'Entrando...';
+
+            try {
+                const usuario = await Api.login(email, senha);
+                if (usuario) {
+                    sessionStorage.setItem('user', JSON.stringify(usuario));
+                    window.location.href = '/pages/index.html';
+                } else {
+                    alert('E-mail ou senha incorretos!');
+                }
+            } catch (err) {
+                console.error('Erro na API:', err);
+                alert('Erro de conexão com o servidor! Verifique se o JSON Server está rodando na porta 3000.');
+            } finally {
+                btnLogin.disabled = false;
+                btnLogin.textContent = 'Entrar';
+            }
+        });
+    });
+</script>
+</body>
+</html>

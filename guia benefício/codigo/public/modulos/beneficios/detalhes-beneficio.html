@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Benefício</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/detalhes-beneficios.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/icon_site.png">
+</head>
+
+<body>
+    <header class="headerMobile">
+        <nav class="navbar navbar-dark bg-dark navbarMobile">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+            <nav class="botoesNavegacao">
+                <a class="link-header" href="../../index.html">Início</a>
+                <a class="link-header" href="../beneficios/catalogo.html">Benefícios</a>
+                <a class="link-header" href="../forms/form.html">Recomendador</a><!-- Tem que linkar com o formulário! -->
+                <a class="link-header" href="">Postos</a><!-- Tem que linkar com a página de Postos -->
+                <a class="link-header" href="">Login</a><!-- Tem que linkar com a página de Login -->
+            </nav>
+        </div>
+    </header>
+
+    <header class="headerDesktop">
+        <nav class="navbar navbar-dark navbarDesktop">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <nav class="botoesNavegacao">
+                    <a class="link-header" href="../../index.html">Início</a>
+                    <a class="link-header" href="../beneficios/catalogo.html">Benefícios</a>
+                    <a class="link-header" href="../forms/form.html">Recomendador</a><!-- Tem que linkar com o formulário! -->
+                    <a class="link-header" href="">Postos</a><!-- Tem que linkar com a página de Postos -->
+                    <a class="botao-amarelo" href="">Login</a><!-- Tem que linkar com a página de Login -->
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main id="info-beneficios">
+        <section id="titulo">
+            <h1 id="titulo-site" class="text-center my-4">DETALHES DO BENEFÍCIO</h1>
+        </section>
+
+        <section class=" p-3 my-2">
+
+            <div class="d-block d-lg-none border border-dark bg-white rounded-3 mx-1">
+                <h1 id="nome-beneficio-mobile" class="text-center mt-4"></h1>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <ul class="nav nav-tabs" id="minhasAbas" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#descricao">
+                                Descrição
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#requisitos">
+                                Requisitos
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#condicoes">
+                                Condições
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content mt-1 d-flex justify-content-center">
+
+                    <div class="tab-pane fade show active" id="descricao">
+                        <h3 class="text-center mt-3">Descrição</h3>
+                        <p id="descricao-beneficio-mobile" class="text-center mx-4"></p>
+                        <div class="mt-3 d-flex justify-content-center align-items-center border-top border-dark">
+                            <h5 class="text-center mt-2 ps-4">Valor: </h5>
+                            <h5 id="valor-beneficio-mobile" class="text-center mx-4 pt-2"></h5>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="requisitos">
+                        <h3 class="text-center mt-3">Requisitos</h3>
+                        <ul id="requisitos-beneficio-mobile" class="text-start mx-4"></ul>
+                    </div>
+
+                    <div class="tab-pane fade" id="condicoes">
+                        <h3 class="text-center mt-3">Condições</h3>
+                        <ul id="condicoes-beneficio-mobile" class="text-start mx-4"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-lg-block">
+
+                <div class="container mt-4">
+
+                    <div class="row g-4">
+
+                        <h1 id="nome-beneficio-desktop" class="text-center mt-4"></h1>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="card h-100 shadow-sm">
+                                <div>
+                                    <h3 id="titulo-descricao-desktop" class="card-title text-center">Descrição</h3>
+                                    <p id="descricao-beneficio-desktop" class="card-text text-center"></p>
+                                    <div id="div-valor-beneficio"
+                                        class="mt-3 d-flex justify-content-center align-items-center">
+                                        <h3 class="text-center mt-2 ps-4">Valor: </h3>
+                                        <h5 id="valor-beneficio-desktop" class="text-center mx-2 pt-2"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">Requisitos</h3>
+                                    <ul id="requisitos-beneficio-desktop" class="text-start"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">Condições</h3>
+                                    <ul id="condicoes-beneficio-desktop" class="text-start"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mt-5">
+            <div class="container">
+
+                <div class="d-block d-lg-none">
+                    <div class="card doc-card shadow-sm">
+                        <div class="card-body p-4">
+                            <h2 class="card-title mb-1">Documentação Necessária</h2>
+                            <p class="text-muted mb-3">Marque os documentos que você já possui.</p>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="fw-semibold">Seu progresso</span>
+                                    <span id="progresso-texto-mobile">0 de 0 documentos</span>
+                                </div>
+                                <div class="progress">
+                                    <div id="barra-progresso-mobile" class="progress-bar bg-success" role="progressbar"
+                                        style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul id="documentos-checklist-mobile" class="list-unstyled mt-3"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-none d-lg-flex row g-4 align-items-stretch">
+
+                    <div class="col-12 col-lg-7">
+                        <div class="card doc-card shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <h2 class="card-title mb-1">Documentação Necessária</h2>
+                                <p class="text-muted mb-3">Marque os documentos que você já possui.</p>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="fw-semibold">Seu progresso</span>
+                                        <span id="progresso-texto-desktop">0 de 0 documentos</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div id="barra-progresso-desktop" class="progress-bar bg-success"
+                                            role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100">0%</div>
+                                    </div>
+                                </div>
+
+                                <ul id="documentos-checklist-desktop" class="list-unstyled mt-3"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-5">
+                        <div class="h-100" style="min-height: 320px;">
+                            <img src="../../assets/images/img-detalhes-beneficio/imagem-documentos.jpg"
+                                alt="Imagem sessão documentos" class="w-100 h-100 rounded-3"
+                                style="object-fit: cover; display: block;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="d-flex justify-content-center">
+            <div class="mt-4">
+                <button class="botao-azul botao-detalhes mb-4 pt-3 ps-4">
+                    <h5>Postos de Atendimento</h5>
+                </button>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/detalhes_beneficios.js"></script>
+</body>
+
+</html>

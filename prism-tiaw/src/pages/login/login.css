@@ -1,0 +1,287 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:        #28a745;
+  --green-dark:    #1e7e34;
+  --green-light:   #e8f5ed;
+  --blue:          #1a3c8f;
+  --blue-light:    #e8eeff;
+  --white:         #ffffff;
+  --gray-50:       #f8fafc;
+  --gray-100:      #f1f5f9;
+  --gray-200:      #e2e8f0;
+  --gray-400:      #94a3b8;
+  --gray-600:      #64748b;
+  --gray-800:      #1e293b;
+  --red:           #dc3545;
+  --shadow-sm:     0 1px 6px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.12);
+  --radius:        12px;
+  --radius-sm:     8px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  min-height: 100vh;
+}
+
+/* ── Navbar ─────────────────────────────────────────────── */
+.navbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.logo img { height: 30px; }
+.logo-text { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--gray-800); }
+.logo-green { color: var(--green); }
+.logo-blue  { color: var(--blue); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--gray-600);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: color 0.18s;
+}
+.nav-links a:hover, .nav-links a.nav-active { color: var(--green); }
+.nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--gray-800); }
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--green-light) 0%, var(--blue-light) 100%);
+  padding: 56px 24px 40px;
+  text-align: center;
+}
+.hero-content { max-width: 640px; margin: 0 auto; }
+.hero-badge {
+  display: inline-block;
+  background: var(--white);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gray-800);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.text-blue { color: var(--blue); }
+.hero p { color: var(--gray-600); font-size: 1rem; }
+
+/* ── Page wrapper ───────────────────────────────────────── */
+.page-wrapper { max-width: 1180px; margin: 0 auto; padding: 32px 24px 56px; }
+.page-wrapper-login {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+/* ── Cartão de autenticação ─────────────────────────────── */
+.auth-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+  width: 100%;
+  max-width: 440px;
+  padding: 8px 32px 32px;
+  margin-top: -28px;
+}
+
+/* Abas */
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0 24px;
+  background: var(--gray-100);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+}
+.auth-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  border-radius: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.auth-tab.active { background: var(--white); color: var(--green-dark); box-shadow: var(--shadow-sm); }
+
+/* Section header compacto (reaproveita padrão do site) */
+.section-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.section-header-compact { margin-bottom: 18px; }
+.section-icon {
+  width: 40px; height: 40px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.section-header h2 { font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--gray-800); }
+.section-header p { font-size: 0.85rem; color: var(--gray-600); margin-top: 2px; }
+
+/* Formulário */
+.auth-form { display: flex; flex-direction: column; }
+.form-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 0.85rem; font-weight: 700; color: var(--gray-800); }
+.form-group input {
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  color: var(--gray-800);
+  outline: none;
+  transition: border-color 0.18s;
+  width: 100%;
+}
+.form-group input:focus { border-color: var(--green); }
+.form-group input.invalid { border-color: var(--red); }
+.field-error { font-size: 0.78rem; color: var(--red); min-height: 1em; }
+
+.input-with-btn { display: flex; gap: 8px; }
+.input-with-btn input { flex: 1; }
+.btn-secondary-sm {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-secondary-sm:hover { border-color: var(--green); color: var(--green-dark); }
+
+/* Opções (lembrar-me / esqueci senha) */
+.auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  cursor: pointer;
+}
+.checkbox-label input { accent-color: var(--green); }
+.link-discreto { font-size: 0.82rem; color: var(--green-dark); text-decoration: none; font-weight: 600; }
+.link-discreto:hover { text-decoration: underline; }
+
+/* Botões principais */
+.form-actions-column { flex-direction: column; }
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.18s;
+  width: 100%;
+}
+.btn-primary:hover { background: var(--green-dark); box-shadow: var(--shadow-md); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-icon { font-size: 1rem; }
+
+/* Troca entre abas */
+.auth-switch {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+.link-botao {
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+
+/* ── Toast ──────────────────────────────────────────────── */
+#toastContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+.toast {
+  background: var(--gray-800);
+  color: var(--white);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.25s ease;
+}
+.toast.success { background: var(--green-dark); }
+.toast.error { background: var(--red); }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+.footer { background: var(--gray-800); padding: 24px; margin-top: 40px; }
+.footer-inner { max-width: 1180px; margin: 0 auto; text-align: center; color: var(--gray-400); font-size: 0.85rem; }
+.footer-inner .logo-text { display: block; margin-bottom: 6px; font-size: 1.1rem; }
+
+/* ── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .hero h1 { font-size: 1.5rem; }
+  .auth-card { padding: 8px 20px 24px; margin: 0 16px; }
+  .page-wrapper-login { padding-left: 0; padding-right: 0; }
+}

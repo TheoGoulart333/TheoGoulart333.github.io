@@ -1,0 +1,80 @@
+main {
+    font-family: var(--font-principal);
+    padding: 3rem;
+    background-color: #E8E8E8;;
+}
+
+.titulo-sessao {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+    font-weight: 900;
+    font-family: montserrat;
+}
+
+.titulo-sessao h2 {
+    font-size: 3rem;
+}
+ 
+/* Label de detalhe (micro-texto acima do valor) */
+.label-detalhe {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #6c757d;
+    display: block;
+}
+
+.assistente-info {
+    color: black;
+    font-family: jomhuria;
+    font-size: 1rem;
+    font-weight: 900;
+}
+ 
+/* Foto do membro — círculo fixo */
+.foto-membro {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border: 3px solid #d9e4ff;
+}
+ 
+/* Badges de categoria */
+.badge-responsavel { background-color: #d9e4ff; }
+.badge-dependente  { background-color: #d4edda; }
+ 
+/* Hover nos cards */
+.card-hover { transition: box-shadow .2s, transform .2s; }
+.card-hover:hover {
+    box-shadow: 0 6px 20px rgba(0,60,163,.12);
+    transform: translateY(-2px);
+}
+ 
+/* Bloco da foto da assistente (altura fixa, cobre a coluna) */
+.foto-assistente-wrapper {
+    min-height: 220px;
+    background: linear-gradient(135deg, #d9e4ff, #d4edda);
+    overflow: hidden;
+}
+
+#beneficios-familia {
+    margin-bottom: 2rem;
+}
+ 
+/* Ícone de benefício */
+.icone-beneficio {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #d9e4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+

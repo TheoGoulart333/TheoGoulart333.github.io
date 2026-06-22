@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Hachi's 20th B-DAY — NANA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Special+Elite&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --punk-bg: #0a0a0a;
+    --punk-red: #c0001a;
+    --punk-silver: #b8b8b8;
+    --punk-accent: #e8e8e8;
+    --hachi-bg: #fdf0f3;
+    --hachi-pink: #f4a7b9;
+    --hachi-deep: #d4607a;
+    --hachi-cream: #fef5e7;
+    --hachi-rose: #e8c5d0;
+    --center-gold: #c9a84c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow-x: hidden; }
+  body { font-family: 'Cormorant Garamond', serif; cursor: none; background: #0a0a0a; }
+
+  /* ── CURSOR ── */
+  .cursor { position: fixed; width: 12px; height: 12px; border-radius: 50%; background: var(--punk-red); pointer-events: none; z-index: 9999; transition: transform 0.1s ease, background 0.3s ease; mix-blend-mode: difference; }
+  .cursor-ring { position: fixed; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); pointer-events: none; z-index: 9998; transition: transform 0.15s ease; }
+
+  /* ── TICKER ── */
+  .ticker { position: fixed; top: 0; left: 0; right: 0; z-index: 300; background: var(--punk-red); padding: 5px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 30s linear infinite; font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 6px; color: white; padding-right: 60px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── STAGE ── */
+  .stage { display: flex; width: 100%; min-height: calc(100vh - 28px); position: relative; margin-top: 28px; }
+
+  /* ── LINHA CENTRAL ── */
+  .center-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent 0%, rgba(201,168,76,0.5) 20%, rgba(201,168,76,0.8) 40%, transparent 50%, rgba(212,96,122,0.8) 60%, rgba(212,96,122,0.5) 80%, transparent 100%); transform: translateX(-50%); z-index: 5; pointer-events: none; }
+
+  /* ── LADO OSAKI (NANA) ── */
+  .side-osaki { flex: 1; background: var(--punk-bg); position: relative; overflow: hidden; transition: background 0.4s ease; padding: 60px 40px 60px 50px; display: flex; flex-direction: column; justify-content: space-between; }
+  .side-osaki::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(192,0,26,0.04) 30px, rgba(192,0,26,0.04) 31px); pointer-events: none; }
+  /* Stronger punk overlay for contrast */
+  .side-osaki::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top left, rgba(192,0,26,0.12) 0%, transparent 60%); pointer-events: none; }
+  .side-osaki.active { background: #0f0005; animation: pulsePunk 1.2s ease-in-out infinite; }
+  @keyframes pulsePunk { 0%, 100% { background: #0f0005; } 50% { background: #180008; } }
+
+  .safety-pin { position: absolute; font-size: 22px; opacity: 0.3; animation: drift 8s ease-in-out infinite; color: var(--punk-silver); }
+  @keyframes drift { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(8deg); } }
+
+  .osaki-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 7vw, 88px); color: var(--punk-accent); letter-spacing: 12px; line-height: 1; position: relative; z-index: 2; text-shadow: 4px 4px 0 var(--punk-red), 8px 8px 0 rgba(192,0,26,0.3); }
+  .osaki-sub { font-family: 'Special Elite', cursive; font-size: clamp(10px, 1.3vw, 14px); color: var(--punk-silver); letter-spacing: 5px; text-transform: uppercase; margin-top: 6px; position: relative; z-index: 2; }
+  .osaki-divider { width: 80px; height: 2px; background: linear-gradient(90deg, var(--punk-red), transparent); margin: 18px 0; position: relative; z-index: 2; }
+
+  .strawberry-row { display: flex; gap: 10px; position: relative; z-index: 2; margin: 10px 0; }
+  .straw-cup { font-size: 26px; animation: wobble 3s ease-in-out infinite; filter: drop-shadow(0 0 6px rgba(192,0,26,0.5)); }
+  .straw-cup:nth-child(2) { animation-delay: 0.4s; }
+  .straw-cup:nth-child(3) { animation-delay: 0.8s; }
+  @keyframes wobble { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+  .vw-tag { font-family: 'Bebas Neue', sans-serif; font-size: clamp(10px, 1.1vw, 12px); letter-spacing: 4px; color: var(--punk-silver); opacity: 0.5; border: 1px solid rgba(184,184,184,0.2); display: inline-block; padding: 4px 10px; position: relative; z-index: 2; }
+
+  /* Frase interativa da Nana — lado esquerdo */
+  .osaki-quote-block { position: relative; z-index: 2; margin: 18px 0; }
+  .osaki-quote-text {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(12px, 1.5vw, 17px);
+    color: var(--punk-silver);
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    border-left: 3px solid var(--punk-red);
+    padding-left: 14px;
+    background: rgba(192,0,26,0.05);
+    padding: 10px 14px;
+  }
+  .side-osaki.active .osaki-quote-text { opacity: 1; transform: translateX(0); }
+
+  .osaki-details { position: relative; z-index: 2; margin-top: auto; }
+  .detail-block { margin-bottom: 12px; }
+  .detail-label { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--punk-red); display: block; margin-bottom: 2px; }
+  .detail-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(13px, 1.6vw, 18px); color: var(--punk-accent); }
+  .dresscode-punk { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 2.5vw, 30px); color: var(--punk-red); letter-spacing: 6px; border: 1px solid var(--punk-red); display: inline-block; padding: 5px 14px; margin-top: 16px; position: relative; }
+  .dresscode-punk::before { content: ''; position: absolute; top: 3px; left: 3px; right: -3px; bottom: -3px; border: 1px solid rgba(192,0,26,0.3); z-index: -1; }
+
+  /* ── LADO HACHI ── */
+  .side-hachi { flex: 1; background: var(--hachi-bg); position: relative; overflow: hidden; transition: background 0.4s ease; padding: 60px 50px 60px 40px; display: flex; flex-direction: column; justify-content: space-between; }
+  .side-hachi.active { background: #fde8ee; }
+  /* Sweet overlay for contrast */
+  .side-hachi::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top right, rgba(244,167,185,0.18) 0%, transparent 60%); pointer-events: none; }
+
+  .flower-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .petal { position: absolute; font-size: 22px; opacity: 0.12; animation: floatPetal linear infinite; }
+  @keyframes floatPetal { 0% { transform: translateY(-20px) rotate(0deg); opacity: 0; } 10% { opacity: 0.15; } 90% { opacity: 0.15; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+  .hachi-name { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(40px, 6.5vw, 82px); color: var(--hachi-deep); letter-spacing: 4px; line-height: 1; position: relative; z-index: 2; text-shadow: 3px 3px 0 rgba(212,96,122,0.2); }
+  .hachi-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(11px, 1.4vw, 16px); color: var(--hachi-pink); letter-spacing: 3px; margin-top: 6px; position: relative; z-index: 2; }
+
+  .hachi-divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; position: relative; z-index: 2; }
+  .hachi-divider::before { content: ''; flex: 1; height: 1px; background: linear-gradient(270deg, var(--hachi-pink), transparent); }
+  .hachi-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--hachi-pink), transparent); }
+  .divider-flower { font-size: 16px; }
+
+  /* Frases interativas do lado Hachi */
+  .quotes-container { max-width: 55%; margin: 16px 0 20px auto; margin-left: auto; position: relative; z-index: 2; text-align: right; }
+  .hachi-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(12px, 1.7vw, 19px); line-height: 1.6; opacity: 0; transform: translateY(-10px); transition: opacity 0.5s ease, transform 0.5s ease; background: rgba(255,255,255,0.7); padding: 14px 16px; border-radius: 2px; color: var(--hachi-deep); border-right: 3px solid var(--hachi-pink); display: inline-block; }
+  .side-hachi.active .hachi-quote { opacity: 1; transform: translateY(0); }
+
+  .flower-cluster { display: flex; gap: 8px; font-size: 24px; position: relative; z-index: 2; margin: 8px 0; }
+  .fl { animation: bloomFloat 4s ease-in-out infinite; }
+  .fl:nth-child(2) { animation-delay: 0.6s; }
+  .fl:nth-child(3) { animation-delay: 1.2s; }
+  @keyframes bloomFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-6px) scale(1.08); } }
+
+  .hachi-details { position: relative; z-index: 2; margin-top: auto; text-align: right; }
+  .hachi-detail-block { margin-bottom: 12px; }
+  .hachi-detail-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11px; letter-spacing: 3px; color: var(--hachi-pink); display: block; margin-bottom: 2px; text-transform: uppercase; }
+  .hachi-detail-value { font-family: 'Playfair Display', serif; font-size: clamp(12px, 1.5vw, 17px); color: var(--hachi-deep); }
+  .dresscode-sweet { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(16px, 2vw, 24px); color: var(--hachi-deep); border: 1px solid var(--hachi-pink); display: inline-block; padding: 6px 18px; margin-top: 16px; border-radius: 40px; background: rgba(255,255,255,0.5); }
+
+  /* ── MEDALHÃO CENTRAL ── */
+  .center-medallion { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 100; width: clamp(110px, 14vw, 180px); height: clamp(110px, 14vw, 180px); cursor: pointer; }
+  .medallion-inner { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg, #0a0a0a 0deg 180deg, #fdf0f3 180deg 360deg); border: 3px solid var(--center-gold); box-shadow: 0 0 0 6px rgba(201,168,76,0.15), 0 0 30px rgba(201,168,76,0.2), 0 8px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: medalSpin 20s linear infinite, medalGlow 3s ease-in-out infinite; position: relative; overflow: hidden; }
+  .medallion-inner::before { content: ''; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.3); pointer-events: none; }
+  @keyframes medalSpin { from { background: conic-gradient(from 0deg, #0a0a0a 0deg 180deg, #fdf0f3 180deg 360deg); } to { background: conic-gradient(from 360deg, #0a0a0a 0deg 180deg, #fdf0f3 180deg 360deg); } }
+  @keyframes medalGlow { 0%, 100% { box-shadow: 0 0 0 6px rgba(201,168,76,0.15), 0 0 20px rgba(201,168,76,0.15), 0 8px 40px rgba(0,0,0,0.5); } 50% { box-shadow: 0 0 0 6px rgba(201,168,76,0.3), 0 0 40px rgba(201,168,76,0.4), 0 8px 50px rgba(0,0,0,0.6); } }
+
+  .medal-text-top { font-family: 'Bebas Neue', sans-serif; font-size: clamp(8px, 1.1vw, 12px); letter-spacing: 3px; color: var(--center-gold); text-shadow: 0 0 8px rgba(201,168,76,0.8); position: relative; z-index: 2; line-height: 1; }
+  .medal-text-main { font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; font-size: clamp(11px, 1.6vw, 18px); color: var(--center-gold); text-shadow: 0 0 12px rgba(201,168,76,1); position: relative; z-index: 2; line-height: 1.2; margin: 4px 0; text-align: center; padding: 0 10px; }
+  .medal-text-bottom { font-family: 'Bebas Neue', sans-serif; font-size: clamp(8px, 1vw, 11px); letter-spacing: 4px; color: var(--center-gold); text-shadow: 0 0 8px rgba(201,168,76,0.8); position: relative; z-index: 2; }
+
+  /* ── PICK A SIDE BANNER ── */
+  .pick-a-side-banner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: stretch;
+    background: linear-gradient(90deg, #0a0a0a 0%, #1a0005 48%, #fff0f4 52%, #fdf0f3 100%);
+    border-top: 1px solid rgba(201,168,76,0.3);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    overflow: hidden;
+  }
+  .pick-punk-side {
+    flex: 1;
+    padding: 22px 30px 22px 50px;
+    background: rgba(192,0,26,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-right: 2px dashed rgba(192,0,26,0.4);
+  }
+  .pick-sweet-side {
+    flex: 1;
+    padding: 22px 50px 22px 30px;
+    background: rgba(244,167,185,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    border-left: 2px dashed rgba(212,96,122,0.4);
+  }
+  .pick-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    min-width: 200px;
+  }
+  .pick-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(13px, 1.8vw, 20px);
+    letter-spacing: 6px;
+    text-align: center;
+    background: linear-gradient(90deg, var(--punk-red), var(--center-gold), var(--hachi-deep));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pick-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(10px, 1.2vw, 13px);
+    letter-spacing: 2px;
+    text-align: center;
+    color: rgba(201,168,76,0.8);
+    margin-top: 4px;
+  }
+  .pick-vs {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 4vw, 50px);
+    letter-spacing: 4px;
+    background: linear-gradient(180deg, var(--punk-red) 50%, var(--hachi-deep) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .pick-label-punk {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(16px, 2.2vw, 28px);
+    color: var(--punk-red);
+    letter-spacing: 8px;
+    text-shadow: 2px 2px 0 rgba(192,0,26,0.3);
+  }
+  .pick-desc-punk {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--punk-silver);
+    letter-spacing: 2px;
+  }
+  .pick-label-sweet {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2.2vw, 28px);
+    color: var(--hachi-deep);
+    letter-spacing: 4px;
+  }
+  .pick-desc-sweet {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--hachi-pink);
+    letter-spacing: 2px;
+  }
+
+  /* ── BANNER RODAPÉ ── */
+  .closing-banner { position: relative; left: 0; right: 0; z-index: 50; padding: 18px 20px; text-align: center; background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(253,240,243,0.9) 100%); }
+  .closing-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(11px, 1.2vw, 14px); color: rgba(255,255,255,0.7); letter-spacing: 1px; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+  .closing-text span { color: var(--hachi-pink); font-weight: 600; }
+
+  /* ── BOTÃO MÚSICA ── */
+  .music-btn { position: fixed; bottom: 30px; right: 30px; z-index: 200; width: 50px; height: 50px; border-radius: 50%; background: rgba(10,10,10,0.8); border: 1px solid rgba(192,0,26,0.5); color: var(--punk-silver); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(8px); }
+  .music-btn:hover { background: var(--punk-red); border-color: var(--punk-red); color: white; transform: scale(1.1); }
+  .music-label { position: fixed; bottom: 88px; right: 22px; z-index: 200; font-family: 'Special Elite', cursive; font-size: 9px; letter-spacing: 2px; color: var(--punk-silver); opacity: 0; transition: opacity 0.3s; text-align: center; width: 66px; }
+  .music-btn:hover + .music-label, .music-label.show { opacity: 0.7; }
+
+  /* ── SPARKLE ── */
+  .sparkle { position: fixed; pointer-events: none; z-index: 9997; width: 6px; height: 6px; border-radius: 50%; animation: sparkFly 0.8s ease-out forwards; }
+  @keyframes sparkFly { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0) translate(var(--dx), var(--dy)); } }
+
+  /* ════════════════════════════════════════
+     TICKET / VIP PASS BUTTON
+  ════════════════════════════════════════ */
+  .vip-pass-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #120008 50%, #0f0005 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .vip-pass-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(201,168,76,0.04) 18px, rgba(201,168,76,0.04) 19px);
+    pointer-events: none;
+  }
+  .ticket-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #1a0005, #0a0a0a);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  .ticket-btn:hover { transform: scale(1.03); filter: brightness(1.1); }
+  .ticket-main {
+    background: linear-gradient(135deg, #c0001a, #8a0012);
+    padding: 18px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+  }
+  /* Serrated edge left */
+  .ticket-main::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    background: radial-gradient(circle at left, #0a0a0a 6px, transparent 6px) repeat-y;
+    background-size: 16px 16px;
+  }
+  /* Serrated edge right */
+  .ticket-main::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    background: radial-gradient(circle at right, #0a0a0a 6px, transparent 6px) repeat-y;
+    background-size: 16px 16px;
+  }
+  .ticket-admit {
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+  .ticket-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(20px, 3vw, 32px);
+    letter-spacing: 6px;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.4);
+    white-space: nowrap;
+  }
+  .ticket-sub {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,200,200,0.8);
+  }
+  .ticket-stub {
+    background: #1a1a1a;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+  }
+  .stub-no {
+    font-family: 'Special Elite', cursive;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(201,168,76,0.5);
+    text-transform: uppercase;
+  }
+  .stub-icon {
+    font-size: 22px;
+  }
+  .stub-event {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--center-gold);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* ── MODAL (PDF / CONVITE) ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: #111;
+    border: 1px solid rgba(201,168,76,0.4);
+    box-shadow: 0 0 60px rgba(192,0,26,0.3), 0 0 0 1px rgba(201,168,76,0.1);
+    width: min(94vw, 860px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    background: linear-gradient(90deg, rgba(192,0,26,0.1), transparent);
+  }
+  .modal-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 5px;
+    color: var(--center-gold);
+  }
+  .modal-close {
+    background: none;
+    border: 1px solid rgba(192,0,26,0.5);
+    color: var(--punk-silver);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--punk-red); border-color: var(--punk-red); color: white; }
+  .modal-body {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .modal-body iframe {
+    width: 100%;
+    height: 75vh;
+    border: none;
+    display: block;
+  }
+  .modal-pdf-note {
+    padding: 18px 20px;
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--punk-silver);
+    opacity: 0.6;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  /* ── CHECK-IN TICKET STRIP ── */
+  .checkin-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 30px;
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(192,0,26,0.15),
+      rgba(192,0,26,0.15) 6px,
+      rgba(10,10,10,0.9) 6px,
+      rgba(10,10,10,0.9) 20px
+    );
+    border-top: 2px dashed rgba(201,168,76,0.4);
+    border-bottom: 2px dashed rgba(201,168,76,0.4);
+    position: relative;
+  }
+  .checkin-icon { font-size: 22px; flex-shrink: 0; }
+  .checkin-text {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(10px, 1.3vw, 14px);
+    letter-spacing: 3px;
+    color: white;
+    text-align: center;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .checkin-text strong { color: var(--center-gold); }
+
+  /* ── NANA CONTEXT CARD ── */
+  .nana-context-section {
+    position: relative;
+    padding: 36px 30px;
+    background: linear-gradient(135deg, #0d0005 0%, #090009 50%, #0f0008 100%);
+    overflow: hidden;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .nana-context-section::before {
+    content: '"NANA"';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 140px;
+    color: rgba(192,0,26,0.05);
+    letter-spacing: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .context-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+  }
+  .context-deco {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4px;
+  }
+  .context-deco-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(180deg, var(--punk-red), var(--hachi-deep));
+  }
+  .context-deco-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--center-gold);
+    box-shadow: 0 0 8px rgba(201,168,76,0.6);
+  }
+  .context-text-block { flex: 1; }
+  .context-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--punk-red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .context-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(13px, 1.6vw, 18px);
+    line-height: 1.8;
+    color: rgba(232,200,208,0.85);
+    border-left: 2px solid rgba(212,96,122,0.4);
+    padding-left: 18px;
+  }
+  .context-quote em {
+    color: var(--hachi-pink);
+    font-style: normal;
+  }
+
+  /* ── GIFT LIST SECTION ── */
+  .gift-section-wrapper {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0f 100%);
+    padding: 36px 30px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .gift-section-wrapper::before {
+    content: '🎁';
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    font-size: 120px;
+    opacity: 0.04;
+    pointer-events: none;
+    transform: rotate(-10deg);
+  }
+  .gift-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: none;
+    border: 1px solid rgba(201,168,76,0.4);
+    cursor: pointer;
+    padding: 12px 24px;
+    margin: 0 auto 28px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  /* Serrated effect */
+  .gift-toggle-btn::before, .gift-toggle-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: calc(100% + 2px);
+    background: radial-gradient(circle, rgba(10,10,10,1) 4px, transparent 4px) repeat-y;
+    background-size: 10px 10px;
+  }
+  .gift-toggle-btn::before { left: -5px; }
+  .gift-toggle-btn::after { right: -5px; transform: translateY(-50%) scaleX(-1); }
+  .gift-toggle-btn:hover { background: rgba(201,168,76,0.08); border-color: var(--center-gold); }
+  .gift-toggle-icon { font-size: 20px; }
+  .gift-toggle-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    letter-spacing: 6px;
+    color: var(--center-gold);
+  }
+  .gift-toggle-arrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: rgba(201,168,76,0.5);
+    transition: transform 0.3s ease;
+  }
+  .gift-toggle-btn.open .gift-toggle-arrow { transform: rotate(180deg); }
+
+  .gift-list-panel {
+    display: none;
+    position: relative;
+    z-index: 2;
+    animation: panelIn 0.35s ease;
+  }
+  .gift-list-panel.open { display: block; }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .gift-list-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(13px, 1.5vw, 17px);
+    color: rgba(244,167,185,0.7);
+    text-align: center;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+  }
+  .gift-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .gift-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 16px;
+    position: relative;
+    transition: all 0.25s ease;
+  }
+  .gift-card:hover { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
+  /* Small serrated corner */
+  .gift-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 20px; height: 20px;
+    background: linear-gradient(225deg, rgba(201,168,76,0.3) 50%, transparent 50%);
+  }
+  .gift-card-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+  .gift-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--punk-accent);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .gift-card-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(184,184,184,0.6);
+    line-height: 1.5;
+  }
+  .gift-card.sweet { border-color: rgba(212,96,122,0.2); }
+  .gift-card.sweet:hover { background: rgba(212,96,122,0.05); border-color: rgba(212,96,122,0.4); }
+  .gift-card.sweet .gift-card-name { color: var(--hachi-deep); }
+  .gift-card.punk { border-color: rgba(192,0,26,0.2); }
+  .gift-card.punk:hover { background: rgba(192,0,26,0.05); border-color: rgba(192,0,26,0.4); }
+  .gift-card.punk .gift-card-name { color: #e8a0a0; }
+
+  /* ── RESPONSIVIDADE MOBILE ── */
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none !important; }
+
+    .stage { flex-direction: column; min-height: auto; }
+    .center-line {
+      left: 0; right: 0; top: auto; bottom: auto;
+      position: relative; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.6) 30%, rgba(201,168,76,0.9) 50%, rgba(212,96,122,0.6) 70%, transparent 100%);
+      transform: none; order: 2;
+    }
+    .side-osaki { order: 1; padding: 50px 24px 70px 24px; min-height: auto; }
+    .side-hachi  { order: 3; padding: 50px 24px 80px 24px; min-height: auto; }
+    .center-medallion {
+      position: relative; left: auto; top: auto; transform: none;
+      margin: 0 auto; order: 2; display: block; width: 120px; height: 120px; z-index: 100;
+    }
+    .closing-banner { background: rgba(10,10,10,0.95); padding: 16px 16px; }
+    .closing-text { font-size: 12px; color: rgba(255,255,255,0.7); }
+    .music-btn { bottom: 20px; right: 20px; width: 44px; height: 44px; font-size: 16px; }
+    .music-label { bottom: 72px; right: 14px; }
+    .osaki-quote-text { font-size: 13px; }
+    .hachi-quote { font-size: 13px; }
+    .quotes-container { max-width: 60%; margin: 12px 0 16px auto; margin-left: auto; text-align: right; }
+
+    .pick-a-side-banner { flex-direction: column; }
+    .pick-punk-side, .pick-sweet-side { padding: 16px 24px; }
+    .pick-sweet-side { align-items: flex-start; }
+    .pick-center { padding: 12px 20px; }
+
+    .ticket-btn { flex-direction: column; }
+    .ticket-stub { min-width: unset; width: 100%; flex-direction: row; justify-content: center; }
+    .stub-event { writing-mode: horizontal-tb; }
+
+    .context-inner { flex-direction: column; gap: 16px; }
+    .context-deco { flex-direction: row; }
+    .context-deco-line { height: 1px; width: 50px; }
+
+    .gift-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+    .checkin-text { font-size: 11px; letter-spacing: 2px; }
+  }
+
+  @media (max-width: 480px) {
+    .ticker-inner { font-size: 10px; letter-spacing: 4px; }
+    .stage { margin-top: 24px; }
+    .side-osaki { padding: 36px 18px 50px 18px; }
+    .side-hachi  { padding: 36px 18px 60px 18px; }
+    .osaki-name { font-size: 48px; letter-spacing: 8px; }
+    .osaki-sub  { font-size: 9px; letter-spacing: 3px; }
+    .osaki-divider { margin: 12px 0; }
+    .vw-tag { font-size: 9px; }
+    .straw-cup { font-size: 22px; }
+    .osaki-quote-text { font-size: 12px; line-height: 1.65; padding: 8px 12px; }
+    .detail-label { font-size: 10px; letter-spacing: 3px; }
+    .detail-value { font-size: 14px; }
+    .dresscode-punk { font-size: 18px; letter-spacing: 4px; padding: 4px 10px; margin-top: 12px; }
+    .hachi-name { font-size: 44px; letter-spacing: 3px; }
+    .hachi-sub  { font-size: 10px; letter-spacing: 2px; }
+    .hachi-divider { margin: 12px 0; }
+    .flower-cluster { font-size: 20px; }
+    .hachi-quote { font-size: 12px; line-height: 1.65; padding: 8px 12px; }
+    .quotes-container { max-width: 65%; margin: 10px 0 14px auto; margin-left: auto; text-align: right; }
+    .hachi-detail-label { font-size: 10px; }
+    .hachi-detail-value { font-size: 13px; }
+    .dresscode-sweet { font-size: 15px; padding: 5px 14px; margin-top: 12px; }
+    .center-medallion { width: 100px; height: 100px; }
+    .medal-text-top    { font-size: 8px; letter-spacing: 2px; }
+    .medal-text-main   { font-size: 11px; }
+    .medal-text-bottom { font-size: 8px; letter-spacing: 2px; }
+    .closing-banner { padding: 14px 14px; }
+    .closing-text { font-size: 11px; line-height: 1.5; }
+    .music-btn { bottom: 16px; right: 16px; width: 40px; height: 40px; font-size: 15px; }
+    .music-label { display: none; }
+    .gift-grid { grid-template-columns: 1fr 1fr; }
+    .modal-body iframe { height: 60vh; }
+  }
+
+  @media (hover: none) {
+    .osaki-quote-text { opacity: 0; transform: translateX(0); transition: opacity 0.6s ease; }
+    .side-osaki.active .osaki-quote-text { opacity: 1; }
+    .hachi-quote { opacity: 0; transform: translateY(0); transition: opacity 0.6s ease; }
+    .side-hachi.active .hachi-quote { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <span class="ticker-inner">
+    ✦ HACHI'S 20th BIRTHDAY ✦ NANA ✦ BLACK STONES OR TRAPNEST ✦ PUNK OR SWEET ✦ AI YAZAWA ✦ 07 DE JULHO ✦ HACHI'S 20th BIRTHDAY ✦ NANA ✦ BLACK STONES OR TRAPNEST ✦ PUNK OR SWEET ✦ AI YAZAWA ✦ 13 DE JUNHO ✦
+  </span>
+</div>
+
+<!-- STAGE -->
+<div class="stage" id="stage">
+
+  <!-- LADO ESQUERDO — NANA OSAKI -->
+  <div class="side-osaki" id="sideOsaki">
+    <span class="safety-pin" style="top:15%; left:12%; animation-delay:0s;">📎</span>
+    <span class="safety-pin" style="top:55%; left:8%; animation-delay:1.5s; font-size:16px;">📎</span>
+    <span class="safety-pin" style="top:75%; left:30%; animation-delay:3s; font-size:14px;">📎</span>
+    <span class="safety-pin" style="top:30%; left:45%; animation-delay:2s;">⛓️</span>
+
+    <div>
+      <div class="osaki-name">NANA<br>OSAKI</div>
+      <div class="osaki-sub">The Black Stones · Vivienne Westwood · Punk Soul</div>
+      <div class="osaki-divider"></div>
+      <span class="vw-tag">★ V.W. LONDON ★</span>
+      <div class="strawberry-row">
+        <span class="straw-cup">🍓</span>
+        <span class="straw-cup">🍓</span>
+        <span class="straw-cup">🍓</span>
+      </div>
+      <div class="osaki-quote-block">
+        <div class="osaki-quote-text">
+          "Para ser feliz,<br>é preciso coragem."
+        </div>
+      </div>
+    </div>
+
+    <div class="osaki-details">
+      <div class="detail-block">
+        <span class="detail-label">📅 Data</span>
+        <span class="detail-value">07 / 07 / 2027</span>
+      </div>
+      <div class="detail-block">
+        <span class="detail-label">⏰ Horário</span>
+        <span class="detail-value">07:00 - 07:00 </span>
+      </div>
+      <div class="detail-block">
+        <span class="detail-label">📍 Local</span>
+        <span class="detail-value">Tokyo Street, 707<br>Tokyo</span>
+      </div>
+      <div class="dresscode-punk">PUNK ★</div>
+    </div>
+  </div>
+
+  <!-- LINHA CENTRAL -->
+  <div class="center-line"></div>
+
+  <!-- MEDALHÃO CENTRAL -->
+  <div class="center-medallion" id="medallion">
+    <div class="medallion-inner">
+      <div class="medal-text-top">✦ CELEBRATING ✦</div>
+      <div class="medal-text-main">HACHI'S<br>20th<br>B-DAY</div>
+      <div class="medal-text-bottom">✦ NANA ✦</div>
+    </div>
+  </div>
+
+  <!-- LADO DIREITO — HACHI KOMATSU -->
+  <div class="side-hachi" id="sideHachi">
+    <div class="flower-bg" id="flowerBg"></div>
+
+    <div>
+      <div class="hachi-name">Hachi<br>Komatsu</div>
+      <div class="hachi-sub">la petite Nana · Coquette · Girly Soul</div>
+      <div class="hachi-divider"><span class="divider-flower">🌸</span></div>
+      <div class="flower-cluster">
+        <span class="fl">🌷</span>
+        <span class="fl">🌸</span>
+        <span class="fl">🌺</span>
+      </div>
+    </div>
+
+    <div class="quotes-container">
+      <div class="hachi-quote">"Mesmo que a vida seja difícil,<br>eu quero estar com você."</div>
+    </div>
+
+    <div class="hachi-details">
+      <div class="hachi-detail-block">
+        <span class="hachi-detail-label">🎀 Data</span>
+        <span class="hachi-detail-value">07 / 07 / 2027</span>
+      </div>
+      <div class="hachi-detail-block">
+        <span class="hachi-detail-label">🕯️ Horário</span>
+        <span class="hachi-detail-value">07:00 - 07:00</span>
+      </div>
+      <div class="hachi-detail-block">
+        <span class="hachi-detail-label">🗺️ Local</span>
+        <span class="hachi-detail-value">Tokyo Street, 707<br>Tokyo</span>
+      </div>
+      <div class="dresscode-sweet">☆ Sweet ☆</div>
+    </div>
+  </div>
+
+</div><!-- /stage -->
+
+
+<!-- ── VIP PASS BUTTON ── -->
+<div class="vip-pass-wrapper">
+  <button class="ticket-btn" id="vipPassBtn" title="Abrir Convite">
+    <div class="ticket-stub">
+      <span class="stub-no">Admit</span>
+      <span class="stub-icon">🎟️</span>
+      <span class="stub-event">ONE</span>
+    </div>
+    <div class="ticket-main">
+      <span class="ticket-admit">★ Convite Oficial ★</span>
+      <span class="ticket-title">VIP BACKSTAGE PASS</span>
+      <span class="ticket-sub">NANA'S 20TH BIRTHDAY · HACHI</span>
+    </div>
+    <div class="ticket-stub">
+      <span class="stub-no">Nº</span>
+      <span class="stub-icon">🖤</span>
+      <span class="stub-event">2027</span>
+    </div>
+  </button>
+</div>
+
+
+<!-- ── PICK A SIDE BANNER ── -->
+<div class="pick-a-side-banner">
+  <div class="pick-punk-side">
+    <div class="pick-label-punk">★ PUNK</div>
+    <div class="pick-desc-punk">Black Stones · Leather · Chains · Boots</div>
+    <div class="pick-desc-punk" style="margin-top:4px; color: rgba(192,0,26,0.7);">Dress code: Noir, couro, correntes, spikes</div>
+  </div>
+  <div class="pick-center">
+    <div class="pick-title">ESCOLHA SEU DESTINO</div>
+    <div class="pick-subtitle">punk ou sweet?</div>
+    <div class="pick-vs">VS</div>
+    <div class="pick-subtitle" style="margin-top:6px;">seu dress code para a festa</div>
+  </div>
+  <div class="pick-sweet-side">
+    <div class="pick-label-sweet">Sweet ☆</div>
+    <div class="pick-desc-sweet">Trapnest · Lace · Ribbons · Pastel</div>
+    <div class="pick-desc-sweet" style="margin-top:4px; color: rgba(212,96,122,0.7);">Dress code: Rosa, rendas, laços, floral</div>
+  </div>
+</div>
+
+
+<!-- ── CHECK-IN STRIP ── -->
+<div class="checkin-strip">
+  <span class="checkin-icon">🎫</span>
+  <div class="checkin-text">
+    <strong>CHECK-IN:</strong> Retire sua pulseira oficial —
+    <strong>Black Stones</strong> (Punk) ou <strong>Trapnest</strong> (Sweet) — na entrada do evento
+  </div>
+  <span class="checkin-icon">🎫</span>
+</div>
+
+
+<!-- ── NANA CONTEXT SECTION ── -->
+<div class="nana-context-section">
+  <div class="context-inner">
+    <div class="context-deco">
+      <div class="context-deco-dot"></div>
+      <div class="context-deco-line"></div>
+      <div class="context-deco-dot" style="background:var(--hachi-pink); box-shadow: 0 0 8px rgba(244,167,185,0.6);"></div>
+    </div>
+    <div class="context-text-block">
+      <span class="context-label">✦ Sobre o Anime ✦</span>
+      <div class="context-quote">
+        <em>NANA</em> é sobre o encontro de duas jovens de nomes iguais e destinos opostos em Tóquio.
+        Uma busca o sonho do <em>Rock 'n' Roll</em>, a outra busca o <em>amor</em>.
+        Duas faces da mesma moeda, assim como os <em>20 anos da Hachi</em>.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── GIFT LIST SECTION ── -->
+<div class="gift-section-wrapper">
+  <button class="gift-toggle-btn" id="giftToggleBtn">
+    <span class="gift-toggle-icon">🎁</span>
+    <span class="gift-toggle-text">Gift List</span>
+    <span class="gift-toggle-arrow">▾</span>
+  </button>
+
+  <div class="gift-list-panel" id="giftPanel">
+    <p class="gift-list-title">— Sugestões de presentes para a Hachi —</p>
+    <div class="gift-grid">
+      <div class="gift-card punk">
+        <span class="gift-card-icon">💿</span>
+        <span class="gift-card-name">Vinil / CD</span>
+        <span class="gift-card-desc">Álbuns de rock alternativo, punk ou bandas japonesas do estilo NANA</span>
+      </div>
+      <div class="gift-card sweet">
+        <span class="gift-card-icon">🌹</span>
+        <span class="gift-card-name">Perfume</span>
+        <span class="gift-card-desc">Fragrâncias florais ou amadeiradas, algo sensorial e duradouro</span>
+      </div>
+      <div class="gift-card punk">
+        <span class="gift-card-icon">📚</span>
+        <span class="gift-card-name">Mangá NANA</span>
+        <span class="gift-card-desc">Volumes da coleção de Ai Yazawa, edições especiais ou completas</span>
+      </div>
+      <div class="gift-card sweet">
+        <span class="gift-card-icon">💅</span>
+        <span class="gift-card-name">Kit Beleza</span>
+        <span class="gift-card-desc">Esmaltes, paletas ou cuidados capilares de marcas especiais</span>
+      </div>
+      <div class="gift-card">
+        <span class="gift-card-icon">🍓</span>
+        <span class="gift-card-name">Experiência</span>
+        <span class="gift-card-desc">Um jantar especial, sessão de cinema ou passeio a dois lados</span>
+      </div>
+      <div class="gift-card punk">
+        <span class="gift-card-icon">⛓️</span>
+        <span class="gift-card-name">Acessório Punk</span>
+        <span class="gift-card-desc">Colares, alfinetes decorativos ou peças no estilo Vivienne Westwood</span>
+      </div>
+      <div class="gift-card sweet">
+        <span class="gift-card-icon">🎀</span>
+        <span class="gift-card-name">Livreto / Diário</span>
+        <span class="gift-card-desc">Caderno artesanal ou álbum de fotos para guardar memórias</span>
+      </div>
+      <div class="gift-card">
+        <span class="gift-card-icon">💌</span>
+        <span class="gift-card-name">Cartão + PIX</span>
+        <span class="gift-card-desc">Deixa a Hachi escolher o presente perfeito, nunca erra!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CLOSING BANNER ── -->
+<div class="closing-banner">
+  <p class="closing-text">
+    Não importa o quanto nos machuquemos, o importante é que estaremos juntas celebrando os <span>20 anos da Hachi.</span>
+    <br>Com amor e rock, 🍓🌸
+  </p>
+</div>
+
+<!-- BOTÃO MÚSICA -->
+<button class="music-btn" id="musicBtn" title="Play Music">♪</button>
+<div class="music-label" id="musicLabel">PLAY MUSIC</div>
+
+
+<!-- ── MODAL (PDF CONVITE) ── -->
+<div class="modal-overlay" id="pdfModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-header-title">✦ NANA'S 20TH BIRTHDAY ✦</span>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe
+        id="pdfFrame"
+        src="NANA'S 20TH BIRTHDAY.pdf"
+        title="Convite de Aniversário da Hachi"
+        allow="fullscreen"
+      ></iframe>
+    </div>
+    <div class="modal-pdf-note">
+      Se o PDF não carregar, certifique-se de que o arquivo "NANA'S 20TH BIRTHDAY.pdf" está na mesma pasta que este HTML.
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /* ── CURSOR ── */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 6 + 'px';
+    cursor.style.top  = e.clientY - 6 + 'px';
+    ring.style.left   = e.clientX - 16 + 'px';
+    ring.style.top    = e.clientY - 16 + 'px';
+  });
+
+  /* ── INTERATIVIDADE DOS LADOS ── */
+  const osaki = document.getElementById('sideOsaki');
+  const hachi = document.getElementById('sideHachi');
+
+  osaki.addEventListener('mouseenter', () => {
+    osaki.classList.add('active');
+    cursor.style.background = '#c0001a';
+    cursor.style.transform  = 'scale(1.5)';
+  });
+  osaki.addEventListener('mouseleave', () => {
+    osaki.classList.remove('active');
+    cursor.style.transform = 'scale(1)';
+  });
+  hachi.addEventListener('mouseenter', () => {
+    hachi.classList.add('active');
+    cursor.style.background = '#f4a7b9';
+    cursor.style.transform  = 'scale(1.5)';
+  });
+  hachi.addEventListener('mouseleave', () => {
+    hachi.classList.remove('active');
+    cursor.style.background = '#c0001a';
+    cursor.style.transform  = 'scale(1)';
+  });
+
+  osaki.addEventListener('touchstart', () => {
+    osaki.classList.add('active');
+    hachi.classList.remove('active');
+  }, { passive: true });
+  osaki.addEventListener('touchend', () => {
+    setTimeout(() => osaki.classList.remove('active'), 3000);
+  });
+  hachi.addEventListener('touchstart', () => {
+    hachi.classList.add('active');
+    osaki.classList.remove('active');
+  }, { passive: true });
+  hachi.addEventListener('touchend', () => {
+    setTimeout(() => hachi.classList.remove('active'), 3000);
+  });
+
+  /* ── PÉTALAS FLUTUANTES ── */
+  const flowerBg = document.getElementById('flowerBg');
+  const petals   = ['🌸','🌷','✿','❀','🌺','꽃'];
+  function spawnPetal() {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = petals[Math.floor(Math.random() * petals.length)];
+    p.style.left  = Math.random() * 100 + '%';
+    p.style.top   = '-30px';
+    const dur = 8 + Math.random() * 10;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay   = Math.random() * 3 + 's';
+    p.style.fontSize          = (14 + Math.random() * 14) + 'px';
+    flowerBg.appendChild(p);
+    setTimeout(() => p.remove(), (dur + 3) * 1000);
+  }
+  setInterval(spawnPetal, 1800);
+  for (let i = 0; i < 6; i++) setTimeout(spawnPetal, i * 600);
+
+  /* ── SPARKLES ── */
+  function createSparkles(x, y) {
+    const colors = ['#c0001a','#f4a7b9','#c9a84c','#ffffff','#e8c5d0'];
+    for (let i = 0; i < 8; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left       = x + 'px';
+      s.style.top        = y + 'px';
+      s.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const angle = (Math.PI * 2 / 8) * i;
+      const dist  = 30 + Math.random() * 30;
+      s.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      s.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 800);
+    }
+  }
+  document.addEventListener('click', e => createSparkles(e.clientX, e.clientY));
+  document.addEventListener('touchend', e => {
+    const t = e.changedTouches[0];
+    createSparkles(t.clientX, t.clientY);
+  }, { passive: true });
+
+  /* ── MEDALHÃO ── */
+  const medallion = document.getElementById('medallion');
+  const medalInner = medallion.querySelector('.medallion-inner');
+  medalInner.style.transition = 'transform 0.2s ease';
+  medallion.addEventListener('click', () => {
+    medalInner.style.transform = 'scale(1.1)';
+    setTimeout(() => { medalInner.style.transform = 'scale(1)'; }, 200);
+  });
+
+  /* ── VIP PASS / MODAL ── */
+  const vipBtn    = document.getElementById('vipPassBtn');
+  const modal     = document.getElementById('pdfModal');
+  const modalClose = document.getElementById('modalClose');
+
+  vipBtn.addEventListener('click', () => {
+    window.open('https://pin.it/4UDEoMvuv', '_blank');
+  });
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  /* ── GIFT LIST TOGGLE ── */
+  const giftBtn   = document.getElementById('giftToggleBtn');
+  const giftPanel = document.getElementById('giftPanel');
+  giftBtn.addEventListener('click', () => {
+    const isOpen = giftPanel.classList.toggle('open');
+    giftBtn.classList.toggle('open', isOpen);
+  });
+
+  /* ── MÚSICA (Spotify embed) ── */
+  const musicBtn   = document.getElementById('musicBtn');
+  const musicLabel = document.getElementById('musicLabel');
+  let spotifyFrame = null;
+  let playing      = false;
+
+  musicBtn.addEventListener('click', () => {
+    if (!playing) {
+      playing = true;
+      musicBtn.textContent = '⏸';
+      musicLabel.classList.add('show');
+
+      if (!spotifyFrame) {
+        spotifyFrame = document.createElement('iframe');
+        spotifyFrame.style.cssText = 'position:fixed;bottom:-100px;left:-100px;width:1px;height:1px;opacity:0;pointer-events:none;';
+        spotifyFrame.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+        spotifyFrame.src = 'https://open.spotify.com/embed/track/7ecZB4IxPkgUGRzwo2GVRQ?utm_source=generator&autoplay=1';
+        document.body.appendChild(spotifyFrame);
+      } else {
+        spotifyFrame.contentWindow.postMessage({ command: 'toggle' }, '*');
+      }
+    } else {
+      playing = false;
+      musicBtn.textContent = '♪';
+      musicLabel.classList.remove('show');
+      if (spotifyFrame) {
+        spotifyFrame.contentWindow.postMessage({ command: 'toggle' }, '*');
+      }
+    }
+  });
+
+  /* ── TOUCH: ocultar cursor ── */
+  if ('ontouchstart' in window) {
+    cursor.style.display = 'none';
+    ring.style.display   = 'none';
+    document.body.style.cursor = 'auto';
+  }
+
+  /* ── MOBILE: reposicionar medalhão ── */
+  function adjustMedallion() {
+    const isMobile = window.innerWidth <= 768;
+    const stage    = document.getElementById('stage');
+    const med      = document.getElementById('medallion');
+    const line     = stage.querySelector('.center-line');
+    if (isMobile) {
+      if (med.parentNode !== stage || med.nextSibling !== line) {
+        stage.insertBefore(med, line.nextSibling);
+      }
+    } else {
+      if (med.parentNode !== stage) stage.appendChild(med);
+      med.style.position = 'absolute';
+    }
+  }
+  adjustMedallion();
+  window.addEventListener('resize', adjustMedallion);
+</script>
+</body>
+</html>

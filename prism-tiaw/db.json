@@ -1,0 +1,127 @@
+{
+  "postos": [
+    {
+      "id": 1,
+      "nome": "UBS Vila Esperança",
+      "endereco": "Rua das Flores, 123",
+      "bairro": "Vila Esperança",
+      "cidade": "Belo Horizonte",
+      "cep": "30140-000",
+      "telefone": "(31) 3277-1100",
+      "horario": "Segunda a Sexta: 07h às 17h",
+      "tipo": "UBS",
+      "servicos": ["Clínica Geral", "Vacinação", "Pré-Natal", "Odontologia"],
+      "distancia": 0.8,
+      "ativo": true
+    },
+    {
+      "id": 2,
+      "nome": "UPA Centro-Sul",
+      "endereco": "Av. dos Andradas, 500",
+      "bairro": "Centro",
+      "cidade": "Belo Horizonte",
+      "cep": "30120-010",
+      "telefone": "(31) 3277-2200",
+      "horario": "24 horas",
+      "tipo": "UPA",
+      "servicos": ["Urgência", "Emergência", "Observação", "Pediatria"],
+      "distancia": 1.2,
+      "ativo": true
+    },
+    {
+      "id": 3,
+      "nome": "Centro de Saúde Pampulha",
+      "endereco": "Rua Otacílio Negrão, 78",
+      "bairro": "Pampulha",
+      "cidade": "Belo Horizonte",
+      "cep": "31365-450",
+      "telefone": "(31) 3277-3300",
+      "horario": "Segunda a Sexta: 07h às 19h | Sábado: 08h às 12h",
+      "tipo": "Centro de Saúde",
+      "servicos": ["Clínica Geral", "Ginecologia", "Vacinação", "Saúde Mental"],
+      "distancia": 2.1,
+      "ativo": true
+    },
+    {
+      "id": 4,
+      "nome": "UBS Barreiro",
+      "endereco": "Rua Padre Eustáquio, 200",
+      "bairro": "Barreiro",
+      "cidade": "Belo Horizonte",
+      "cep": "30640-100",
+      "telefone": "(31) 3277-4400",
+      "horario": "Segunda a Sexta: 07h às 17h",
+      "tipo": "UBS",
+      "servicos": ["Clínica Geral", "Vacinação", "Coleta de Exames"],
+      "distancia": 3.4,
+      "ativo": true
+    },
+    {
+      "id": 5,
+      "nome": "UPA Venda Nova",
+      "endereco": "Av. Vilarinho, 1500",
+      "bairro": "Venda Nova",
+      "cidade": "Belo Horizonte",
+      "cep": "31610-000",
+      "telefone": "(31) 3277-5500",
+      "horario": "24 horas",
+      "tipo": "UPA",
+      "servicos": ["Urgência", "Emergência", "Pediatria", "Ortopedia"],
+      "distancia": 4.7,
+      "ativo": true
+    },
+    {
+      "id": 6,
+      "nome": "Centro de Saúde Santa Efigênia",
+      "endereco": "Rua Timbiras, 340",
+      "bairro": "Santa Efigênia",
+      "cidade": "Belo Horizonte",
+      "cep": "30140-060",
+      "telefone": "(31) 3277-6600",
+      "horario": "Segunda a Sexta: 07h às 17h",
+      "tipo": "Centro de Saúde",
+      "servicos": ["Clínica Geral", "Dermatologia", "Vacinação", "Nutrição"],
+      "distancia": 1.9,
+      "ativo": true
+    },
+    {
+      "id": 7,
+      "nome": "UBS Contagem Norte",
+      "endereco": "Rua João César, 45",
+      "bairro": "Industrial",
+      "cidade": "Contagem",
+      "cep": "32010-100",
+      "telefone": "(31) 3391-1100",
+      "horario": "Segunda a Sexta: 07h às 17h",
+      "tipo": "UBS",
+      "servicos": ["Clínica Geral", "Vacinação", "Odontologia"],
+      "distancia": 5.2,
+      "ativo": true
+    },
+    {
+      "id": 8,
+      "nome": "Centro de Saúde Betânia",
+      "endereco": "Rua Betânia, 720",
+      "bairro": "Betânia",
+      "cidade": "Belo Horizonte",
+      "cep": "30575-000",
+      "telefone": "(31) 3277-7700",
+      "horario": "Segunda a Sexta: 07h às 19h",
+      "tipo": "Centro de Saúde",
+      "servicos": ["Clínica Geral", "Ginecologia", "Pré-Natal", "Pediatria"],
+      "distancia": 2.8,
+      "ativo": true
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Maria Silva",
+      "endereco": "Rua das Acácias, 55",
+      "bairro": "Centro",
+      "cidade": "Belo Horizonte",
+      "cep": "30120-000",
+      "dataCadastro": "2025-05-01T10:00:00.000Z"
+    }
+  ]
+}

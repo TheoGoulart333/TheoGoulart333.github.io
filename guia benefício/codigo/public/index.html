@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia-Benefício</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/icon_site.png">
+</head>
+
+<body>
+    <header class="headerMobile">
+        <nav class="navbar navbar-dark bg-dark navbarMobile">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+            <nav class="botoesNavegacao">
+                <a class="link-header" href="index.html">Início</a>
+                <a class="link-header" href="modulos/beneficios/catalogo.html">Benefícios</a>
+                <a class="link-header" href="modulos/forms/form.html">Recomendador</a><!-- Tem que linkar com o formulário! -->
+                <a class="link-header" href="">Postos</a><!-- Tem que linkar com a página de Postos -->
+                <a class="link-header" href="">Login</a><!-- Tem que linkar com a página de Login -->
+            </nav>
+        </div>
+    </header>
+
+    <header class="headerDesktop">
+        <nav class="navbar navbar-dark navbarDesktop">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <nav class="botoesNavegacao">
+                    <a class="link-header" href="index.html">Início</a>
+                    <a class="link-header" href="modulos/beneficios/catalogo.html">Benefícios</a>
+                    <a class="link-header" href="modulos/forms/form.html">Recomendador</a><!-- Tem que linkar com o formulário! -->
+                    <a class="link-header" href="">Postos</a><!-- Tem que linkar com a página de Postos -->
+                    <a class="botao-amarelo" href="">Login</a><!-- Tem que linkar com a página de Login -->
+                </nav>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="introducao-site">
+            <h1><span style="color:#333">Guia-Benefício</span><br><span style="color:#003CA3">Seus Direitos
+                    Sociais</span></h1>
+            <p>Descubra todos os benefícios sociais disponíveis para você e sua família. Informações claras e acessíveis
+                sobre aposentadorias, auxílios, bolsas e muito mais.</p>
+            <div class="cards-modulos">
+                <card id="catalogo" class="card-modulo">
+                    <h2>Catálogo Completo</h2>
+                    <p>Explore a lista completa de benefícios disponíveis, com detalhes sobre requisitos e como
+                        solicitar.</p>
+                    <a class="botao-azul" href="modulos/beneficios/catalogo.html">Ver Todos os Benefícios ➔</a>
+                </card>
+                <card id="recomendador" class="card-modulo">
+                    <h2>Recomendador Inteligente</h2>
+                    <p>Responda algumas perguntas e descubra exatamente quais benefícios você pode receber.</p>
+                    <a class="botao-verde" href="modulos/forms/form.html">Descobrir Meus Benefícios 🔍︎</a>
+                </card>
+                <card id="postos" class="card-modulo">
+                    <h2>Postos de Atendimento</h2>
+                    <p>Encontre os endereços, horários de funcionamento e contatos dos postos do CRAS/CREAS mais
+                        próximos de você.</p>
+                    <a class="botao-azul" href="">Descobrir postos 📍</a>
+                </card>
+                <card id="assistente" class="card-modulo">
+                    <h2>Assistente Social</h2>
+                    <p>Área restrita para profissionais. Acesse o sistema para acompanhar e gerenciar as famílias
+                        assistidas.</p>
+                    <a class="botao-amarelo" href="">Faça login</a>
+                </card>
+            </div>
+        </section>
+        <section class="valores-site">
+            <h1>Por que usar o Guia-Benefício?</h1>
+            <p>Facilitamos o acesso à informação sobre seus direitos sociais de forma simples e direta.</p>
+            <div class="cards-valores">
+                <card class="card-valor">
+                    <img src="assets/images/icon_site.png">
+                    <h2>Informação Clara</h2>
+                    <p>Explicamos cada benefício de forma simples, sem termos complicados. Você entende seus direitos
+                        rapidamente.</p>
+                </card>
+                <card class="card-valor">
+                    <img src="assets/images/icon_confiabilidade.png">
+                    <h2>Confiável</h2>
+                    <p>Todas as informações são baseadas em leis e regulamentos oficiais. Você pode confiar no que
+                        encontra
+                        aqui.</p>
+                </card>
+                <card class="card-valor">
+                    <img src="assets/images/icon_paratodos.png">
+                    <h2>Para Todos</h2>
+                    <p>Explicamos cada benefício de forma simples, sem termos complicados. Você entende seus direitos
+                        rapidamente.</p>
+                </card>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

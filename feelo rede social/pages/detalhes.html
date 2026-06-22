@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelo — Detalhes do Feel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* ── VARIÁVEIS ──────────────────────────────────── */
+    :root {
+      --accent:      #9b8afb;
+      --accent-dark: #7c6fe0;
+      --bg:          #0d0d14;
+      --surface:     #15151f;
+      --surface-2:   #1e1e2e;
+      --text:        #e8e8f0;
+      --text-muted:  #8888aa;
+      --border:      rgba(255,255,255,0.07);
+      --radius:      16px;
+      --font-display:'DM Serif Display', serif;
+      --font-body:   'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── NAVBAR ─────────────────────────────────────── */
+    .feelo-navbar {
+      background: rgba(13,13,20,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+      position: sticky; top: 0; z-index: 1030;
+    }
+    .feelo-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .feelo-logo .logo-text { font-family:var(--font-display); font-size:1.6rem; color:var(--accent); letter-spacing:-0.5px; }
+    .feelo-navbar .nav-link {
+      color: var(--text-muted); font-weight:500; font-size:0.92rem;
+      padding:0.4rem 0.8rem; border-radius:8px;
+      display:flex; align-items:center; gap:5px;
+      transition: color .2s, background .2s; text-decoration:none;
+    }
+    .feelo-navbar .nav-link:hover { color:var(--accent); background:rgba(155,138,251,0.1); }
+    .navbar-toggler { border-color:var(--border); }
+    .navbar-toggler-icon { filter:invert(1); }
+    .btn-feel {
+      background:var(--accent); color:#fff; font-weight:600;
+      border-radius:50px; padding:0.45rem 1.2rem; border:none;
+      font-size:0.88rem; transition:background .2s, transform .15s; cursor:pointer;
+      display:inline-flex; align-items:center; gap:6px;
+    }
+    .btn-feel:hover { background:var(--accent-dark); color:#fff; transform:translateY(-1px); }
+
+    /* ── BREADCRUMB ─────────────────────────────────── */
+    .breadcrumb-bar {
+      padding: 1rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .breadcrumb-bar a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; }
+    .breadcrumb-bar a:hover { color: var(--accent); }
+    .breadcrumb-bar span { color: var(--text-muted); font-size: 0.88rem; }
+    .breadcrumb-bar .bc-current { color: var(--text); font-size: 0.88rem; }
+
+    /* ── SEÇÕES DE DETALHE ──────────────────────────── */
+    .detalhe-section { padding: 52px 0 72px; }
+    .detalhe-secao { margin-bottom: 3rem; }
+    .secao-titulo {
+      font-family: var(--font-display); font-size: 1.4rem; color: var(--text);
+      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+    }
+
+    /* ── HERO DA IMAGEM PRINCIPAL ───────────────────── */
+    .detalhe-hero {
+      width: 100%; height: 320px;
+      background-size: cover; background-position: center;
+      border-radius: var(--radius);
+      position: relative; overflow: hidden;
+    }
+    @media (max-width: 767px) { .detalhe-hero { height: 220px; } }
+    .detalhe-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,20,0.7) 0%, transparent 60%);
+    }
+    .detalhe-hero-badge {
+      position: absolute; bottom: 1.2rem; left: 1.2rem;
+      background: rgba(155,138,251,0.2); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.4); border-radius: 50px;
+      padding: 5px 16px; font-size: 0.85rem; font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+
+    /* ── GRID DE INFORMAÇÕES ────────────────────────── */
+    .detalhe-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .info-item {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+    }
+    .info-label {
+      font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.8px; font-weight: 600; display: block; margin-bottom: 4px;
+    }
+    .info-value { font-size: 0.95rem; color: var(--text); font-weight: 500; margin: 0; }
+    .avatar-sm { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .author-name { font-weight: 600; font-size: 0.88rem; color: var(--text); display: block; }
+    .author-handle { font-size: 0.76rem; color: var(--text-muted); }
+
+    /* ── CONTEÚDO COMPLETO ──────────────────────────── */
+    .detalhe-conteudo-bloco {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .detalhe-conteudo-texto {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      line-height: 1.75; color: var(--text);
+      font-style: italic; margin: 0;
+    }
+
+    /* ── AÇÕES ──────────────────────────────────────── */
+    .action-btn {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); border-radius: 10px; padding: 7px 16px;
+      font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: color .2s, border-color .2s; text-decoration: none;
+    }
+    .action-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .action-btn.liked { color: #f06292; border-color: #f06292; }
+    .btn-ca {
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.82rem; padding: 7px 16px;
+      border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: color .2s, border-color .2s;
+    }
+    .btn-ca:hover { color: var(--accent); border-color: var(--accent); }
+    .feeling-tag {
+      background: rgba(155,138,251,0.12); color: var(--accent);
+      border: 1px solid rgba(155,138,251,0.25); border-radius: 50px;
+      padding: 3px 11px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;
+    }
+
+    /* ── FOTOS VINCULADAS ───────────────────────────── */
+    .foto-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      transition: border-color .25s, transform .2s;
+    }
+    .foto-card:hover { border-color: rgba(155,138,251,0.4); transform: translateY(-3px); }
+    .foto-thumb {
+      width: 100%; height: 160px; object-fit: cover; display: block;
+    }
+    @media (max-width: 575px) { .foto-thumb { height: 130px; } }
+    .foto-titulo {
+      padding: 0.6rem 0.8rem; font-size: 0.8rem; color: var(--text-muted);
+      margin: 0; line-height: 1.4;
+    }
+
+    /* ── LOADING ────────────────────────────────────── */
+    .loading-placeholder { text-align: center; padding: 4rem 0; color: var(--text-muted); }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    .feelo-footer {
+      background: var(--surface); border-top: 1px solid var(--border); padding: 3rem 0 1.5rem;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1.2rem;
+      color: var(--text-muted); font-size: 0.8rem;
+    }
+    .footer-logo .logo-text { font-family: var(--font-display); font-size: 1.4rem; color: var(--accent); }
+    .footer-tagline { color: var(--text-muted); font-size: 0.88rem; margin-top: 4px; }
+    .footer-links h6 { font-weight: 700; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.8rem; }
+    .footer-links a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.88rem; margin-bottom: 6px; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .social-links { display: flex; gap: 10px; }
+    .social-links a { color: var(--text-muted); font-size: 1.1rem; transition: color .2s; }
+    .social-links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ───────────────────────────────────────────── -->
+
+  <nav class="feelo-navbar">
+    <div class="container d-flex align-items-center justify-content-between gap-3">
+      <a href="/pages/index.html" class="feelo-logo">
+        <svg width="36" height="36" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="#9b8afb"/>
+          <text x="40" y="48" font-family="serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#fff">f</text>
+        </svg>
+        <span class="logo-text">feelo</span>
+      </a>
+
+      <!-- Menu renderizado condicionalmente pelo ui.js -->
+      <ul class="d-none d-md-flex align-items-center gap-1 list-unstyled mb-0" id="nav-menu"></ul>
+    </div>
+  </nav>
+
+  <!-- ── CONTEÚDO PRINCIPAL ───────────────────────────────── -->
+  <section class="detalhe-section">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-bar">
+        <a href="/pages/index.html"><i class="bi bi-house-fill"></i> Início</a>
+        <span>/</span>
+        <a href="/pages/index.html#todos">Todos os Feels</a>
+        <span>/</span>
+        <span class="bc-current">Detalhes do Feel</span>
+      </div>  
+
+      <div id="detalhe-conteudo">
+        <div class="loading-placeholder">
+          <i class="bi bi-hourglass-split" style="font-size:2rem;"></i>
+          <p class="mt-2">Carregando feel...</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="feelo-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="footer-logo"><span class="logo-text">feelo</span></div>
+          <p class="footer-tagline">Share what you feel.</p>
+          <p class="mt-3" style="color:var(--text-muted);font-size:0.83rem;">Um espaço seguro para expressar emoções e se conectar com quem entende o que você sente.</p>
+          <div class="social-links mt-3">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Produto</h6>
+          <a href="/pages/index.html">Início</a>
+          <a href="/pages/index.html#todos">Todos os Feels</a>
+          <a href="/pages/index.html#destaques">Destaques</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Empresa</h6>
+          <a href="#">Sobre nós</a><a href="#">Blog</a><a href="#">Carreiras</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Suporte</h6>
+          <a href="#">Central de Ajuda</a><a href="#">Privacidade</a><a href="#">Termos</a>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-2 footer-links">
+          <h6>Projeto</h6>
+          <a href="#">PUC Minas</a><a href="#">DIW — Eng. Software</a><a href="#">Theo Goulart</a>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span>©2026 Feelo Corp. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/app.js"></script>
+
+</body>
+</html>

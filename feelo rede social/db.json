@@ -1,0 +1,230 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nome": "Theo Goulart",
+      "handle": "@theosoad",
+      "email": "theo@feelo.com",
+      "senha": "123456",
+      "admin": true,
+      "avatarIniciais": "TS",
+      "avatarCor": "#3d2d6e"
+    },
+    {
+      "id": "2",
+      "nome": "Maria Kawai",
+      "handle": "@mariakawai",
+      "email": "maria@feelo.com",
+      "senha": "123456",
+      "admin": false,
+      "avatarIniciais": "MK",
+      "avatarCor": "#4a7fc1"
+    }
+  ],
+  "feels": [
+    {
+      "id": "1",
+      "usuarioId": 1,
+      "autor": "theosoad",
+      "handle": "@theosoad",
+      "tempo": "2h",
+      "sentimento": "😔 Melancólico",
+      "descricao": "Silêncio no caminho — reflexões de uma caminhada solitária ao entardecer.",
+      "texto": "Tem dias em que o silêncio do caminho fala mais alto que qualquer pensamento — e eu só sigo, tentando me encontrar no meio do vazio.",
+      "conteudo": "Tem dias em que o silêncio do caminho fala mais alto que qualquer pensamento — e eu só sigo, tentando me encontrar no meio do vazio. Às vezes a melancolia não é tristeza, é uma pausa necessária. O mundo continua girando e eu estou aqui, respirando fundo, lembrando que tudo passa.",
+      "curtidas": 247,
+      "comentarios": 38,
+      "destaque": true,
+      "avatarIniciais": "TS",
+      "avatarCor": "#3d2d6e",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Estrada vazia ao pôr do sol",
+          "imagem": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Névoa nas montanhas",
+          "imagem": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80"
+        },
+        {
+          "id": 3,
+          "titulo": "Árvore solitária na neblina",
+          "imagem": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "usuarioId": 2,
+      "autor": "mariakawai",
+      "handle": "@mariakawai",
+      "tempo": "4h",
+      "sentimento": "🌸 Grata",
+      "descricao": "Gratidão que chegou de surpresa numa manhã ensolarada de segunda-feira.",
+      "texto": "Hoje acordei com a sensação rara de que tudo vai dar certo. 🌸 Às vezes a gratidão aparece de surpresa, e a gente só precisa acolher.",
+      "conteudo": "Hoje acordei com a sensação rara de que tudo vai dar certo. 🌸 Às vezes a gratidão aparece de surpresa, e a gente só precisa acolher. Não sei se foi o café perfeito, o sol entrando pela janela ou aquela ligação inesperada de um amigo.",
+      "curtidas": 512,
+      "comentarios": 72,
+      "destaque": true,
+      "avatarIniciais": "MK",
+      "avatarCor": "#4a7fc1",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1490750967868-88df5691cc84?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Flores de cerejeira ao amanhecer",
+          "imagem": "https://images.unsplash.com/photo-1490750967868-88df5691cc84?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Chá quente na janela",
+          "imagem": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&q=80"
+        },
+        {
+          "id": 3,
+          "titulo": "Jardim em flor",
+          "imagem": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "usuarioId": 1,
+      "autor": "lucasfeels",
+      "handle": "@lucasfeels",
+      "tempo": "6h",
+      "sentimento": "😤 Frustrado",
+      "descricao": "Frustrações do dia a dia e a força que vem de dentro para continuar.",
+      "texto": "Às vezes a gente se esforça tanto e parece que nada muda. Mas eu sei que é um processo. Respira, Lucas.",
+      "conteudo": "Às vezes a gente se esforça tanto e parece que nada muda. Mas eu sei que é um processo. Respira, Lucas. Já passei por momentos piores e saí deles. A frustração é um sinal de que eu me importo.",
+      "curtidas": 189,
+      "comentarios": 21,
+      "destaque": false,
+      "avatarIniciais": "LF",
+      "avatarCor": "#3a7a45",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Punho cerrado — determinação",
+          "imagem": "https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Escrivaninha com anotações",
+          "imagem": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "usuarioId": 2,
+      "autor": "carlosg",
+      "handle": "@carlosg",
+      "tempo": "1d",
+      "sentimento": "🌅 Em paz",
+      "descricao": "Um pôr do sol que curou mais do que qualquer palavra jamais poderia.",
+      "texto": "Assisti ao pôr do sol hoje e, por um momento, tudo fez sentido. Às vezes a natureza cura mais do que qualquer palavra.",
+      "conteudo": "Assisti ao pôr do sol hoje e, por um momento, tudo fez sentido. Às vezes a natureza cura mais do que qualquer palavra. Fiquei ali, parado, vendo o céu mudar de cor — do laranja pro roxo.",
+      "curtidas": 1400,
+      "comentarios": 95,
+      "destaque": true,
+      "avatarIniciais": "CG",
+      "avatarCor": "#5a3a7a",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Pôr do sol laranja sobre o mar",
+          "imagem": "https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Silhueta de pessoa ao entardecer",
+          "imagem": "https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "usuarioId": 2,
+      "autor": "beatrizta",
+      "handle": "@beatrizta",
+      "tempo": "1d",
+      "sentimento": "☕ Aconchegante",
+      "descricao": "Café quente, chuva na janela e a felicidade nas pequenas coisas.",
+      "texto": "Tem coisa mais gostosa do que aquele primeiro café da manhã enquanto chove? Felicidade nas pequenas coisas.",
+      "conteudo": "Tem coisa mais gostosa do que aquele primeiro café da manhã enquanto chove? Felicidade nas pequenas coisas. O cheiro do café fresco, o som da chuva na janela, a coberta no sofá.",
+      "curtidas": 876,
+      "comentarios": 54,
+      "destaque": false,
+      "avatarIniciais": "BT",
+      "avatarCor": "#8a6a10",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Xícara de café fumegante",
+          "imagem": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Janela embaçada com chuva",
+          "imagem": "https://images.unsplash.com/photo-1515694346937-97f85016bfb4?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "usuarioId": 1,
+      "autor": "joaovrs",
+      "handle": "@joaovrs",
+      "tempo": "2d",
+      "sentimento": "🌃 Nostálgico",
+      "descricao": "Voltar à cidade da infância e encontrar o adulto que você se tornou nas ruas de antes.",
+      "texto": "Voltei para a cidade onde cresci depois de 5 anos. As ruas eram as mesmas, mas eu era outro.",
+      "conteudo": "Voltei para a cidade onde cresci depois de 5 anos. As ruas eram as mesmas, mas eu era outro. Que sensação estranha e linda ao mesmo tempo. Passei pela escola antiga, pela sorveteria que ainda existe.",
+      "curtidas": 2100,
+      "comentarios": 143,
+      "destaque": false,
+      "avatarIniciais": "JV",
+      "avatarCor": "#6a3a6a",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=900&q=80",
+      "fotos": [
+        {
+          "id": 1,
+          "titulo": "Rua vazia à noite com lanternas",
+          "imagem": "https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=600&q=80"
+        },
+        {
+          "id": 2,
+          "titulo": "Escola abandonada",
+          "imagem": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80"
+        }
+      ]
+    },
+    {
+      "usuarioId": "1",
+      "autor": "Theo Goulart",
+      "handle": "@theosoad",
+      "tempo": "agora",
+      "sentimento": "😔 Triste",
+      "descricao": "estou triste",
+      "texto": "estou triste",
+      "conteudo": "estou triste",
+      "curtidas": 0,
+      "comentarios": 0,
+      "destaque": false,
+      "avatarIniciais": "TS",
+      "avatarCor": "#3d2d6e",
+      "imagemPrincipal": "https://images.unsplash.com/photo-1518398046578-8cca57782e17?w=900&q=80",
+      "fotos": [],
+      "id": "1QnaG_OVWAU"
+    }
+  ],
+  "favoritos": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}

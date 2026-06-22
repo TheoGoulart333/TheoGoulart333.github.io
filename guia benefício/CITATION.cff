@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: Please cite this software using these metadata.
+title: Prism
+authors:
+  - family-names: Goulart Cardoso Vasconcelos
+    given-names: Theo
+  - family-names: Heber de Souza Godinho
+    given-names: Daniel
+  - family-names: César Silva Monteiro
+    given-names: Paulo
+  - family-names: Gomes Esteves da Silva
+    given-names: Lucas
+  - family-names: Oliveira Martins Rosa
+    given-names: Giovanni
+  - family-names: Alvim Fagundes de Andrade
+    given-names: Bernardo
+  - family-names: de Faria Barros
+    given-names: Diego Augusto
+    affiliation: PUC Minas
+  - family-names: Soares de Paiva Lacerdo
+    given-names: Lucca
+    affiliation: PUC Minas
+  - family-names: Almeida Louzada
+    given-names: Henrique
+    affiliation: PUC Minas
+keywords:
+  - Benefícios
+  - Governo
+  - Postos
+  - Assistência
+repository-code: https://github.com/ICEI-PUC-Minas-PMGES-TI/pmg-es-2026-1-ti1-0438100-prism-1.git
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-07-10

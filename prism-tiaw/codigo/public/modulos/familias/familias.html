@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Famílias</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/beneficios-recomendados.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/icon_site.png">
+</head>
+
+<body>
+    <header class="headerMobile">
+        <nav class="navbar navbar-dark bg-dark navbarMobile">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+            <nav class="botoesNavegacao">
+                <a class="link-header" href="">Início</a>
+                <a class="link-header" href="">Suas Famílias</a>
+                <span id="usuarioLogadoMobile"
+                    style="color: #333; font-weight: bold; text-align: center; font-size: 1.3rem;"></span>
+                <a class="botao-amarelo" href="../login/login.html">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <header class="headerDesktop">
+        <nav class="navbar navbar-dark navbarDesktop">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../assets/images/logo_site.jpeg" alt="Logo" class="d-inline-block align-text-center">
+                    <span style="color: #003CA3;">Guia-</span><span style="color: #2B7F3A">Benefício</span>
+                </a>
+                <nav class="botoesNavegacao">
+                    <a class="link-header" href="">Início</a>
+                    <a class="link-header" href="">Suas Famílias</a>
+                    <span id="usuarioLogado"
+                        style="color: #333; font-weight: bold; font-size: 1.3rem;"></span>
+                    <a class="botao-amarelo" href="../login/login.html">Sair</a>
+                </nav>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-4">
+        <section class="intro">
+            <h1>Minhas Famílias</h1>
+            <p>Carregando...</p>
+        </section>
+
+        <section class="filtros" style="justify-content: flex-start;">
+            <input type="text" id="pesquisa-familia" placeholder="Pesquisar pelo nome da família..."
+                style="max-width: 500px;">
+        </section>
+
+        <section class="beneficios" id="container-familias">
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/familias.js"></script>
+</body>
+
+</html>

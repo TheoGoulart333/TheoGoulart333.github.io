@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postos de Saúde Próximos | Guia-Benefício</title>
+  <link rel="stylesheet" href="postos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="Guia-Benefício" onerror="this.style.display='none'" />
+        <span class="logo-text"><span class="logo-green">Guia</span>-<span class="logo-blue">Benefício</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="beneficios.html">Benefícios</a></li>
+        <li><a href="recomendador.html">Recomendador</a></li>
+        <li><a href="postos.html" class="nav-active">Postos de Saúde</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🏥 Rede de Saúde Pública</div>
+      <h1>Postos de Saúde <span class="text-blue">Próximos a Você</span></h1>
+      <p>Informe seu endereço e encontre a unidade de saúde mais perto de você. Consulte horários, serviços e como chegar.</p>
+    </div>
+  </section>
+
+  <div class="page-wrapper">
+
+    <!-- ===== FORMULÁRIO DE ENDEREÇO ===== -->
+    <section class="section-card" id="secaoFormulario">
+      <div class="section-header">
+        <div class="section-icon">📍</div>
+        <div>
+          <h2>Seu Endereço</h2>
+          <p>Preencha os dados para encontrar postos próximos</p>
+        </div>
+      </div>
+
+      <form id="formEndereco" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nomeUsuario">Nome completo *</label>
+            <input type="text" id="nomeUsuario" placeholder="Ex: Maria Silva" required />
+            <span class="field-error" id="erroNome"></span>
+          </div>
+          <div class="form-group">
+            <label for="cep">CEP *</label>
+            <div class="input-with-btn">
+              <input type="text" id="cep" placeholder="00000-000" maxlength="9" required />
+              <button type="button" id="btnBuscarCep" class="btn-secondary-sm">Buscar</button>
+            </div>
+            <span class="field-error" id="erroCep"></span>
+          </div>
+          <div class="form-group form-group-wide">
+            <label for="enderecoUsuario">Endereço *</label>
+            <input type="text" id="enderecoUsuario" placeholder="Rua, Av., Travessa..." required />
+            <span class="field-error" id="erroEndereco"></span>
+          </div>
+          <div class="form-group">
+            <label for="bairroUsuario">Bairro *</label>
+            <input type="text" id="bairroUsuario" placeholder="Seu bairro" required />
+            <span class="field-error" id="erroBairro"></span>
+          </div>
+          <div class="form-group">
+            <label for="cidadeUsuario">Cidade *</label>
+            <input type="text" id="cidadeUsuario" placeholder="Sua cidade" required />
+            <span class="field-error" id="erroCidade"></span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="btnBuscar">
+            <span class="btn-icon">🔍</span> Buscar Postos de Saúde
+          </button>
+          <button type="button" class="btn-outline" id="btnLimpar">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== RESULTADOS ===== -->
+    <section class="section-card" id="secaoResultados" style="display:none">
+      <div class="results-header">
+        <div class="section-header">
+          <div class="section-icon">📋</div>
+          <div>
+            <h2>Postos Encontrados</h2>
+            <p id="subtituloResultados">Mostrando resultados para o seu endereço</p>
+          </div>
+        </div>
+        <div class="results-actions">
+          <button class="btn-export" id="btnExportarCSV" title="Exportar postos filtrados como CSV">
+            ⬇️ Exportar CSV
+          </button>
+          <button class="btn-green" id="btnAdicionarPosto">+ Cadastrar Posto</button>
+        </div>
+      </div>
+
+      <!-- Barra de filtros -->
+      <div class="filtros-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="campoPesquisa" placeholder="Pesquisar por nome ou bairro..." />
+        </div>
+        <select id="filtroTipo">
+          <option value="">Todos os tipos</option>
+          <option value="UBS">UBS</option>
+          <option value="UPA">UPA</option>
+          <option value="Centro de Saúde">Centro de Saúde</option>
+        </select>
+        <select id="filtroOrdem">
+          <option value="distancia">Ordenar: Distância</option>
+          <option value="nome">Ordenar: Nome A-Z</option>
+          <option value="tipo">Ordenar: Tipo</option>
+        </select>
+      </div>
+
+      <!-- Contador -->
+      <div class="results-count" id="contadorResultados"></div>
+
+      <!-- Loading -->
+      <div class="loading-state" id="loadingPostos" style="display:none">
+        <div class="spinner"></div>
+        <p>Buscando postos de saúde próximos...</p>
+      </div>
+
+      <!-- ESTADO VAZIO -->
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="empty-icon">🏥</div>
+        <h3>Nenhum posto encontrado</h3>
+        <p>Tente ajustar os filtros ou cadastrar um novo posto.</p>
+      </div>
+
+      <!-- Grid de Cards -->
+      <div class="cards-grid" id="gridPostos"></div>
+
+      <!-- Toast de notificações -->
+      <div id="toastContainer"></div>
+    </section>
+
+    <!-- ===== SEÇÃO ADMIN (CRUD) ===== -->
+    <section class="section-card" id="secaoAdmin">
+      <div class="section-header">
+        <div class="section-icon">⚙️</div>
+        <div>
+          <h2>Gerenciar Postos</h2>
+          <p>Administre o cadastro de unidades de saúde</p>
+        </div>
+      </div>
+      <div class="admin-grid" id="adminGrid"></div>
+    </section>
+
+  </div>
+
+  <!-- ===== MODAL DETALHES ===== -->
+  <div class="modal-overlay" id="modalDetalhes" style="display:none">
+    <div class="modal-box">
+      <button class="modal-close" id="btnFecharModal">✕</button>
+      <div class="modal-header">
+        <span class="modal-badge" id="modalTipoBadge"></span>
+        <h2 id="modalNome"></h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-grid">
+          <div class="modal-info-item">
+            <span class="info-label">📍 Endereço</span>
+            <span class="info-value" id="modalEndereco"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="info-label">📞 Telefone</span>
+            <span class="info-value" id="modalTelefone"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="info-label">🕐 Horário</span>
+            <span class="info-value" id="modalHorario"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="info-label">📏 Distância</span>
+            <span class="info-value" id="modalDistancia"></span>
+          </div>
+          <div class="modal-info-item">
+            <span class="info-label">✉️ E-mail</span>
+            <span class="info-value" id="modalEmail"></span>
+          </div>
+        </div>
+        <div class="modal-avaliacao">
+          <span class="info-label">⭐ Avaliação</span>
+          <div class="estrelas" id="modalAvaliacao"></div>
+        </div>
+        <div class="modal-servicos">
+          <span class="info-label">🩺 Serviços Disponíveis</span>
+          <div class="servicos-tags" id="modalServicos"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="modalMapsLink" href="#" target="_blank" class="btn-primary">🗺️ Ver no Google Maps</a>
+        <button class="btn-outline" id="btnFecharModalFooter">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL CADASTRO/EDIÇÃO ===== -->
+  <div class="modal-overlay" id="modalForm" style="display:none">
+    <div class="modal-box modal-form-box">
+      <button class="modal-close" id="btnFecharFormModal">✕</button>
+      <div class="modal-header">
+        <h2 id="modalFormTitulo">Cadastrar Posto de Saúde</h2>
+      </div>
+      <form id="formPosto" novalidate>
+        <input type="hidden" id="postoId" />
+        <div class="form-grid">
+          <div class="form-group form-group-wide">
+            <label for="postoNome">Nome do Posto *</label>
+            <input type="text" id="postoNome" placeholder="Ex: UBS Vila Nova" required />
+          </div>
+          <div class="form-group form-group-wide">
+            <label for="postoEndereco">Endereço *</label>
+            <input type="text" id="postoEndereco" placeholder="Rua, número" required />
+          </div>
+          <div class="form-group">
+            <label for="postoBairro">Bairro *</label>
+            <input type="text" id="postoBairro" placeholder="Nome do bairro" required />
+          </div>
+          <div class="form-group">
+            <label for="postoCidade">Cidade *</label>
+            <input type="text" id="postoCidade" placeholder="Nome da cidade" required />
+          </div>
+          <div class="form-group">
+            <label for="postoCep">CEP *</label>
+            <input type="text" id="postoCep" placeholder="00000-000" maxlength="9" required />
+          </div>
+          <div class="form-group">
+            <label for="postoTelefone">Telefone *</label>
+            <input type="text" id="postoTelefone" placeholder="(00) 0000-0000" required />
+          </div>
+          <div class="form-group form-group-wide">
+            <label for="postoHorario">Horário de Funcionamento *</label>
+            <input type="text" id="postoHorario" placeholder="Ex: Seg a Sex: 07h às 17h" required />
+          </div>
+          <div class="form-group">
+            <label for="postoTipo">Tipo *</label>
+            <select id="postoTipo" required>
+              <option value="">Selecione...</option>
+              <option value="UBS">UBS</option>
+              <option value="UPA">UPA</option>
+              <option value="Centro de Saúde">Centro de Saúde</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="postoDistancia">Distância (km)</label>
+            <input type="number" id="postoDistancia" placeholder="Ex: 1.5" step="0.1" min="0" />
+          </div>
+          <div class="form-group form-group-wide">
+            <label for="postoServicos">Serviços (separados por vírgula)</label>
+            <input type="text" id="postoServicos" placeholder="Ex: Clínica Geral, Vacinação, Odontologia" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="btnSalvarPosto">Salvar Posto</button>
+          <button type="button" class="btn-outline" id="btnCancelarForm">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="logo-text"><span class="logo-green">Guia</span>-<span class="logo-blue">Benefício</span></span>
+      <p>© 2025 Guia-Benefício · PUC Minas · Engenharia de Software</p>
+    </div>
+  </footer>
+
+  <script src="postos.js"></script>
+</body>
+</html>

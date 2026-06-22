@@ -1,0 +1,222 @@
+/* ==========================================
+   1. ESTILOS GERAIS (BASE)
+   ========================================== */
+body {
+    background-color: #E8E8E8;
+}
+
+main {
+    width: 100%;
+    padding-top: 9.47vh;
+}
+
+/* ==========================================
+   2. SEÇÃO: INTRODUÇÃO
+   ========================================== */
+.introducao-site {
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../images/background-introducao.jpg") no-repeat center / cover;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.introducao-site>h1 {
+    font-family: var(--font-principal);
+    font-size: 5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 90px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.introducao-site>p {
+    font-family: var(--font-principal);
+    color: var(--cor-preto);
+    text-align: center;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 60%;
+}
+
+/* ==========================================
+   3. SEÇÃO: CARDS MÓDULOS
+   ========================================== */
+.cards-modulos {
+    display: flex;
+    gap: 2%;
+    margin-top: 4%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-modulo {
+    font-family: var(--font-principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 30rem;
+    height: 17rem;
+    color: var(--cor-texto-escuro);
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 1% 1.5% 1.5% 1.5%;
+    margin-bottom: 1%;
+}
+
+.card-modulo>h2 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.card-modulo>p {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+#postos,
+#catalogo {
+    border: solid 3px var(--cor-primaria);
+}
+
+#recomendador {
+    border: solid 3px var(--cor-secundaria);
+}
+
+#assistente {
+    border: solid 3px var(--cor-terciaria);
+}
+
+/* ==========================================
+   4. SEÇÃO: VALORES DO SITE
+   ========================================== */
+.valores-site {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 8rem;
+}
+
+.valores-site>h1 {
+    font-family: var(--font-principal);
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 90px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.valores-site>p {
+    font-family: var(--font-principal);
+    color: var(--cor-texto-escuro);
+    text-align: center;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 60%;
+}
+
+.cards-valores {
+    display: flex;
+    width: 100%;
+    gap: 2%;
+    margin-top: 4%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-valor {
+    font-family: var(--font-principal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 25rem;
+    height: 20rem;
+    color: var(--cor-texto-escuro);
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 4% 1.5% 4% 1.5%;
+    margin-bottom: 3%;
+}
+
+.card-valor>h2 {
+    text-align: center;
+    font-weight: 600;
+}
+
+.card-valor>p {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   5. RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================== */
+
+/* Tablets (até 1024px) */
+@media (max-width: 1024px) {
+    .introducao-site>h1 {
+        font-size: 4rem;
+    }
+
+    .introducao-site>p {
+        font-size: 2rem;
+    }
+
+    .card-modulo{
+        height: 18rem;
+        margin-bottom: 5%;
+    }
+}
+
+/* Celulares (até 768px) */
+@media (max-width: 768px) {
+    .introducao-site{
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+    .introducao-site>h1 {
+        font-size: 2.3rem;
+        line-height: normal;
+    }
+
+    .introducao-site>p {
+        font-size: 1.3rem;
+        width: 80%;
+    }
+
+    .card-modulo{
+        width: 99%;
+    }
+
+    .valores-site{
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
+    .valores-site>h1{
+        font-size: 2.3rem;
+        line-height: normal;
+    }
+
+    .valores-site>p{
+        font-size: 1.3rem;
+        width: 80%;
+    }
+
+}

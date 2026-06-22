@@ -1,0 +1,211 @@
+/* ==========================================
+   1. IMPORTS, VARIÁVEIS E RESET
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+    --font-principal: "DM Sans", sans-serif;
+    --cor-primaria: #003CA3;
+    --cor-primaria-hover: #3360ad;
+    --cor-secundaria: #2B7F3A;
+    --cor-secundaria-hover: #2b7f3aa1;
+    --cor-terciaria: rgb(255, 214, 132);
+    --cor-terciaria-hover: rgba(255, 238, 204, 1);
+    --cor-texto-escuro: #333;
+    --cor-texto-claro: #ffffff;
+    --cor-fundo-claro: #f7f7f7;
+    --cor-preto: #000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* ==========================================
+   2. COMPONENTES REUTILIZÁVEIS
+   ========================================== */
+/* Botões */
+.botao-azul,
+.botao-branco,
+.botao-verde,
+.botao-amarelo {
+    font-family: var(--font-principal);
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.6rem 1.4rem;
+    border-radius: 40px;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+
+.botao-azul {
+    color: var(--cor-texto-claro);
+    background-color: var(--cor-primaria);
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.botao-azul:hover {
+    background-color: var(--cor-primaria-hover);
+    transform: scale(1.01);
+}
+
+.botao-branco {
+    color: var(--cor-texto-escuro);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.botao-branco:hover {
+    background-color: var(--cor-terciaria-hover);
+    transform: scale(1.01);
+}
+
+.botao-verde {
+    color: var(--cor-texto-claro);
+    background-color: var(--cor-secundaria);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.botao-verde:hover {
+    background-color: var(--cor-secundaria-hover);
+    transform: scale(1.01);
+}
+
+.botao-amarelo{
+    background-color: var(--cor-terciaria);
+    color: var(--cor-preto);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.botao-amarelo:hover{
+    background-color: var(--cor-terciaria-hover);
+    transform: scale(1.01);
+}
+
+/* ==========================================
+   3. CABEÇALHO (HEADER)
+   ========================================== */
+header {
+    font-family: var(--font-principal);
+    width: 100vw;
+    background-color: var(--cor-fundo-claro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: 0% 3% 0% 1%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbarDesktop,
+.container-fluid {
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.headerMobile {
+    display: none !important;
+}
+
+.navbar-brand {
+    height: 100% !important;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.navbar-brand>img {
+    height: 4.7rem;
+}
+
+.botoesNavegacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar-toggler {
+    background-color: var(--cor-primaria);
+}
+
+.link-header{
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: var(--font-principal);
+    color: var(--cor-primaria);
+    text-decoration: none;
+    border-bottom: solid 2px #2B7F3A;
+    transition: border-width 0.3s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+}
+
+.link-header:hover{
+    transform: scale(1.1);
+    border-width: 4px;
+}
+
+/* ==========================================
+   4. RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================== */
+
+/* Tablets (até 1024px) */
+@media (max-width: 1024px) {
+    .headerDesktop {
+        display: none !important;
+    }
+
+    .headerMobile {
+        display: block !important;
+    }
+
+    .navbarMobile {
+        padding: 0 !important;
+        height: 100%;
+        width: 100%;
+        background-color: var(--cor-fundo-claro) !important;
+    }
+
+    .navbar-brand {
+        font-size: 1.9rem;
+    }
+
+    .botoesNavegacao {
+        margin-bottom: 1.3rem;
+    }
+    .link-header{
+        border-left: solid 2px #2B7F3A;
+        border-bottom: 0px;
+        padding-left: 0.5rem;
+    }
+}
+
+/* Celulares (até 768px) */
+@media (max-width: 768px) {
+    .navbar-brand>img {
+        height: 3.5rem;
+    }
+
+    .botoesNavegacao {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+
+    .headerMobile .botao-branco,
+    .headerMobile .botao-azul {
+        font-size: 1.3rem !important;
+    }
+}
