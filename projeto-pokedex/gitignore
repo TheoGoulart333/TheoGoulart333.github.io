@@ -1,0 +1,11 @@
+# Save local da Pokédex (dados de cada usuário, não deve ir pro repositório)
+pokedex_save.json
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Sistema
+.DS_Store
